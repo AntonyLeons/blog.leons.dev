@@ -34,7 +34,7 @@
     <![endif]-->
     
     <!-- This tag outputs SEO meta+structured data and other important settings -->
-    <meta name="description" content="My Personal Projects" />
+    <meta name="description" content="My Personal Projects & Opinions" />
     <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png" />
     <link rel="canonical" href="/the-editor" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
@@ -122,7 +122,8 @@ into the {body} of the default.hbs template -->
         
         
             <ul class="nav" role="menu">
-    <li class="nav-home" role="menuitem"><a href="https://leons.dev">Home</a></li>
+	<li class="nav-home" role="menuitem"><a href="/">Home</a></li>
+	<li class="nav-try-ghost" role="menuitem"><a href="https://leons.dev">leons.dev</a></li>
 </ul>
 
         
@@ -138,6 +139,8 @@ into the {body} of the default.hbs template -->
 </a>
             
         </div>
+        
+            <a class="subscribe-button" href="#subscribe">Subscribe</a>
         
     </div>
 </nav>
@@ -223,6 +226,21 @@ into the {body} of the default.hbs template -->
 
             <!-- Email subscribe form at the bottom of the page -->
             
+                <section class="subscribe-form">
+                    <h3 class="subscribe-form-title">Subscribe to Antony's blog</h3>
+                    <p>Get the latest posts delivered right to your inbox</p>
+                    <form method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  /><input class="location" type="hidden" name="location"  /><input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" type="email" name="email"  placeholder="youremail@example.com" />
+    </div>
+    <button class="" type="submit" disabled><span>Subscribe</span></button>
+    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/7436352604ad99479c915b6f0/aa3c97fe620d7229cf6afeb3d.js");</script>
+</form>
+
+                </section>
+            
 
             <footer class="post-full-footer">
                 <!-- Everything inside the #author tags pulls data from the author -->
@@ -231,17 +249,17 @@ into the {body} of the default.hbs template -->
                     
                         <section class="author-card">
                             
-                                <img class="author-profile-image" src="/assets/images/ghost.png" alt="ghost" />
+                                <img class="author-profile-image" src="/assets/images/ghost.png" alt="antony" />
                             
                             <section class="author-card-content">
-                                <h4 class="author-card-name"><a href="/author/ghost">Ghost</a></h4>
+                                <h4 class="author-card-name"><a href="/author/antony">Antony</a></h4>
                                 
-                                    <p>The professional publishing platform</p>
+                                    <p>Creator of leons.dev</p>
                                 
                             </section>
                         </section>
                         <div class="post-full-footer-right">
-                            <a class="author-card-button" href="/author/ghost">Read More</a>
+                            <a class="author-card-button" href="/author/antony">Read More</a>
                         </div>
                     
                 
@@ -410,10 +428,10 @@ into the {body} of the default.hbs template -->
                 
                     
                         
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Ghost" />
+                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Antony" />
                         
                         <span class="post-card-author">
-                            <a href="/author/ghost/">Ghost</a>
+                            <a href="/author/antony/">Antony</a>
                         </span>
                     
                 
@@ -474,10 +492,10 @@ into the {body} of the default.hbs template -->
                 
                     
                         
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Ghost" />
+                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Antony" />
                         
                         <span class="post-card-author">
-                            <a href="/author/ghost/">Ghost</a>
+                            <a href="/author/antony/">Antony</a>
                         </span>
                     
                 
@@ -572,6 +590,27 @@ into the {body} of the default.hbs template -->
     </div>
 
     <!-- The big email subscribe modal content -->
+    
+        <div id="subscribe" class="subscribe-overlay">
+            <a class="subscribe-overlay-close" href="#"></a>
+            <div class="subscribe-overlay-content">
+                
+                    <img class="subscribe-overlay-logo" src="/assets/images/blog-icon.png" alt="Antony's blog" />
+                
+                <h1 class="subscribe-overlay-title">Subscribe to Antony's blog</h1>
+                <p class="subscribe-overlay-description">Stay up to date! Get all the latest &amp; greatest posts delivered straight to your inbox</p>
+                <form method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  /><input class="location" type="hidden" name="location"  /><input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" type="email" name="email"  placeholder="youremail@example.com" />
+    </div>
+    <button class="" type="submit" disabled><span>Subscribe</span></button>
+    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/7436352604ad99479c915b6f0/aa3c97fe620d7229cf6afeb3d.js");</script>
+</form>
+
+            </div>
+        </div>
     
 
     <!-- highlight.js -->
