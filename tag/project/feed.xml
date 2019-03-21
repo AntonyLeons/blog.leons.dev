@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="/tag/project/feed.xml" rel="self" type="application/atom+xml" />
   <link href="/" rel="alternate" type="text/html" />
-  <updated>2019-03-19T22:24:07+00:00</updated>
+  <updated>2019-03-21T13:29:49+00:00</updated>
   <id>/tag/project/feed.xml</id>
 
   
@@ -39,9 +39,14 @@
       <id>/welcome</id>
       <content type="html" xml:base="/welcome">&lt;p&gt;Hey! Welcome to my blog, it’s great to have you :)&lt;/p&gt;
 
-&lt;p&gt;This is just an intro into how and why I created my website&lt;/p&gt;
+&lt;p&gt;This is just an intro into how and why I created my website, the tools I used and future improvements I’m figuring out how to do.
+I’ll give a breif overview of costing(a lot less than you think), and maybe I’ll write some tutorial over summer depending on
+how bored I am.&lt;/p&gt;
 
-&lt;p&gt;This post will probably be finished at a later date because I have deadlines and I’ve been really busy.&lt;/p&gt;
+&lt;p&gt;This post will probably be finished at a later date because I have deadlines and I’ve been really busy
+plus this is a side project so I only work on it a few hours a week if I can.&lt;/p&gt;
+
+&lt;p&gt;I’ll also be publishing opinion piece but they’ll be tagged appropriately so I can save you some time.&lt;/p&gt;
 
 &lt;p&gt;But if you’re here cheers for browsing to my blog and stay tuned for updates&lt;/p&gt;</content>
 
