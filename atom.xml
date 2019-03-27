@@ -1,25 +1,28 @@
+---
+layout: null
+---
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title> - Articles</title>
-    <description>My Personal Projects &amp; Opinions</description>
+    <title>{{ site.name | xml_escape }} - Articles</title>
+    <description>{% if site.description %}{{ site.description | xml_escape }}{% endif %}</description>
     <link>
-    </link>
-    
-      
+    {{ site.url }}</link>
+    {% for post in site.posts %}
+      {% unless post.link %}
       <item>
-        <title>Welcome to My Blog</title>
-        
-          <description>&lt;p&gt;Hey! Welcome to my blog, it’s great to have you :)&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Thu, 27 Jul 2017 11:00:00 +0100</pubDate>
+        <title>{{ post.title | xml_escape }}</title>
+        {% if post.excerpt %}
+          <description>{{ post.excerpt | xml_escape }}</description>
+        {% else %}
+          <description>{{ post.content | xml_escape }}</description>
+        {% endif %}
+        <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
         <link>
-        /welcome</link>
-        <guid isPermaLink="true">/welcome</guid>
+        {{ site.url }}{{ post.url }}</link>
+        <guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
       </item>
-      
-    
+      {% endunless %}
+    {% endfor %}
   </channel>
 </rss>
