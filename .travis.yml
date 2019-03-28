@@ -17,7 +17,7 @@ gem install travis
 travis encrypt 'GIT_NAME="Openanttony" GIT_EMAIL="antony@leons.dev" GH_TOKEN=f0c4e0bc84cee5bc31663c162d178547cc5cba39'
 env:
   global:
-    secure: "BcpzyVcLZ23HBHElaK8S5w"
+    secure: "cRE27cPAJbVTzFTKUNlahGMAYGatztJSKC8uQcasMBCJn8IIwwDc5xdg8otuA5/GVZv0aeWUu9N/jAEh2hY9IrGF3P4aLDZ1o76/o7ZXC8P2XdZVPNRHuuMza/UvNhOczDX9PELCkgHPmKB9dCfzt9ob0ZQT1/sp4DKDeKqq3NvXIvg2LWEbcLx7Yw7aRZnt/AFXYjrIW3ROWu4gfyBMIzefxTHP8Rh/O4YLWtve3pyH0Nx2XDy9LEhjJJvFwx9quTfNCPhYOLYZs3/l/lJL4hX75RjynuGPlFJ4m0+WhmxC+xqggcoDUZaA46X55AuN1u4Oq1gk99U7chqhZJOf14s8cNCmmHVkGaITpsHATOcImDX8pLj8MSEVw+GNG+1NJhAW8djAmSLew7xz0LY/S8nX/r7tbI/vA9SqVIewm3AxoNWYLZPFhY9oAraRr3sCl41umnQNx5Z8UQDR2K/YZDKzfEEbdqDqM6owzNREdDajeqgkai/EnNw3NLRhSEPZ68GmkSy0/b/51FRRWuIe8NX2kVJmqKZ+gFdg2Tq+RXybAQmjeWHPU0NOtaxE1N4D0bnPlk0dkw4pzH9q7KjscNmL6j56A8kwIVC5G7Px3O33sNaN0NuM6dv9NfLqUiGD64TDku/ss3Xs4tPtlWYQ6xvASZFwOQQ9Wf2MEcz7/b4="
 branches:
   only:
     - master
