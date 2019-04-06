@@ -39,3 +39,5 @@ Just a disclaimer but you £500 to open an ISA and this is only open the UK resi
 get £5 for signing up after your first transaction using this [link](https://join.monzo.com/r/m4oo8cy "Get £5").
 
 So if anything go [get £5](https://join.monzo.com/r/m4oo8cy "Get £5") even if I haven't sold you the idea.
+
+But if you wanna read more head over to their website [monzo.com](https://monzo.com/).
