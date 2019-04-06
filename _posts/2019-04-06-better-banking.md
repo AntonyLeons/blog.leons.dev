@@ -35,7 +35,7 @@ Well..
 
 It's an actual bank that gets regulated by the government, you get everything you normally get just no branches which saves them a lot of money, money they then use to give you better rates and services, this is technology disrupting industry and I love it. Why Monzo? Well I've tried a lot of fintech banks and it hands down comes out on top.
 
-Just a disclaimer but you £500 to open an ISA and this is only open the UK residents, but just to sweeten the deal
+Just a disclaimer but you need to have £500 to open an ISA and this is only open the UK residents, but just to sweeten the deal
 get £5 for signing up after your first transaction using this [link](https://join.monzo.com/r/m4oo8cy "Get £5").
 
 So if anything go [get £5](https://join.monzo.com/r/m4oo8cy "Get £5") even if I haven't sold you the idea.
