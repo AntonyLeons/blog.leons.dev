@@ -10,9 +10,9 @@ language: 'en-uk'
 title: Antony's blog
 description: My Personal Projects & Opinions
 cover: assets/images/blog-cover.jpg
-logo: assets/images/blog-icon.png
-logo_dark: assets/images/favicon.png
-favicon: assets/images/favicon.png
+logo: assets/images/blog-icon.webp
+logo_dark: assets/images/favicon.webp
+favicon: assets/images/favicon.webp
 production_url: blog.leons.dev
 source_url: https://github.com/Openanttony/blog.leons.dev/
 CNAME: blog.leons.dev

@@ -1,7 +1,7 @@
 ---
 layout: post
 current: post
-cover:  assets/images/Monzo.png
+cover:  assets/images/Monzo.webp
 navigation: True
 title: Better Banking
 date: 2019-04-06 10:00:00
@@ -19,9 +19,9 @@ However there are some newcomers...
 <p><img src="assets/images/Fintech.webp#full" alt="Fintech banks"></p>
 
 I had an ISA with Halifax for like 4 or 5 years but every year they reduced the interest rate, when I was legally a child they give you a better rate for whatever reason but I'm guessing it's to hook you early. Why get you early? It's a savings accounts, nobody really checks their savings account, they can lower rates and nobody bats an eyes.
-![alt text](assets/images/monzo2.png "Halifax interest")
+![alt text](assets/images/monzo2.webp "Halifax interest")
 Banks are a business and this is capitalism so it makes sense. What doesn't make sense is you can renew your account. What does that mean? Well you can 'renew your interest rate', Doing this **TRIPLED** my rate to 0.6% but why this doesn't happen automatically.
-![alt text](assets/images/monzo1.png "Renewed rate") <a name="Monzo"></a>
+![alt text](assets/images/monzo1.webp "Renewed rate") <a name="Monzo"></a>
 # Enter Monzo
 Monzo is "The bank of the future" It's now my primary bank account and it's just launched ISAs so I ditched Halifax and moved straight over. Now your probably wondering what makes it different.
 Well..
