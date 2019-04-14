@@ -16,7 +16,7 @@ favicon: assets/images/favicon.webp
 production_url: blog.leons.dev
 source_url: https://github.com/Openanttony/blog.leons.dev
 CNAME: blog.leons.dev
-url: https://blog.leons.dev
+url: https://blog.leons.dev/
 
 # Social info
 navigation: True # show the navbar links
