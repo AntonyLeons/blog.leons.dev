@@ -5,6 +5,7 @@ paginate: 100 # it will paginate after this number
 language: 'en-uk'
 
 # edit baseurl to simply '/' if using as your personal page (instead of a project page)
+baseurl: /jasper2/
 
 # Website info
 title: Antony's blog
@@ -14,9 +15,9 @@ logo: assets/images/blog-icon.webp
 logo_dark: assets/images/favicon.webp
 favicon: assets/images/favicon.webp
 production_url: blog.leons.dev
-source_url: https://github.com/Openanttony/blog.leons.dev/
+source_url: https://github.com/Openanttony/blog.leons.dev
 CNAME: blog.leons.dev
-url: https://blog.leons.dev/
+url: https://blog.leons.dev
 
 # Social info
 navigation: True # show the navbar links
