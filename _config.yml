@@ -14,10 +14,10 @@ cover: assets/images/blog-cover.jpg
 logo: assets/images/blog-icon.webp
 logo_dark: assets/images/favicon.webp
 favicon: assets/images/favicon.webp
-production_url: blog.leons.dev
-source_url: https://github.com/Openanttony/blog.leons.dev
+production_url: blog.leons.dev/
+source_url: https://github.com/Openanttony/blog.leons.dev/
 CNAME: blog.leons.dev
-url: https://blog.leons.dev
+url: https://blog.leons.dev/
 
 # Social info
 navigation: True # show the navbar links
@@ -32,7 +32,7 @@ disqus: False
 disqus_shortname: antonyleons # replace with your disqus username
 
 # Google Analytics
-google_analytics: UA-135515365-1 # replace with your GA tracking identifier
+#google_analytics: UA-135515365-1 # replace with your GA tracking identifier
 
 # Permalinks
 permalink: /:title
