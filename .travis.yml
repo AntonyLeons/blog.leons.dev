@@ -7,7 +7,7 @@ rvm:
 install:
   # Install Jekyll and dependencies
   - bundle install
-
+before_script: bundle update
 script: bundle exec rake site:deploy --quiet #--trace
 
 # Generate your secure token with the travis gem:
