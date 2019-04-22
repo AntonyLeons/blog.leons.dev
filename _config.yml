@@ -29,7 +29,7 @@ facebook: antony.leons.3 # replace by your username
 
 # Disqus
 disqus: False
-disqus_shortname: antonyleons # replace with your disqus username
+disqus_shortname: leons-dev # replace with your disqus username
 
 # Google Analytics
 #google_analytics: UA-135515365-1 # replace with your GA tracking identifier
