@@ -1,12 +1,12 @@
 tutorial:
   name: tutorial
   description: Step by step instructional articles.
-  cover: assets/images/tags.jpg
+  cover: assets/images/tags.webp
 opinion:
   name: opinion
   description: My personal opinion of various topics.
-  cover: assets/images/fables.jpg
+  cover: assets/images/fables.webp
 project:
   name: project
   description: Projects that are part of my portfolio
-  cover: assets/images/design.jpg
+  cover: assets/images/design.webp

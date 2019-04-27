@@ -10,7 +10,7 @@ baseurl: /
 # Website info
 title: Antony's blog
 description: My Personal Projects & Opinions
-cover: assets/images/blog-cover.jpg
+cover: assets/images/blog-cover.webp
 logo: assets/images/blog-icon.webp
 logo_dark: assets/images/favicon.webp
 favicon: assets/images/favicon.webp
