@@ -11,9 +11,9 @@ baseurl: /
 title: Antony's blog
 description: My Personal Projects & Opinions
 cover: assets/images/blog-cover.jpg
-logo: assets/images/blog-icon.jpg
+logo: assets/images/blog-icon.webp
 logo_dark: assets/images/favicon.webp
-favicon: assets/images/favicon.jpg
+favicon: assets/images/favicon.webp
 production_url: https://blog.leons.dev/
 source_url: https://github.com/AntonyLeons/blog.leons.dev/
 url: https://blog.leons.dev
