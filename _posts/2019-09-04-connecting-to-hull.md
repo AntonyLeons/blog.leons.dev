@@ -36,6 +36,18 @@ You should end up with something that resembles this
 Facebook also have ical feeds for events, something which societies use a lot, canvas too, but some modules spam the calendar making it unusable.
 The rest of this tutorial is based on google calendar so if you're having trouble just switch. Then you'll have a calendar that looks as good as this, plus it's amazing for productivity once you sync up everything.
 
+# Email
+You can sync your Uni Email to your phone, very handy for people who forget to check their emails, I use Gmail but any client should work.
+* Go to settings and add account
+* Select Exchange or Office 365
+* your email is actually your computer login with @hull.ac.uk E.g 554537@hull.ac.uk
+* your password is your computer login password
+* allow admin rights (a bit worrying yes but oh well)
+
+The newer emails may just work as the actual email these are from 2018 onwards with only @hull.ac.uk at the end. The server settings should get automatically get picked up but if you’re having trouble here is my entire config.
+![alt text](assets/images/email-screenshot.jpg "Email Screenshot")
+This also sync your calendar events to google calendar if you have an android phone.
+
 # Wifi
 The university says get an installer from [Eduroam Cat](https://cat.eduroam.org/ "Eduroam") and I support them, it works but your mileage may vary, Just select Hull Uni and download the installer the login is the login described in the process below. But a PC connection is simple enough you don't need a installer...
 * connect to Eduroam and it'll prompt you for a username and password
@@ -45,18 +57,6 @@ The university says get an installer from [Eduroam Cat](https://cat.eduroam.org/
 Fun fact, Eduroam will work on campuses across 101 countries, I found this out when I was in Dublin. To connect all you other devices you use the same login, but you'll probably have to go into advanced connection setting. If you get less that 20Mb/s cry, you can test your speed [here](https://speed.leons.dev "Speed Test").
 
 Note, if you use a custom DNS, Eduroam will not work, this is probably because they want to track your activity.
-
-# Email
-You can sync your Uni Email to your phone, very handy for people who forget to check their emails, I use Gmail but any client should work.
-* Go to settings and add account
-* Select Exchange or Office 365
-* your email is actually your computer login with @hull.ac.uk E.g 554537@hull.ac.uk
-* your password is your computer login password
-* allow admin rights (a bit worrying yes but oh well)
-
-The server settings should get automatically get picked up but if you’re having trouble here is my entire config.
-![alt text](assets/images/email-screenshot.jpg "Email Screenshot")
-This also sync your calendar events to google calendar if you have an android phone.
 
 # Software
 Students can get office for free [here](https://www.microsoft.com/en-gb/education/products/office "Office"). And all other software is available [here](https://e5.onthehub.com/WebStore/ProductsByMajorVersionList.aspx?cmi_cs=1&cmi_mnuMain=433748da-f0a6-e811-8109-000d3af41938&ws=8fabf8c8-de0b-e211-bd05-f04da23e67f6&vsro=8 "OnTheHub"). You use your university email and password to login but IT is a bit slow so it may take a few weeks to activate.
