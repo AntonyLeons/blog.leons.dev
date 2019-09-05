@@ -37,14 +37,14 @@ Facebook also have ical feeds for events, something which societies use a lot, c
 The rest of this tutorial is based on google calendar so if you're having trouble just switch. Then you'll have a calendar that looks as good as this, plus it's amazing for productivity once you sync up everything.
 
 # Email
-You can sync your Uni Email to your phone, very handy for people who forget to check their emails, I use Gmail but any client should work.
+You can sync your Uni Email to your phone, very handy for people who forget to check their emails, I use Gmail but any client should work. 
 * Go to settings and add account
 * Select Exchange or Office 365
-* your email is actually your computer login with @hull.ac.uk E.g 554537@hull.ac.uk
+* your email is actually your computer login with @hull.ac.uk E.g 554537@hull.ac.uk. The newer emails may just work as the actual email these are from 2018 onwards with only @hull.ac.uk at the end.
 * your password is your computer login password
 * allow admin rights (a bit worrying yes but oh well)
 
-The newer emails may just work as the actual email these are from 2018 onwards with only @hull.ac.uk at the end. The server settings should get automatically get picked up but if you’re having trouble here is my entire config.
+The server settings should get automatically get picked up but if you’re having trouble here is my entire config.
 ![alt text](assets/images/email-screenshot.jpg "Email Screenshot")
 This also sync your calendar events to google calendar if you have an android phone.
 
