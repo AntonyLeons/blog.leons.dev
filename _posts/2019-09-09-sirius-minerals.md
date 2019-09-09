@@ -4,7 +4,7 @@ current: post
 cover:  assets/images/sirius_logo.png
 navigation: True
 title: My Time at Sirius
-date: 2019-08-15 10:00:00
+date: 2019-09-09 10:00:00
 tags: [project]
 class: post-template
 subclass: 'post tag-project'
