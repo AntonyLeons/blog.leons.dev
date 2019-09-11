@@ -11,15 +11,15 @@ subclass: 'post tag-project'
 author: antony
 ---
 
-You're going to Uni, Hull uni. Here's a list of things you can connect to that I found during my time here. If you don't have your login bookmark this for later and if you find it useful a share would be nice.
+You're going to Uni, Hull Uni. Here's a list of things you can connect to that I found during my time here. If you don't have your login bookmark this for later and if you find it useful a share would be nice.
 
 # Timetables
 The most important thing on this list, you can find it [here](https://timetables.scientia.hull.ac.uk/login.aspx?ReturnUrl=%2fdefault.aspx) or use the IHull app which you can find on the app store. Or you could do it the better way...
 
 Use the ical feed below and attach it to your calendar, this will sync nicely with your timetable. I recommend google calendar, but any good calendar will support an ical feed. 
-```
-webcal://calendars.hull.ac.uk/tcs/Stucal.asp?p1=2017*****
-```
+
+`webcal://calendars.hull.ac.uk/tcs/Stucal.asp?p1=2017*****`
+
 The number at the end is your student number, it starts with the year you joined and it's on your student card, note this is NOT the number underneath the barcode.
 
 On [google calendar](https://calendar.google.com "Google Calendar") open it on a laptop
@@ -64,7 +64,7 @@ Students can get office for free [here](https://www.microsoft.com/en-gb/educatio
 # Get your files
 This is the most complicated one, the university has [box](http://box.hull.ac.uk "box") for cloud storage, but do not have box sync installed so it's basically useless.
 
-They do provide a VPN so you can access your drives like you're at uni, I was going to talk about it but it's down/broken and without screenshots it's hard to tell you how to do it, but you can read more about it [here](https://share.hull.ac.uk/Services/ICT/SitePages/VPN%20-%20Working%20Remotely.aspx "VPN"). Login using your computer login. If you're on Eduroam you just need to map your drives and it will just work.
+They do provide a VPN so you can access your drives like you're at Uni, I was going to talk about it but it's down/broken and without screenshots it's hard to tell you how to do it, but you can read more about it [here](https://share.hull.ac.uk/Services/ICT/SitePages/VPN%20-%20Working%20Remotely.aspx "VPN"). Login using your computer login. If you're on Eduroam you just need to map your drives and it will just work.
 
 # Random
 I think I covered everything, 2 more unrelated things 
