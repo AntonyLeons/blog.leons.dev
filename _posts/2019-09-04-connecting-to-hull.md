@@ -11,7 +11,7 @@ subclass: 'post tag-project'
 author: antony
 ---
 
-You're going to Uni, Hull uni. Here's a list of things you can connect to that I found during my time here. If you don't have your login bookmark this for later and if you find it useful a share would be nice.
+You're going to uni, Hull uni. Here's a list of things you can connect to that I found during my time here. If you don't have your login bookmark this for later and if you find it useful a share would be nice.
 
 # Timetables
 The most important thing on this list, you can find it [here](https://timetables.scientia.hull.ac.uk/login.aspx?ReturnUrl=%2fdefault.aspx) or use the IHull app which you can find on the app store. Or you could do it the better way...
@@ -37,7 +37,7 @@ Facebook also have ical feeds for events, something which societies use a lot, c
 The rest of this tutorial is based on google calendar so if you're having trouble just switch. Then you'll have a calendar that looks as good as this, plus it's amazing for productivity once you sync up everything.
 
 # Email
-You can sync your Uni Email to your phone, very handy for people who forget to check their emails, I use Gmail but any client should work. 
+You can sync your uni Email to your phone, very handy for people who forget to check their emails, I use Gmail but any client should work. 
 * Go to settings and add account
 * Select Exchange or Office 365
 * your email is actually your computer login with @hull.ac.uk E.g 554537@hull.ac.uk. The newer emails may just work as the actual email these are from 2018 onwards with only @hull.ac.uk at the end.
@@ -49,7 +49,7 @@ The server settings should get automatically get picked up but if you’re havin
 This also sync your calendar events to google calendar if you have an android phone.
 
 # Wifi
-The university says get an installer from [Eduroam Cat](https://cat.eduroam.org/ "Eduroam") and I support them, it works but your mileage may vary, Just select Hull Uni and download the installer the login is the login described in the process below. But a PC connection is simple enough you don't need a installer...
+The university says get an installer from [Eduroam Cat](https://cat.eduroam.org/ "Eduroam") and I support them, it works but your mileage may vary, Just select Hull uni and download the installer the login is the login described in the process below. But a PC connection is simple enough you don't need a installer...
 * connect to Eduroam and it'll prompt you for a username and password
 * your username is your computer login with @hull.ac.uk E.g 554537@hull.ac.uk
 * your password is your computer login password
