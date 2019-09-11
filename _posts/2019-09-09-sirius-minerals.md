@@ -16,7 +16,7 @@ I landed an internship this summer, I know I was surprised too. Let me introduce
 Also a shout out to Hull Uni for letting me know through their [jobteaser platform](https://hull.jobteaser.com "Job Teaser"). So the week after I got the job I moved to Scarborough for 2 months. Honestly it was a fast but 100% worth it for the experience I gained in those 2 months. <a name="Sirius"></a>
 
 # Sirius Minerals
-Sirius Minerals is a fertilizer development company. Most people would describe it as a mining company, and I wouldn’t blame them they own a mine, so it makes sense. They’re a start-up but a billion-dollar start-up so I was pretty excited to join the team. 
+Sirius Minerals is a fertilizer development company. Most people would describe it as a mining company, and I wouldn’t blame them they are developing mine, so it makes sense. They’re a start-up but a billion-dollar start-up so I was pretty excited to join the team. 
 <div style ="text-align:centre">Every start up needs a ping pong table...</div>
 <img src="assets/images/sirius_social.jpg" alt="Social Space">
 
