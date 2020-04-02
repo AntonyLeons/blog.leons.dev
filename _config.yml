@@ -74,7 +74,7 @@ username: AntonyLeons
 repo: blog.leons.dev
 branch: master
 relative_source: ../blog.leons.dev/
-destination: ../blog.leons.dev-pages/
+destination: /build/
 production_url:  https://blog.leons.dev/
 source_url:  https://github.com/AntonyLeons/blog.leons.dev/
 
