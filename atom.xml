@@ -1,28 +1,100 @@
----
-layout: null
----
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{ site.name | xml_escape }} - Articles</title>
-    <description>{% if site.description %}{{ site.description | xml_escape }}{% endif %}</description>
+    <title> - Articles</title>
+    <description>My Personal Projects &amp; Opinions</description>
     <link>
-    {{ site.url }}</link>
-    {% for post in site.posts %}
-      {% unless post.link %}
+    https://blog.leons.dev</link>
+    
+      
       <item>
-        <title>{{ post.title | xml_escape }}</title>
-        {% if post.excerpt %}
-          <description>{{ post.excerpt | xml_escape }}</description>
-        {% else %}
-          <description>{{ post.content | xml_escape }}</description>
-        {% endif %}
-        <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
+        <title>Tech in Energy</title>
+        
+          <description>&lt;p&gt;The future of energy will rely on technology more than ever. Here’s my predictions on how the industry will evolve in the next century.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 24 Nov 2019 10:00:00 +0000</pubDate>
         <link>
-        {{ site.url }}{{ post.url }}</link>
-        <guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
+        https://blog.leons.dev/tech-in-energy</link>
+        <guid isPermaLink="true">https://blog.leons.dev/tech-in-energy</guid>
       </item>
-      {% endunless %}
-    {% endfor %}
+      
+    
+      
+      <item>
+        <title>My Time at Sirius</title>
+        
+          <description>&lt;p&gt;I landed an internship this summer, I know I was surprised too. Let me introduce you to &lt;a href=&quot;#Sirius&quot;&gt;Sirius Minerals&lt;/a&gt; the FTSE 250 traded company.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 09 Sep 2019 10:00:00 +0000</pubDate>
+        <link>
+        https://blog.leons.dev/sirius-minerals</link>
+        <guid isPermaLink="true">https://blog.leons.dev/sirius-minerals</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Connecting to Hull 🏫</title>
+        
+          <description>&lt;p&gt;You’re going to uni, Hull uni. Here’s a list of things you can connect to that I found during my time here. If you don’t have your login bookmark this for later and if you find it useful a share would be nice.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 04 Sep 2019 10:00:00 +0000</pubDate>
+        <link>
+        https://blog.leons.dev/connecting-to-hull</link>
+        <guid isPermaLink="true">https://blog.leons.dev/connecting-to-hull</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Better Banking</title>
+        
+          <description>&lt;p&gt;Most banks are terrible, &lt;a href=&quot;#Monzo&quot;&gt;Enter Monzo&lt;/a&gt;, you can scroll to the header if you don’t want to read.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 06 Apr 2019 10:00:00 +0000</pubDate>
+        <link>
+        https://blog.leons.dev/better-banking</link>
+        <guid isPermaLink="true">https://blog.leons.dev/better-banking</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Tooling</title>
+        
+          <description>&lt;p&gt;To make this site I had a lot of help, Without the work of over 1385 people this would not look the same, these are the tools they created.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 29 Mar 2019 10:00:00 +0000</pubDate>
+        <link>
+        https://blog.leons.dev/tooling</link>
+        <guid isPermaLink="true">https://blog.leons.dev/tooling</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Welcome to My Blog</title>
+        
+          <description>&lt;p&gt;Hey! Welcome to my blog, it’s great to have you :)&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 19 Mar 2019 10:00:00 +0000</pubDate>
+        <link>
+        https://blog.leons.dev/welcome</link>
+        <guid isPermaLink="true">https://blog.leons.dev/welcome</guid>
+      </item>
+      
+    
   </channel>
 </rss>

@@ -11,7 +11,7 @@
 
 
 
-    <title>Antony's blog</title>
+    <title>Project - Antony's blog</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -28,20 +28,20 @@
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="My Personal Projects & Opinions" />
     <link rel="shortcut icon" href="https://blog.leons.dev/assets/images/favicon.png" type="image/png" />
-    <link rel="canonical" href="https://blog.leons.dev/" />
+    <link rel="canonical" href="https://blog.leons.dev/tag/project/" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 	<link type="application/atom+xml" rel="alternate" href="https://blog.leons.dev/feed.xml" title="Antony's blog" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Antony's blog" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Antony's blog" />
+    <meta property="og:title" content="Project - Antony's blog" />
     <meta property="og:description" content="My Personal Projects & Opinions" />
-    <meta property="og:url" content="https://blog.leons.dev/" />
+    <meta property="og:url" content="https://blog.leons.dev/tag/project/" />
     <meta property="og:image" content="https://blog.leons.dev/assets/images/blog-cover.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/antony.leons.3" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Antony's blog" />
+    <meta name="twitter:title" content="Project - Antony's blog" />
     <meta name="twitter:description" content="My Personal Projects & Opinions" />
     <meta name="twitter:url" content="https://blog.leons.dev/" />
     <meta name="twitter:image" content="https://blog.leons.dev/assets/images/blog-cover.jpg" />
@@ -61,7 +61,7 @@
         "name": "Antony's blog",
         "logo": "https://blog.leons.dev/assets/images/blog-icon.png"
     },
-    "url": "https://blog.leons.dev/",
+    "url": "https://blog.leons.dev/tag/project/",
     "image": {
         "@type": "ImageObject",
         "url": "https://blog.leons.dev/assets/images/blog-cover.jpg",
@@ -70,38 +70,37 @@
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://blog.leons.dev/"
+        "@id": "https://blog.leons.dev/tag/project/"
     },
     "description": "My Personal Projects & Opinions"
 }
     </script>
 
 
-    <link rel="alternate" type="application/rss+xml" title="Antony's blog" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Tag Page" href="/feed.xml" />
 
 
 </head>
-<body class="home-template">
+<body class="tag-template">
 
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
-        <!-- < default -->
-<!-- The tag above means: insert everything in this file
-into the {body} of the default.hbs template -->
+        <!-- default -->
+<!-- The tag above means - insert everything in this file into the {body} of the default.hbs template -->
 
 <!-- The big featured header, it uses blog cover image as a BG if available -->
-<header class="site-header outer " style="background-image:  url(/assets/images/blog-cover.jpg) ">
+<!-- #tag -->
+<!-- dynamically loading backgrounds for tags,  descriptions and page titles -->
+
+
+<header class="site-header outer " style="background-image: url(/assets/images/design.jpg) ">
     <div class="inner">
-        <div class="site-header-content">
-            <h1 class="site-title">
-                
-                    <img class="site-logo" src="/assets/images/blog-icon.png" alt="Antony's blog"/>
-                
-            </h1>
-            <h2 class="site-description">My Personal Projects & Opinions</h2>
-        </div>
         <nav class="site-nav">
     <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="https://blog.leons.dev/"><img src="/assets/images/blog-icon.png" alt="Antony's blog" /></a>
+            
         
         
             <ul class="nav" role="menu">
@@ -129,67 +128,27 @@ into the {body} of the default.hbs template -->
     </div>
 </nav>
 
+        <div class="site-header-content">
+            <h1 class="site-title">Project</h1>
+            <h2 class="site-description">
+                
+                    Projects that are part of my portfolio
+                
+            </h2>
+        </div>
     </div>
 </header>
+<!-- tag -->
 
 <!-- The main content area -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
-
         <div class="post-feed">
             <!-- The tag below includes the markup for each post - partials/post-card.hbs -->
             
 
 
-    <article class="post-card home-template">
-        
-            <a class="post-card-image-link" href="/tech-in-energy">
-                <div class="post-card-image" style="background-image: url(/assets/images/energy_cover.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/tech-in-energy">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Opinion</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">Tech in Energy</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>The future of energy will rely on technology more than ever. Here’s my predictions on how the industry will evolve in the next century.
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/antony.png" alt="Antony" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/antony/">Antony</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      2 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card home-template">
+    <article class="post-card tag-template">
         
             <a class="post-card-image-link" href="/sirius-minerals">
                 <div class="post-card-image" style="background-image: url(/assets/images/sirius_logo.png)"></div>
@@ -237,7 +196,7 @@ into the {body} of the default.hbs template -->
         </div>
     </article>
 
-    <article class="post-card home-template">
+    <article class="post-card tag-template">
         
             <a class="post-card-image-link" href="/connecting-to-hull">
                 <div class="post-card-image" style="background-image: url(/assets/images/Hull-Uni-cover.jpg)"></div>
@@ -283,55 +242,7 @@ into the {body} of the default.hbs template -->
         </div>
     </article>
 
-    <article class="post-card home-template">
-        
-            <a class="post-card-image-link" href="/better-banking">
-                <div class="post-card-image" style="background-image: url(/assets/images/Monzo.png)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/better-banking">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Opinion</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">Better Banking</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>Most banks are terrible, Enter Monzo, you can scroll to the header if you don’t want to read.
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/antony.png" alt="Antony" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/antony/">Antony</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      2 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card home-template">
+    <article class="post-card tag-template">
         
             <a class="post-card-image-link" href="/tooling">
                 <div class="post-card-image" style="background-image: url(/assets/images/tooling.jpg)"></div>
@@ -379,7 +290,7 @@ into the {body} of the default.hbs template -->
         </div>
     </article>
 
-    <article class="post-card home-template">
+    <article class="post-card tag-template">
         
             <a class="post-card-image-link" href="/welcome">
                 <div class="post-card-image" style="background-image: url(/assets/images/welcome.jpg)"></div>
@@ -429,7 +340,6 @@ into the {body} of the default.hbs template -->
 
 
         </div>
-
     </div>
 </main>
 

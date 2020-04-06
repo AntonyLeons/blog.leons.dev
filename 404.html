@@ -1,9 +1,3 @@
----
-layout: error
-current: error
-title: "404 - Page Not Found"
-permalink: 404.html
----
 <!--
 This error template is used for all 404 errors, which might occur on your site.
 It's a good idea to keep this template as minimal as possible in terms of both file size and complexity.
@@ -14,25 +8,75 @@ It's a good idea to keep this template as minimal as possible in terms of both f
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>{{ page.title }}</title>
+    <title>404 - Page Not Found</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}assets/built/screen.css" />
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
     <!-- This tag outputs SEO meta+structured data and other important settings -->
-    {% include head.html %}
+    <meta name="description" content="My Personal Projects & Opinions" />
+    <link rel="shortcut icon" href="https://blog.leons.dev/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="https://blog.leons.dev/404.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+	<link type="application/atom+xml" rel="alternate" href="https://blog.leons.dev/feed.xml" title="Antony's blog" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="Antony's blog" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="404 - Page Not Found" />
+    <meta property="og:description" content="My Personal Projects & Opinions" />
+    <meta property="og:url" content="https://blog.leons.dev/404.html" />
+    <meta property="og:image" content="https://blog.leons.dev/assets/images/blog-cover.jpg" />
+    <meta property="article:publisher" content="https://www.facebook.com/antony.leons.3" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="404 - Page Not Found" />
+    <meta name="twitter:description" content="My Personal Projects & Opinions" />
+    <meta name="twitter:url" content="https://blog.leons.dev/" />
+    <meta name="twitter:image" content="https://blog.leons.dev/assets/images/blog-cover.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Antony's blog" />
+    <meta name="twitter:site" content="@AntonyLeons" />
+    <meta name="twitter:creator" content="@AntonyLeons" />
+    <meta property="og:image:width" content="2000" />
+    <meta property="og:image:height" content="666" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Antony's blog",
+        "logo": "https://blog.leons.dev/assets/images/blog-icon.png"
+    },
+    "url": "https://blog.leons.dev/404.html",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://blog.leons.dev/assets/images/blog-cover.jpg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://blog.leons.dev/404.html"
+    },
+    "description": "My Personal Projects & Opinions"
+}
+    </script>
+
+
+    <link rel="alternate" type="application/rss+xml" title="404 - Page Not Found" href="/feed.xml" />
+
 </head>
 <body class="error-template">
     <div class="site-wrapper">
 
-        <header class="site-header outer {% if page.cover %}" style="background-image: url({{ site.baseurl }}{{ page.cover }})){% else %}no-cover{% endif %}">
+        <header class="site-header outer no-cover">
             <div class="inner">
                 <nav class="site-nav-center">
-                    {% if site.logo %}
-                        <a class="site-nav-logo" href="{{ site.baseurl }}"><img src="{{site.baseurl}}{{ site.logo }}" alt="{{ site.title }}" /></a>
-                    {% else %}
-                        <a class="site-nav-logo" href="{{ site.baseurl }}">{{ site.title }}</a>
-                    {% endif %}
+                    
+                        <a class="site-nav-logo" href="/"><img src="/assets/images/blog-icon.png" alt="Antony's blog" /></a>
+                    
                 </nav>
             </div>
         </header>
@@ -43,7 +87,7 @@ It's a good idea to keep this template as minimal as possible in terms of both f
                 <section class="error-message">
                     <h1 class="error-code">404</h1>
                     <p class="error-description">Page not found</p>
-                    <a class="error-link" href="{{ site.baseurl }}">Go to the front page →</a>
+                    <a class="error-link" href="/">Go to the front page →</a>
                 </section>
             </div>
         </main>
@@ -53,7 +97,171 @@ It's a good idea to keep this template as minimal as possible in terms of both f
             <div class="inner">
                 <div class="post-feed">
                     <!-- The tag below includes the markup for each post - partials/post-card.hbs -->
-                    {%  include post-card-error.html %}
+                    
+
+
+
+    
+    
+        <article class="post-card ">
+            
+                <a class="post-card-image-link" href="/tech-in-energy">
+                    <div class="post-card-image" style="background-image: url(/assets/images/energy_cover.jpg)"></div>
+                </a>
+            
+            <div class="post-card-content">
+                <a class="post-card-content-link" href="/tech-in-energy">
+                    <header class="post-card-header">
+                        
+                            
+                                
+                                    <span class="post-card-tags">Opinion</span>
+                                
+                            
+                        
+
+                        <h2 class="post-card-title">Tech in Energy</h2>
+                    </header>
+                    <section class="post-card-excerpt">
+                        
+                            <p>The future of energy will rely on technology more than ever. Here’s my predictions on how the industry will evolve in the next century.
+
+</p>
+                        
+                    </section>
+                </a>
+                <footer class="post-card-meta">
+                    
+                        
+                            
+                            <img class="author-profile-image" src="/assets/images/antony.png" alt="Antony" />
+                            
+                            <span class="post-card-author">
+                                <a href="/author/antony/">Antony</a>
+                            </span>
+                        
+                    
+                    <span class="reading-time">
+                        
+                        
+                          2 min read
+                        
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
+
+    
+    
+        <article class="post-card ">
+            
+                <a class="post-card-image-link" href="/sirius-minerals">
+                    <div class="post-card-image" style="background-image: url(/assets/images/sirius_logo.png)"></div>
+                </a>
+            
+            <div class="post-card-content">
+                <a class="post-card-content-link" href="/sirius-minerals">
+                    <header class="post-card-header">
+                        
+                            
+                                
+                                    <span class="post-card-tags">Project</span>
+                                
+                            
+                        
+
+                        <h2 class="post-card-title">My Time at Sirius</h2>
+                    </header>
+                    <section class="post-card-excerpt">
+                        
+                            <p>I landed an internship this summer, I know I was surprised too. Let me introduce you to Sirius Minerals the FTSE 250 traded company.
+
+</p>
+                        
+                    </section>
+                </a>
+                <footer class="post-card-meta">
+                    
+                        
+                            
+                            <img class="author-profile-image" src="/assets/images/antony.png" alt="Antony" />
+                            
+                            <span class="post-card-author">
+                                <a href="/author/antony/">Antony</a>
+                            </span>
+                        
+                    
+                    <span class="reading-time">
+                        
+                        
+                          3 min read
+                        
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
+
+    
+    
+        <article class="post-card ">
+            
+                <a class="post-card-image-link" href="/connecting-to-hull">
+                    <div class="post-card-image" style="background-image: url(/assets/images/Hull-Uni-cover.jpg)"></div>
+                </a>
+            
+            <div class="post-card-content">
+                <a class="post-card-content-link" href="/connecting-to-hull">
+                    <header class="post-card-header">
+                        
+                            
+                                
+                                    <span class="post-card-tags">Project</span>
+                                
+                            
+                        
+
+                        <h2 class="post-card-title">Connecting to Hull 🏫</h2>
+                    </header>
+                    <section class="post-card-excerpt">
+                        
+                            <p>You’re going to uni, Hull uni. Here’s a list of things you can connect to that I found during my time here. If you don’t have your login bookmark this for later and</p>
+                        
+                    </section>
+                </a>
+                <footer class="post-card-meta">
+                    
+                        
+                            
+                            <img class="author-profile-image" src="/assets/images/antony.png" alt="Antony" />
+                            
+                            <span class="post-card-author">
+                                <a href="/author/antony/">Antony</a>
+                            </span>
+                        
+                    
+                    <span class="reading-time">
+                        
+                        
+                          3 min read
+                        
+                    </span>
+                </footer>
+            </div>
+        </article>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+
                 </div>
             </div>
         </aside>
@@ -62,3 +270,4 @@ It's a good idea to keep this template as minimal as possible in terms of both f
     </div>
 </body>
 </html>
+

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator>
+  <link href="https://blog.leons.dev/tag/project/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="https://blog.leons.dev/" rel="alternate" type="text/html" />
+  <updated>2020-04-06T04:43:24+00:00</updated>
+  <id>https://blog.leons.dev/tag/project/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">Antony’s blog | </title>
+  
+
+  
+    <subtitle>My Personal Projects &amp; Opinions</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">My Time at Sirius</title>
+      <link href="https://blog.leons.dev/sirius-minerals" rel="alternate" type="text/html" title="My Time at Sirius" />
+      <published>2019-09-09T10:00:00+00:00</published>
+      <updated>2019-09-09T10:00:00+00:00</updated>
+      <id>https://blog.leons.dev/sirius-minerals</id>
+      <content type="html" xml:base="https://blog.leons.dev/sirius-minerals">&lt;p&gt;I landed an internship this summer, I know I was surprised too. Let me introduce you to &lt;a href=&quot;#Sirius&quot;&gt;Sirius Minerals&lt;/a&gt; the FTSE 250 traded company.&lt;/p&gt;
+
+&lt;p&gt;Also a shout out to Hull Uni for letting me know through their &lt;a href=&quot;https://hull.jobteaser.com&quot; title=&quot;Job Teaser&quot;&gt;jobteaser platform&lt;/a&gt;. So the week after I got the job I moved to Scarborough for 2 months. Honestly it was a fast but 100% worth it for the experience I gained in those 2 months. &lt;a name=&quot;Sirius&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;sirius-minerals&quot;&gt;Sirius Minerals&lt;/h1&gt;
+&lt;p&gt;Sirius Minerals is a fertilizer development company. Most people would describe it as a mining company, and I wouldn’t blame them they are developing mine, so it makes sense. They’re a start-up but a billion-dollar start-up so I was pretty excited to join the team.&lt;/p&gt;
+&lt;div style=&quot;text-align:centre&quot;&gt;Every start up needs a ping pong table...&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;assets/images/sirius_social.jpg&quot; alt=&quot;Social Space&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Our mission is really to ensure food security for the world for a minimum of another 50 years so for a project of this scale with an estimated 9.7 billion mouths to feed by 2050, you can really see why investing in this area is key. Contracts and trails are already been signed or in progress from India all the way to Argentina. The main product is &lt;a href=&quot;https://www.poly4.com&quot;&gt;POLY4&lt;/a&gt; which contains 4 of 6 macronutrients(potassium, sulphur, magnesium and calcium) that all plants need.&lt;/p&gt;
+&lt;h1 id=&quot;it-or-bi-in-a-vm&quot;&gt;IT or BI in a VM..?&lt;/h1&gt;
+&lt;p&gt;From day one I had to run a virtual machine, obviously this would have a performance impact, but my setup wasn’t bad…&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;assets/images/sirius_setup.jpg&quot; alt=&quot;My Setup&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Yep, Thunderbolt daisy chain too and i7 of course and 16GB standard, I wasn’t a fan of Thinkpads but it has grown on me. Open source software was dominant here, being a start up after all it’s important to keep overhead low. Most of their servers run on Ubuntu so I had to have one for development purposes, but I have to say my preferred flavour of Ubuntu has to be POP OS. A virtual machine with an SSD works really well, much better than my previous experiences.&lt;/p&gt;
+
+&lt;p&gt;The Unix experience was so good that I even have it installed on my personal machine. It’s very convenient to have one installed just in case you have to run a Linux utility; Docker containers in particular in my case are so good they have become my preferred installation medium. And this does away with the Windows pro requirement which is just obnoxious. Being new to this stuff made it a learning curve but everyone was really helpful, and the GM of technology even sat down with me to help me with some cron jobs I was having trouble with.&lt;/p&gt;
+
+&lt;p&gt;I coded my first ever Java project, an application that consumes a REST API from a popular task management system and exports this to a Postgres database. Now this is very useful for backup but also allows for the application of Business Intelligence software. In my case this was Metabase, an open source, modern BI solution built on Clojure, but I did go on to run some tests on Apache Superset and Redis. Elasticsearch + Kibana looked very promising and was very polished but required a NoSQL to be maintained along side our Postgres database so it was unsuitable in case.&lt;/p&gt;
+
+&lt;p&gt;Now most data scientists code in Python so that was the next thing on my list. I spent a week learning a very different programming language and it’s become one of my favourites syntactically. I produced less verbose code compared to either Java or C#, and with my data mining module next year I know it could be very useful, not to mention machine learning.&lt;/p&gt;
+
+&lt;p&gt;With this being my first internship I’m truly grateful that I had the opportunity to join the team and be part of something that will have a lasting impact on a local and global scale, and hopefully they’ll have a placement or a grad student next year.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;assets/images/mine.jpg&quot; alt=&quot;My Setup&quot; /&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Antony</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="project" />
+      
+
+      
+        <summary type="html">I landed an internship this summer, I know I was surprised too. Let me introduce you to Sirius Minerals the FTSE 250 traded company.</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Connecting to Hull 🏫</title>
+      <link href="https://blog.leons.dev/connecting-to-hull" rel="alternate" type="text/html" title="Connecting to Hull 🏫" />
+      <published>2019-09-04T10:00:00+00:00</published>
+      <updated>2019-09-04T10:00:00+00:00</updated>
+      <id>https://blog.leons.dev/connecting-to-hull</id>
+      <content type="html" xml:base="https://blog.leons.dev/connecting-to-hull">&lt;p&gt;You’re going to uni, Hull uni. Here’s a list of things you can connect to that I found during my time here. If you don’t have your login bookmark this for later and if you find it useful a share would be nice.&lt;/p&gt;
+
+&lt;h1 id=&quot;timetables&quot;&gt;Timetables&lt;/h1&gt;
+&lt;p&gt;The most important thing on this list, you can find it &lt;a href=&quot;https://timetables.scientia.hull.ac.uk/login.aspx?ReturnUrl=%2fdefault.aspx&quot;&gt;here&lt;/a&gt; or use the IHull app which you can find on the app store. Or you could do it the better way…&lt;/p&gt;
+
+&lt;p&gt;Use the ical feed below and attach it to your calendar, this will sync nicely with your timetable. I recommend google calendar, but any good calendar will support an ical feed.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;webcal://calendars.hull.ac.uk/tcs/Stucal.asp?p1=2017*****
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The number at the end is your student number, it starts with the year you joined and it’s on your student card, note this is NOT the number underneath the barcode.&lt;/p&gt;
+
+&lt;p&gt;On &lt;a href=&quot;https://calendar.google.com&quot; title=&quot;Google Calendar&quot;&gt;google calendar&lt;/a&gt; open it on a laptop&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Click the settings cog then settings&lt;/li&gt;
+  &lt;li&gt;Add calendar&lt;/li&gt;
+  &lt;li&gt;From URL&lt;/li&gt;
+  &lt;li&gt;Copy and paste the link replacing the 2017***** with your student number&lt;/li&gt;
+  &lt;li&gt;Wait a minute, the first sync takes longer than usual&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You should end up with something that resembles this&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/calendar-screenshot.png&quot; alt=&quot;alt text&quot; title=&quot;Calendar Screenshot&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Facebook also have ical feeds for events, something which societies use a lot, canvas too, but some modules spam the calendar making it unusable.
+The rest of this tutorial is based on google calendar so if you’re having trouble just switch. Then you’ll have a calendar that looks as good as this, plus it’s amazing for productivity once you sync up everything.&lt;/p&gt;
+
+&lt;h1 id=&quot;email&quot;&gt;Email&lt;/h1&gt;
+&lt;p&gt;You can sync your uni Email to your phone, very handy for people who forget to check their emails, I use Gmail but any client should work.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Go to settings and add account&lt;/li&gt;
+  &lt;li&gt;Select Exchange or Office 365&lt;/li&gt;
+  &lt;li&gt;your email is actually your computer login with @hull.ac.uk E.g 554537@hull.ac.uk. The newer emails may just work as the actual email these are from 2018 onwards with only @hull.ac.uk at the end.&lt;/li&gt;
+  &lt;li&gt;your password is your computer login password&lt;/li&gt;
+  &lt;li&gt;allow admin rights (a bit worrying yes but oh well)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The server settings should get automatically get picked up but if you’re having trouble here is my entire config.
+&lt;img src=&quot;assets/images/email-screenshot.jpg&quot; alt=&quot;alt text&quot; title=&quot;Email Screenshot&quot; /&gt;
+This also sync your calendar events to google calendar if you have an android phone.&lt;/p&gt;
+
+&lt;h1 id=&quot;wifi&quot;&gt;Wifi&lt;/h1&gt;
+&lt;p&gt;The university says get an installer from &lt;a href=&quot;https://cat.eduroam.org/&quot; title=&quot;Eduroam&quot;&gt;Eduroam Cat&lt;/a&gt; and I support them, it works but your mileage may vary, Just select Hull uni and download the installer the login is the login described in the process below. But a PC connection is simple enough you don’t need a installer…&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;connect to Eduroam and it’ll prompt you for a username and password&lt;/li&gt;
+  &lt;li&gt;your username is your computer login with @hull.ac.uk E.g 554537@hull.ac.uk&lt;/li&gt;
+  &lt;li&gt;your password is your computer login password&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Fun fact, Eduroam will work on campuses across 101 countries, I found this out when I was in Dublin. To connect all you other devices you use the same login, but you’ll probably have to go into advanced connection setting. If you get less that 20Mb/s cry, you can test your speed &lt;a href=&quot;https://speed.leons.dev&quot; title=&quot;Speed Test&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Note, if you use a custom DNS, Eduroam will not work, this is probably because they want to track your activity.&lt;/p&gt;
+
+&lt;h1 id=&quot;software&quot;&gt;Software&lt;/h1&gt;
+&lt;p&gt;Students can get office for free &lt;a href=&quot;https://www.microsoft.com/en-gb/education/products/office&quot; title=&quot;Office&quot;&gt;here&lt;/a&gt;. And all other software is available &lt;a href=&quot;https://e5.onthehub.com/WebStore/ProductsByMajorVersionList.aspx?cmi_cs=1&amp;amp;cmi_mnuMain=433748da-f0a6-e811-8109-000d3af41938&amp;amp;ws=8fabf8c8-de0b-e211-bd05-f04da23e67f6&amp;amp;vsro=8&quot; title=&quot;OnTheHub&quot;&gt;here&lt;/a&gt;. You use your university email and password to login but IT is a bit slow so it may take a few weeks to activate.&lt;/p&gt;
+
+&lt;h1 id=&quot;get-your-files&quot;&gt;Get your files&lt;/h1&gt;
+&lt;p&gt;This is the most complicated one, the university has &lt;a href=&quot;http://box.hull.ac.uk&quot; title=&quot;box&quot;&gt;box&lt;/a&gt; for cloud storage, but do not have box sync installed so it’s basically useless.&lt;/p&gt;
+
+&lt;p&gt;They do provide a VPN so you can access your drives like you’re at uni, I was going to talk about it but it’s down/broken and without screenshots it’s hard to tell you how to do it, but you can read more about it &lt;a href=&quot;https://share.hull.ac.uk/Services/ICT/SitePages/VPN%20-%20Working%20Remotely.aspx&quot; title=&quot;VPN&quot;&gt;here&lt;/a&gt;. Login using your computer login. If you’re on Eduroam you just need to map your drives and it will just work.&lt;/p&gt;
+
+&lt;h1 id=&quot;random&quot;&gt;Random&lt;/h1&gt;
+&lt;p&gt;I think I covered everything, 2 more unrelated things 
+I would recommend is Monzo, the app only bank which you can read about &lt;a href=&quot;https://blog.leons.dev/better-banking&quot; title=&quot;Monzo Blog&quot;&gt;here&lt;/a&gt; and sign up &lt;a href=&quot;https://join.monzo.com/r/m4oo8cy&quot; title=&quot;Join Monzo&quot;&gt;here&lt;/a&gt;. Splitting bills and creating a tab for your house are extremely useful for students, me and my friends already have a tab set up and we haven’t even moved in yet.&lt;/p&gt;
+
+&lt;p&gt;If you’re a computer scientist get the GitHub Student pack &lt;a href=&quot;https://education.github.com/pack&quot; title=&quot;student pack&quot;&gt;here&lt;/a&gt;. It’s so much better than SVN. It even does static web hosting for free, so I recommend making a website. Here’s a little secret, my entire site costs £10 a year to run and helped me land a internship so I’d say it’s a good investment, you can read more about that &lt;a href=&quot;https://blog.leons.dev/tooling&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Antony</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="project" />
+      
+
+      
+        <summary type="html">You’re going to uni, Hull uni. Here’s a list of things you can connect to that I found during my time here. If you don’t have your login bookmark this for later and if you find it useful a share would be nice.</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Tooling</title>
+      <link href="https://blog.leons.dev/tooling" rel="alternate" type="text/html" title="Tooling" />
+      <published>2019-03-29T10:00:00+00:00</published>
+      <updated>2019-03-29T10:00:00+00:00</updated>
+      <id>https://blog.leons.dev/tooling</id>
+      <content type="html" xml:base="https://blog.leons.dev/tooling">&lt;p&gt;To make this site I had a lot of help, Without the work of over 1385 people this would not look the same, these are the tools they created.&lt;/p&gt;
+
+&lt;p&gt;Before I begin I just want to say this is not for absolute beginners, learning everything takes time so don’t worry&lt;/p&gt;
+
+&lt;p&gt;Anyway onwards to tooling;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://atom.io&quot; title=&quot;A Code Editor&quot;&gt;Atom&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com&quot; title=&quot;Hosting &amp;amp; Management&quot;&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And realistically that’s all you need I recommend you download &lt;a href=&quot;https://desktop.github.com/&quot;&gt;GitHub desktop&lt;/a&gt; to make you life easier. And if you have knowledge of HTML and CSS that’s all you need to create a site.&lt;/p&gt;
+
+&lt;p&gt;But hey this blog is complicated I’m not going to write all of this code am I.
+So here’s some more tools I used to make my life easier and the code simpler.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jekyllrb.com&quot; title=&quot;Blog Generator&quot;&gt;Jekyll&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://themes.gohugo.io/&quot; title=&quot;Landing Page Generator&quot;&gt;GoHugo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://domains.google&quot; title=&quot;Domain Registrar&quot;&gt;Google Domains&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cloudflare.com&quot; title=&quot;CDN and SSL&quot;&gt;CloudFlare&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://analytics.google.com&quot; title=&quot;Analytics&quot;&gt;Google Analytics&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://web.dev/measure&quot; title=&quot;Automated Testing&quot;&gt;Measure&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://travis-ci.org&quot; title=&quot;Continuous Integration&quot;&gt;Travis CI&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These are the tools I used, sure there are alternatives but I found these to work well and I’m now stuck in the ecosystem these tools provide. CloudFlare, Google Analytics, Measure and Travis CI are not necessary but they are useful tools you can add for the management of the site. All of these tools except your domain is free so why not?&lt;/p&gt;
+
+&lt;p&gt;Possibly next week I’ll go over the more of the setup and the structure of my site, feel free to follow along. Technically you could do it all yourself now by reading the documentation on all the tools and deploy your site so if you’re a skilled developer go ahead.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Antony</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="project" />
+      
+
+      
+        <summary type="html">To make this site I had a lot of help, Without the work of over 1385 people this would not look the same, these are the tools they created.</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Welcome to My Blog</title>
+      <link href="https://blog.leons.dev/welcome" rel="alternate" type="text/html" title="Welcome to My Blog" />
+      <published>2019-03-19T10:00:00+00:00</published>
+      <updated>2019-03-19T10:00:00+00:00</updated>
+      <id>https://blog.leons.dev/welcome</id>
+      <content type="html" xml:base="https://blog.leons.dev/welcome">&lt;p&gt;Hey! Welcome to my blog, it’s great to have you :)&lt;/p&gt;
+
+&lt;p&gt;This is just an intro into how and why I created my website, the tools I used and future improvements I’m figuring out how to do.
+I’ll give a brief overview of costing(a lot less than you think), and maybe I’ll write some tutorial over summer depending on
+how bored I am.&lt;/p&gt;
+
+&lt;p&gt;Follow my socials or bookmark this page and check in every month or so.&lt;/p&gt;
+
+&lt;p&gt;I’ll also be publishing opinion pieces but they’ll be tagged appropriately so I can save you some time.&lt;/p&gt;
+
+&lt;p&gt;But if you’re here cheers for browsing to my blog and stay tuned for updates&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Antony</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="project" />
+      
+
+      
+        <summary type="html">Hey! Welcome to my blog, it’s great to have you :)</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>

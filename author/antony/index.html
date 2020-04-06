@@ -11,7 +11,7 @@
 
 
 
-    <title>Antony's blog</title>
+    <title>Antony - Antony's blog</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -28,20 +28,20 @@
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="My Personal Projects & Opinions" />
     <link rel="shortcut icon" href="https://blog.leons.dev/assets/images/favicon.png" type="image/png" />
-    <link rel="canonical" href="https://blog.leons.dev/" />
+    <link rel="canonical" href="https://blog.leons.dev/author/antony/" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 	<link type="application/atom+xml" rel="alternate" href="https://blog.leons.dev/feed.xml" title="Antony's blog" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Antony's blog" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Antony's blog" />
+    <meta property="og:title" content="Antony - Antony's blog" />
     <meta property="og:description" content="My Personal Projects & Opinions" />
-    <meta property="og:url" content="https://blog.leons.dev/" />
+    <meta property="og:url" content="https://blog.leons.dev/author/antony/" />
     <meta property="og:image" content="https://blog.leons.dev/assets/images/blog-cover.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/antony.leons.3" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Antony's blog" />
+    <meta name="twitter:title" content="Antony - Antony's blog" />
     <meta name="twitter:description" content="My Personal Projects & Opinions" />
     <meta name="twitter:url" content="https://blog.leons.dev/" />
     <meta name="twitter:image" content="https://blog.leons.dev/assets/images/blog-cover.jpg" />
@@ -61,7 +61,7 @@
         "name": "Antony's blog",
         "logo": "https://blog.leons.dev/assets/images/blog-icon.png"
     },
-    "url": "https://blog.leons.dev/",
+    "url": "https://blog.leons.dev/author/antony/",
     "image": {
         "@type": "ImageObject",
         "url": "https://blog.leons.dev/assets/images/blog-cover.jpg",
@@ -70,38 +70,36 @@
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://blog.leons.dev/"
+        "@id": "https://blog.leons.dev/author/antony/"
     },
     "description": "My Personal Projects & Opinions"
 }
     </script>
 
 
-    <link rel="alternate" type="application/rss+xml" title="Antony's blog" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Author Page" href="/feed.xml" />
 
 
 </head>
-<body class="home-template">
+<body class="author-template">
 
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
-        <!-- < default -->
-<!-- The tag above means: insert everything in this file
-into the {body} of the default.hbs template -->
+        <!-- < default}} -->
+<!-- The tag above means - insert everything in this file into the {body} of the default.hbs template -->
 
-<!-- The big featured header, it uses blog cover image as a BG if available -->
-<header class="site-header outer " style="background-image:  url(/assets/images/blog-cover.jpg) ">
-    <div class="inner">
-        <div class="site-header-content">
-            <h1 class="site-title">
-                
-                    <img class="site-logo" src="/assets/images/blog-icon.png" alt="Antony's blog"/>
-                
-            </h1>
-            <h2 class="site-description">My Personal Projects & Opinions</h2>
-        </div>
-        <nav class="site-nav">
+<!-- #author  -->
+<!-- Everything inside the #author tags pulls data from the author -->
+
+    
+    <header class="site-header outer " style="background-image: url(/assets/images/waves.jpg) ">
+        <div class="inner">
+            <nav class="site-nav">
     <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="https://blog.leons.dev/"><img src="/assets/images/blog-icon.png" alt="Antony's blog" /></a>
+            
         
         
             <ul class="nav" role="menu">
@@ -129,8 +127,41 @@ into the {body} of the default.hbs template -->
     </div>
 </nav>
 
-    </div>
-</header>
+            <div class="site-header-content">
+                
+                    <img class="author-profile-image" src="/assets/images/antony.png" alt="antony" />
+                
+                <h1 class="site-title">Antony</h1>
+                
+                    <h2 class="author-bio">Tech Enthusiast, Coder and Investor</h2>
+                
+                <div class="author-meta">
+                    
+                    <div class="author-stats">
+                        6 posts <span class="bull">&bull;</span>
+                    </div>
+                    
+                        <a class="social-link social-link-wb" href="https://leons.dev" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.5 11.957c0 6.375-5.163 11.544-11.532 11.544C5.599 23.5.5 18.125.5 11.75.5 5.542 5.37.758 11.505.511l.5-.011C18.374.5 23.5 5.582 23.5 11.957zM11.505.511c-6 6.5-6 14.98 0 22.98m1-22.98c6 6.5 6 14.977 0 22.977M2 17.479h20.063m-19.657-12h19.062m-20.968 6h22.938" stroke="#000" stroke-linejoin="round" stroke-miterlimit="10" fill="none"/></svg>
+</a>
+                    
+                    
+                        <a class="social-link social-link-tw" href="https://twitter.com/AntonyLeons" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+                    
+                    
+                        <a class="social-link social-link-fb" href="https://facebook.com/antony.leons.3" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+</a>
+                    
+                    
+                        <a class="social-link social-link-gb" href="https://github.com/AntonyLeons" target="_blank" rel="noopener"><svg viewBox="0 0 1660 1660" xmlns="http://www.w3.org/2000/svg"><path d="M896 128q209 0 385.5 103t279.5 279.5 103 385.5q0 251-146.5 451.5t-378.5 277.5q-27 5-40-7t-13-30q0-3 .5-76.5t.5-134.5q0-97-52-142 57-6 102.5-18t94-39 81-66.5 53-105 20.5-150.5q0-119-79-206 37-91-8-204-28-9-81 11t-92 44l-38 24q-93-26-192-26t-192 26q-16-11-42.5-27t-83.5-38.5-85-13.5q-45 113-8 204-79 87-79 206 0 85 20.5 150t52.5 105 80.5 67 94 39 102.5 18q-39 36-49 103-21 10-45 15t-57 5-65.5-21.5-55.5-62.5q-19-32-48.5-52t-49.5-24l-20-3q-21 0-29 4.5t-5 11.5 9 14 13 12l7 5q22 10 43.5 38t31.5 51l10 23q13 38 44 61.5t67 30 69.5 7 55.5-3.5l23-4q0 38 .5 88.5t.5 54.5q0 18-13 30t-40 7q-232-77-378.5-277.5t-146.5-451.5q0-209 103-385.5t279.5-279.5 385.5-103zm-477 1103q3-7-7-12-10-3-13 2-3 7 7 12 9 6 13-2zm31 34q7-5-2-16-10-9-16-3-7 5 2 16 10 10 16 3zm30 45q9-7 0-19-8-13-17-6-9 5 0 18t17 7zm42 42q8-8-4-19-12-12-20-3-9 8 4 19 12 12 20 3zm57 25q3-11-13-16-15-4-19 7t13 15q15 6 19-6zm63 5q0-13-17-11-16 0-16 11 0 13 17 11 16 0 16-11zm58-10q-2-11-18-9-16 3-14 15t18 8 14-14z"/></svg></a>
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    
+
+<!-- /author -->
 
 <!-- The main content area -->
 <main id="site-main" class="site-main outer" role="main">
@@ -141,7 +172,7 @@ into the {body} of the default.hbs template -->
             
 
 
-    <article class="post-card home-template">
+    <article class="post-card author-template">
         
             <a class="post-card-image-link" href="/tech-in-energy">
                 <div class="post-card-image" style="background-image: url(/assets/images/energy_cover.jpg)"></div>
@@ -189,7 +220,7 @@ into the {body} of the default.hbs template -->
         </div>
     </article>
 
-    <article class="post-card home-template">
+    <article class="post-card author-template">
         
             <a class="post-card-image-link" href="/sirius-minerals">
                 <div class="post-card-image" style="background-image: url(/assets/images/sirius_logo.png)"></div>
@@ -237,7 +268,7 @@ into the {body} of the default.hbs template -->
         </div>
     </article>
 
-    <article class="post-card home-template">
+    <article class="post-card author-template">
         
             <a class="post-card-image-link" href="/connecting-to-hull">
                 <div class="post-card-image" style="background-image: url(/assets/images/Hull-Uni-cover.jpg)"></div>
@@ -283,7 +314,7 @@ into the {body} of the default.hbs template -->
         </div>
     </article>
 
-    <article class="post-card home-template">
+    <article class="post-card author-template">
         
             <a class="post-card-image-link" href="/better-banking">
                 <div class="post-card-image" style="background-image: url(/assets/images/Monzo.png)"></div>
@@ -331,7 +362,7 @@ into the {body} of the default.hbs template -->
         </div>
     </article>
 
-    <article class="post-card home-template">
+    <article class="post-card author-template">
         
             <a class="post-card-image-link" href="/tooling">
                 <div class="post-card-image" style="background-image: url(/assets/images/tooling.jpg)"></div>
@@ -379,7 +410,7 @@ into the {body} of the default.hbs template -->
         </div>
     </article>
 
-    <article class="post-card home-template">
+    <article class="post-card author-template">
         
             <a class="post-card-image-link" href="/welcome">
                 <div class="post-card-image" style="background-image: url(/assets/images/welcome.jpg)"></div>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator>
+  <link href="https://blog.leons.dev/tag/opinion/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="https://blog.leons.dev/" rel="alternate" type="text/html" />
+  <updated>2020-04-06T04:43:24+00:00</updated>
+  <id>https://blog.leons.dev/tag/opinion/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">Antony’s blog | </title>
+  
+
+  
+    <subtitle>My Personal Projects &amp; Opinions</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">Tech in Energy</title>
+      <link href="https://blog.leons.dev/tech-in-energy" rel="alternate" type="text/html" title="Tech in Energy" />
+      <published>2019-11-24T10:00:00+00:00</published>
+      <updated>2019-11-24T10:00:00+00:00</updated>
+      <id>https://blog.leons.dev/tech-in-energy</id>
+      <content type="html" xml:base="https://blog.leons.dev/tech-in-energy">&lt;p&gt;The future of energy will rely on technology more than ever. Here’s my predictions on how the industry will evolve in the next century.&lt;/p&gt;
+
+&lt;h1 id=&quot;renewable-energy&quot;&gt;Renewable Energy&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;assets/images/renewables.jpg#full&quot; alt=&quot;Solar panels&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Clean renewable energy will be the energy of the future, there are already entire countries that are fully renewable like Costa Rica and Iceland. Many  other countries also have targets to be 100% renewable or at least carbon neutral in the future, whether these targets will be met is another question. But growth in renewables is strong, quadrupling over the past decade, solar and wind being leaders in the field.&lt;/p&gt;
+
+&lt;h1 id=&quot;distributed-grid&quot;&gt;Distributed Grid&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;assets/images/powerwall.jpg&quot; alt=&quot;Powerwall&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Renewables are getting cheaper than ever and so more and more people are are installing solar panels on their home. Distributed power generation is more resilient than traditional power generation as each node in the system can support it self however combining it with existing systems will give additional redundancy. Less energy also has to be produced too as energy will not be lost in transmission. Improving overall grid efficiency. Storing energy and using it in peak demand has also become more popular with products like the tesla powerwall, which are essentially supplemental batteries when the sun or grid is down.&lt;/p&gt;
+
+&lt;h1 id=&quot;energy-storage&quot;&gt;Energy storage&lt;/h1&gt;
+&lt;p&gt;It’s not just individuals storing energy for later use, corporations and even utility companies are leveraging energy store solutions to meet peak demand or reduce energy bills at scale. Supply can be increased as soon as there is demand unlike traditional power stations where this would take several minutes. This would likely be controlled by algorithms which predict when demand will increase or decrease.&lt;/p&gt;
+
+&lt;h1 id=&quot;electric-cars&quot;&gt;Electric Cars&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;assets/images/car.jpg&quot; alt=&quot;Nissan Leaf&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Electric cars will increase the demand for electricity, however they are a cleaner alternative to their fossil fuelled counterparts as power stations tend to be more efficient than car engines. This might also provide a positive for the industry as this is a distributed energy store and could act as a massive battery bank when there is peak demand. Which is likely when people are home in the after noon. This is a bit more in the future but a really innovative solution, as this would have huge infrastructure cost savings.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;Renewable is the future and other energy sources are finding it harder to compete, even nuclear with it’s zero carbon emissions is relatively expensive when it comes to renewables. But storage technology will need to improve before we can go 100% renewable energy, that or perfect nuclear fusion. Which ever comes first.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Antony</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="opinion" />
+      
+
+      
+        <summary type="html">The future of energy will rely on technology more than ever. Here’s my predictions on how the industry will evolve in the next century.</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Better Banking</title>
+      <link href="https://blog.leons.dev/better-banking" rel="alternate" type="text/html" title="Better Banking" />
+      <published>2019-04-06T10:00:00+00:00</published>
+      <updated>2019-04-06T10:00:00+00:00</updated>
+      <id>https://blog.leons.dev/better-banking</id>
+      <content type="html" xml:base="https://blog.leons.dev/better-banking">&lt;p&gt;Most banks are terrible, &lt;a href=&quot;#Monzo&quot;&gt;Enter Monzo&lt;/a&gt;, you can scroll to the header if you don’t want to read.&lt;/p&gt;
+
+&lt;p&gt;Banks, most people hate them but they do provide a service for modern society, with most offering free accounts you can open at any time. I have multiple bank accounts, they have different perk or just have really cool cards and I think I enjoy collecting them.&lt;/p&gt;
+
+&lt;p&gt;However there are some newcomers…&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;assets/images/Fintech.png#full&quot; alt=&quot;Fintech banks&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I had an ISA with Halifax for like 4 or 5 years but every year they reduced the interest rate, when I was legally a child they give you a better rate for whatever reason but I’m guessing it’s to hook you early. Why get you early? It’s a savings accounts, nobody really checks their savings account, they can lower rates and nobody bats an eyes.
+&lt;img src=&quot;assets/images/monzo2.png&quot; alt=&quot;alt text&quot; title=&quot;Halifax interest&quot; /&gt;
+Banks are a business and this is capitalism so it makes sense. What doesn’t make sense is you can renew your account. What does that mean? Well you can ‘renew your interest rate’, Doing this &lt;strong&gt;TRIPLED&lt;/strong&gt; my rate to 0.6% but why this doesn’t happen automatically.
+&lt;img src=&quot;assets/images/monzo1.png&quot; alt=&quot;alt text&quot; title=&quot;Renewed rate&quot; /&gt; &lt;a name=&quot;Monzo&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;enter-monzo&quot;&gt;Enter Monzo&lt;/h1&gt;
+&lt;p&gt;Monzo is “The bank of the future” It’s now my primary bank account and it’s just launched ISAs so I ditched Halifax and moved straight over. Now your probably wondering what makes it different.
+Well..&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Instant nonfictions when you spend and receive money&lt;/li&gt;
+  &lt;li&gt;Freeze your card whenever you want&lt;/li&gt;
+  &lt;li&gt;Verify big purchases with a notification&lt;/li&gt;
+  &lt;li&gt;Split bills with your friend instantly&lt;/li&gt;
+  &lt;li&gt;ISA’s with 1.14% and paid monthly and next day withdrawal&lt;/li&gt;
+  &lt;li&gt;A custom &lt;a href=&quot;https://monzo.me/antonyleons&quot; title=&quot;My link&quot;&gt;link&lt;/a&gt; where you can get paid right into your account&lt;/li&gt;
+  &lt;li&gt;Transparency, Everything is in plain English&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It’s an actual bank that gets regulated by the government, you get everything you normally get just no branches which saves them a lot of money, money they then use to give you better rates and services, this is technology disrupting industry and I love it. Why Monzo? Well I’ve tried a lot of fintech banks and it hands down comes out on top.&lt;/p&gt;
+
+&lt;p&gt;Just a disclaimer but you need to have £500 to open an ISA and this is only open the UK residents, but just to sweeten the deal
+get £5 for signing up after your first transaction using this &lt;a href=&quot;https://join.monzo.com/r/m4oo8cy&quot; title=&quot;Get £5&quot;&gt;link&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;So if anything go &lt;a href=&quot;https://join.monzo.com/r/m4oo8cy&quot; title=&quot;Get £5&quot;&gt;get £5&lt;/a&gt; even if I haven’t sold you the idea.&lt;/p&gt;
+
+&lt;p&gt;But if you wanna read more head over to their website &lt;a href=&quot;https://monzo.com/&quot;&gt;monzo.com&lt;/a&gt;.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Antony</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="opinion" />
+      
+
+      
+        <summary type="html">Most banks are terrible, Enter Monzo, you can scroll to the header if you don’t want to read.</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>
