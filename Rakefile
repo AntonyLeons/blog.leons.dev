@@ -56,7 +56,7 @@ namespace :site do
     end
 
     # Make sure destination folder exists as git repo
-  #  check_destination
+    check_destination
 
     sh "git checkout #{SOURCE_BRANCH}"
     Dir.chdir(CONFIG["destination"]) { sh "git checkout #{DESTINATION_BRANCH}" }
