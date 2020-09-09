@@ -14,24 +14,27 @@ author: antony
 You're going to uni, Hull uni. Here's a list of things you can connect to that I found during my time here. If you don't have your login bookmark this for later and if you find it useful a share would be nice.
 
 # Timetables
-The most important thing on this list, you can find it [here](https://timetables.scientia.hull.ac.uk/login.aspx?ReturnUrl=%2fdefault.aspx) or use the IHull app which you can find on the app store. Or you could do it the better way...
+### UPDATED 09/09/20 
+The most important thing on this list, you can find it [here](https://mytimetable.hull.ac.uk/). 
 
-Use the ical feed below and attach it to your calendar, this will sync nicely with your timetable. I recommend google calendar, but any good calendar will support an ical feed. 
-```
-webcal://calendars.hull.ac.uk/tcs/Stucal.asp?p1=2017*****
-```
-The number at the end is your student number, it starts with the year you joined and it's on your student card, note this is NOT the number underneath the barcode.
+Using the ical feed and attaching it to your calendar is the best way forward, this will sync nicely with your timetable. I recommend google calendar, but any good calendar will support an ical feed. Just hit menu in the top left, then connect to calendar app. you should copy a link similar to this.
+
+![alt text](assets/images/calendar-link.png "Calendar Link")
+
+Just paste it to your calendar app and you should be good to go.
 
 On [google calendar](https://calendar.google.com "Google Calendar") open it on a laptop
 * Click the settings cog then settings
 * Add calendar
 * From URL
-* Copy and paste the link replacing the 2017***** with your student number
+* Copy and paste the link
 * Wait a minute, the first sync takes longer than usual
   
 You should end up with something that resembles this
 
 ![alt text](assets/images/calendar-screenshot.png "Calendar Screenshot")
+
+If it doesn't show remember to tick show in the google calendar menu.
 
 Facebook also have ical feeds for events, something which societies use a lot, canvas too, but some modules spam the calendar making it unusable.
 The rest of this tutorial is based on google calendar so if you're having trouble just switch. Then you'll have a calendar that looks as good as this, plus it's amazing for productivity once you sync up everything.
