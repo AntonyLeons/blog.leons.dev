@@ -67,7 +67,7 @@ Students can get office for free [here](https://www.microsoft.com/en-gb/educatio
 # Get your files
 This is the most complicated one, the university has [box](http://box.hull.ac.uk "box") for cloud storage, but do not have box sync installed so it's basically useless.
 
-They do provide a VPN so you can access your drives like you're at uni, I was going to talk about it but it's down/broken and without screenshots it's hard to tell you how to do it, but you can read more about it [here](https://share.hull.ac.uk/Services/ICT/SitePages/VPN%20-%20Working%20Remotely.aspx "VPN"). Login using your computer login. If you're on Eduroam you just need to map your drives and it will just work.
+They do provide a VPN so you can access your drives like you're at uni, you can read more about it [here](https://support.hull.ac.uk/tas/public/ssp/content/detail/knowledgeitem?unid=3092637de12b41e696830e57acec3891 "VPN"). Download the installer and login with your credentials. If you're on Eduroam you just need to map your drives and it will just work. You can find how to do that [here](https://support.hull.ac.uk/tas/public/ssp/content/detail/knowledgeitem?unid=c03ca580-4407-4a01-9e07-7f2b08a82c6d "Map Drives").
 
 # Random
 I think I covered everything, 2 more unrelated things 
