@@ -1,34 +1,20 @@
 {
   "language": "ruby",
-  "os": [
-    "linux"
-  ],
-  "dist": "bionic",
-  "cache": {
-    "bundler": true
-  },
-  "rvm": [
-    "2.5.1"
-  ],
-  "install": [
-    "bundle install"
-  ],
-  "before_script": [
-    "bundle update"
-  ],
-  "script": [
-    "bundle exec rake site:deploy --quiet"
-  ],
-  "env": {
-    "global": [
-      {
-        "secure": "jbZ2ZmYgNuHzLN1DCZuOvSMYTheBHbylvFCGw/OKDZ83h/Wabn4bThKyBsZdjU81x2nmVW4WhbVDrnua+HDblWpQc1vwN2AAN5Fu+lSMFKHHeNsp2LeD3SlYqUtaiooYjsNhiX9AxXLj4SPt9NBAxZHR4YmV6sP/BUd/w/BGCwiCwVPoor5wQFtQtBeSY1w9tdvfrRJ3XThMzbXad9XcYQ+aVUcFWy4pwjXCr4Y/L5nooQG42ymMEo8f3hs48Qy47HSCSGIwwxZ4v5KBjo0TtPb8KuYbyT+4jDJnDeaY9MtRoVHDaa1ekOhQssX9WgHyEaJSiD5+fu7nED1N9KfBayhiPZMZ/lPcjos9gHub3Hz4MEWvL4ToMMMuwiFpHceGfBSbihTlV4guV1uUeEooM0h8BC+R9JT6JyPbYA/O6G5NyX+MwU2oFJVgUFikYjqYkvZ6wBurHg2a899OUCsU0mkshqzYuGhqTFjp8jXvMzW5/0ThuzOBqxjQ6PMjgLScQgul2Qrtbmtvnpi9TusNkc2BgM1G2DqzWow4M0u9h2B/wACkFXpXmzBU62yyBUzILOzG4CIzqL1ZzEWBevPugevueJ4AUW6uMy/nzv/K7q4RtAJ9KxJbg3GKqkKHUtGtt3bSG/TDPr89bNfJmJGPZA/4Q64ZlVaWfihA4DHH9h4="
-      }
-    ]
-  },
-  "branches": {
-    "only": [
-      "master"
-    ]
-  }
+  "os": ["linux"],
+  "dist": "focal",
+  "cache": { "bundler": true },
+  "rvm": ["2.7.5"],
+  "install": ["bundle install"],
+  "before_script": ["bundle update"],
+  "script": ["bundle exec rake site:deploy --quiet"],
+  "env":
+    {
+      "global":
+        [
+          {
+            "secure": "jbZ2ZmYgNuHzLN1DCZuOvSMYTheBHbylvFCGw/OKDZ83h/Wabn4bThKyBsZdjU81x2nmVW4WhbVDrnua+HDblWpQc1vwN2AAN5Fu+lSMFKHHeNsp2LeD3SlYqUtaiooYjsNhiX9AxXLj4SPt9NBAxZHR4YmV6sP/BUd/w/BGCwiCwVPoor5wQFtQtBeSY1w9tdvfrRJ3XThMzbXad9XcYQ+aVUcFWy4pwjXCr4Y/L5nooQG42ymMEo8f3hs48Qy47HSCSGIwwxZ4v5KBjo0TtPb8KuYbyT+4jDJnDeaY9MtRoVHDaa1ekOhQssX9WgHyEaJSiD5+fu7nED1N9KfBayhiPZMZ/lPcjos9gHub3Hz4MEWvL4ToMMMuwiFpHceGfBSbihTlV4guV1uUeEooM0h8BC+R9JT6JyPbYA/O6G5NyX+MwU2oFJVgUFikYjqYkvZ6wBurHg2a899OUCsU0mkshqzYuGhqTFjp8jXvMzW5/0ThuzOBqxjQ6PMjgLScQgul2Qrtbmtvnpi9TusNkc2BgM1G2DqzWow4M0u9h2B/wACkFXpXmzBU62yyBUzILOzG4CIzqL1ZzEWBevPugevueJ4AUW6uMy/nzv/K7q4RtAJ9KxJbg3GKqkKHUtGtt3bSG/TDPr89bNfJmJGPZA/4Q64ZlVaWfihA4DHH9h4=",
+          },
+        ],
+    },
+  "branches": { "only": ["master"] },
 }
