@@ -12,7 +12,7 @@
         "gulp-zip": "5.1.0",
         "postcss-color-function": "4.1.0",
         "postcss-custom-properties": "12.1.4",
-        "postcss-easy-import": "^3.0.0"
+        "postcss-easy-import": "^4.0.0"
     },
     "config": {
         "posts_per_page": 25
