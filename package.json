@@ -11,7 +11,7 @@
         "gulp-watch": "^5.0.1",
         "gulp-zip": "5.1.0",
         "postcss-color-function": "4.1.0",
-        "postcss-custom-properties": "12.1.5",
+        "postcss-custom-properties": "12.1.6",
         "postcss-easy-import": "^4.0.0"
     },
     "config": {
