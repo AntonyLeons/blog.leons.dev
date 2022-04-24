@@ -16,10 +16,10 @@
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}assets/built/screen.edited.css" />
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}assets/built/syntax.css" />
     <!-- highlight.js  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/themes/prism-okaidia.min.css" integrity="sha256-Ykz0nNWK7w4QWJUYR7OraN4773aMB/11aMt1nZyrhuQ=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css" integrity="sha512-hasIneQUHlh06VNBe7f6ZcHmeRTLIaQWFd43YriJ0UND19bvYRauxthDg8E4eVNPm9bRUhr5JGeqH7FRFXQu5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- jQuery + Fitvids, which makes all video embeds responsive -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.2.0/jquery.fitvids.min.js" integrity="sha256-nA828blBCdUSSdI8jpciOZsf72IGt1eBcdx1ioEfa8o=" crossorigin="anonymous"></script> -->
     <script type="text/javascript" src="{{ site.baseurl }}assets/js/jquery.fitvids.js"></script>
     <!-- This tag outputs SEO meta+structured data and other important settings -->
@@ -48,7 +48,17 @@
         {% endif %}
 
         <!-- The footer at the very bottom of the screen -->
-
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="{{ site.url }}{{ site.baseurl }}">{{ site.title }}</a> &copy; {{  site.time | date: '%Y' }}</section>
+                <nav class="site-footer-nav">
+                    <a href="{{ site.baseurl }}">Latest Posts</a>
+                    {% if site.facebook %}<a href="https://facebook.com/{{ site.facebook }}" target="_blank" rel="noopener">Facebook</a>{% endif %}
+                    {% if site.twitter %}<a href="https://twitter.com/{{ site.twitter }}" target="_blank" rel="noopener">Twitter</a>{% endif %}
+                    <a href="https://github.com/AntonyLeons/blog.leons.dev/fork" target="_blank" rel="noopener">Fork this on Github</a>
+                </nav>
+            </div>
+        </footer>
 
     </div>
 
