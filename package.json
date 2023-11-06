@@ -7,7 +7,7 @@
         "gulp-nodemon": "^2.5.0",
         "gulp-postcss": "9.0.1",
         "gulp-util": "3.0.8",
-        "gulp-zip": "5.1.0",
+        "gulp-zip": "6.0.0",
         "postcss-color-function": "4.1.0",
         "postcss-custom-properties": "13.3.2",
         "postcss-easy-import": "^4.0.0"
