@@ -1,7 +1,7 @@
 {
     "devDependencies": {
         "autoprefixer": "10.4.17",
-        "cssnano": "^6.0.5",
+        "cssnano": "^6.1.0",
         "gulp": "^4.0.2",
         "gulp-livereload": "^4.0.2",
         "gulp-nodemon": "^2.5.0",
