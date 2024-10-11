@@ -9,7 +9,7 @@
         "gulp-util": "3.0.8",
         "gulp-zip": "6.0.0",
         "postcss-color-function": "4.1.0",
-        "postcss-custom-properties": "14.0.0",
+        "postcss-custom-properties": "14.0.2",
         "postcss-easy-import": "^4.0.0"
     },
     "config": {
