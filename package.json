@@ -1,18 +1,35 @@
 {
-    "devDependencies": {
-        "autoprefixer": "10.4.21",
-        "cssnano": "^7.0.6",
-        "gulp": "^4.0.2",
-        "gulp-livereload": "^4.0.2",
-        "gulp-nodemon": "^2.5.0",
-        "gulp-postcss": "10.0.0",
-        "gulp-util": "3.0.8",
-        "gulp-zip": "6.0.0",
-        "postcss-color-function": "4.1.0",
-        "postcss-custom-properties": "14.0.4",
-        "postcss-easy-import": "^4.0.0"
-    },
-    "config": {
-        "posts_per_page": 25
-    }
+  "name": "blog.leons.dev",
+  "version": "1.0.0",
+  "description": "Personal blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp",
+    "build": "gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aleons/blog.leons.dev.git"
+  },
+  "author": "Leons",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "browser-sync": "^3.0.0",
+    "cssnano": "^7.0.1",
+    "fancy-log": "^2.0.0",
+    "gulp": "^5.0.0",
+    "gulp-postcss": "^10.0.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-zip": "^6.0.0",
+    "postcss": "^8.4.38",
+    "postcss-color-mod-function": "^3.0.3",
+    "postcss-custom-properties": "^13.3.10",
+    "postcss-easy-import": "^4.0.0",
+    "postcss-import": "^16.1.0"
+  },
+  "config": {
+    "posts_per_page": 25
+  }
 }

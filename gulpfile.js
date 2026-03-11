@@ -1,70 +1,83 @@
-var gulp = require('gulp');
-
-// gulp plugins and utils
-var gutil = require('gulp-util');
-var livereload = require('gulp-livereload');
-var nodemon = require('gulp-nodemon');
-var postcss = require('gulp-postcss');
-var sourcemaps = require('gulp-sourcemaps');
-var zip = require('gulp-zip');
+const { src, dest, watch, series, parallel } = require('gulp');
+const log = require('fancy-log');
+const postcss = require('gulp-postcss');
+const sourcemaps = require('gulp-sourcemaps');
+const zip = require('gulp-zip');
+const browserSync = require('browser-sync').create();
+const { spawn } = require('child_process');
 
 // postcss plugins
-var autoprefixer = require('autoprefixer');
-var colorFunction = require('postcss-color-function');
-var cssnano = require('cssnano');
-var customProperties = require('postcss-custom-properties');
-var easyimport = require('postcss-easy-import');
+const autoprefixer = require('autoprefixer');
+const colorModFunction = require('postcss-color-mod-function');
+const cssnano = require('cssnano');
+const customProperties = require('postcss-custom-properties');
+const easyImport = require('postcss-easy-import');
 
-var swallowError = function swallowError(error) {
-    gutil.log(error.toString());
-    gutil.beep();
+function swallowError(error) {
+    log.error(error.toString());
     this.emit('end');
-};
+}
 
-var nodemonServerInit = function () {
-    livereload.listen(1234);
-};
-
-gulp.task('build', ['css'], function (/* cb */) {
-    return nodemonServerInit();
-});
-
-gulp.task('css', function () {
-    var processors = [
-        easyimport,
+function css() {
+    const processors = [
+        easyImport,
         customProperties,
-        colorFunction(),
-        autoprefixer({browsers: ['last 2 versions']}),
+        colorModFunction(),
+        autoprefixer(),
         cssnano()
     ];
 
-    return gulp.src('assets/css/*.css')
+    return src('assets/css/*.css')
         .on('error', swallowError)
         .pipe(sourcemaps.init())
         .pipe(postcss(processors))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('assets/built/'))
-        .pipe(livereload());
-});
+        .pipe(dest('assets/built/'))
+        .pipe(browserSync.stream());
+}
 
-gulp.task('watch', function () {
-    gulp.watch('assets/css/**', ['css']);
-});
+function jekyll() {
+    // Run jekyll build --watch
+    // We override destination to _site for local development
+    const jekyll = spawn('bundle', ['exec', 'jekyll', 'build', '--watch', '--destination', '_site', '--incremental']);
 
-gulp.task('zip', ['css'], function() {
-    var targetDir = 'dist/';
-    var themeName = require('./package.json').name;
-    var filename = themeName + '.zip';
+    jekyll.stdout.on('data', (data) => {
+        log('Jekyll: ' + data.toString().trim()); 
+    });
 
-    return gulp.src([
+    jekyll.stderr.on('data', (data) => {
+        log.error('Jekyll Error: ' + data.toString().trim());
+    });
+
+    return jekyll; 
+}
+
+function serve() {
+    browserSync.init({
+        server: {
+            baseDir: '_site'
+        },
+        files: ['_site/**/!(*.css)'] // Watch _site for changes to reload (excluding css as we stream it)
+    });
+
+    watch('assets/css/**', css);
+}
+
+function zipper() {
+    const targetDir = 'dist/';
+    const themeName = require('./package.json').name;
+    const filename = themeName + '.zip';
+
+    return src([
         '**',
         '!node_modules', '!node_modules/**',
-        '!dist', '!dist/**'
+        '!dist', '!dist/**',
+        '!_site', '!_site/**'
     ])
         .pipe(zip(filename))
-        .pipe(gulp.dest(targetDir));
-});
+        .pipe(dest(targetDir));
+}
 
-gulp.task('default', ['build'], function () {
-    gulp.start('watch');
-});
+exports.css = css;
+exports.zip = series(css, zipper);
+exports.default = series(css, parallel(jekyll, serve));
