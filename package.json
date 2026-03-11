@@ -20,16 +20,16 @@
   "author": "Leon",
   "license": "ISC",
   "devDependencies": {
-    "autoprefixer": "^10.4.19",
+    "autoprefixer": "^10.4.27",
     "bestzip": "^2.2.1",
-    "concurrently": "^8.2.2",
-    "cssnano": "^7.0.1",
-    "postcss": "^8.4.38",
-    "postcss-cli": "^11.0.0",
-    "postcss-color-mod-function": "^3.0.3",
-    "postcss-custom-properties": "^13.3.10",
-    "postcss-import": "^16.1.0",
-    "vite": "^5.2.11"
+    "concurrently": "^9.2.1",
+    "cssnano": "^7.1.3",
+    "postcss": "^8.5.8",
+    "postcss-cli": "^11.0.1",
+    "postcss-color-mod-function": "^4.1.1",
+    "postcss-custom-properties": "^15.0.1",
+    "postcss-import": "^16.1.1",
+    "vite": "^7.3.1"
   },
   "config": {
     "posts_per_page": 25
