@@ -11,7 +11,7 @@
     "build:css": "postcss assets/css/*.css --dir assets/built --ext css",
     "watch:css": "postcss assets/css/*.css --dir assets/built --ext css --watch --verbose",
     "watch:jekyll": "bundle exec jekyll build --watch --incremental",
-    "zip": "bestzip dist/blog.leons.dev.zip assets/built assets/css assets/images assets/js default.hbs index.hbs package.json partials/ *.hbs *.js *.md *.json"
+    "zip": "mkdir -p dist && bestzip dist/blog.leons.dev.zip assets/built assets/css assets/images assets/js default.hbs index.hbs package.json partials/ *.hbs *.js *.md *.json"
   },
   "repository": {
     "type": "git",

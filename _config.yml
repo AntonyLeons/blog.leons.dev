@@ -73,8 +73,8 @@ lsi: False
 username: AntonyLeons
 repo: blog.leons.dev
 branch: master
-relative_source: ../blog.leons.dev/
-destination: ../blog.leons.dev-pages/
+# relative_source: ../blog.leons.dev/
+# destination: ../blog.leons.dev-pages/
 
 exclude:
   - assets/css
