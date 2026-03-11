@@ -5,29 +5,31 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp",
-    "build": "gulp build"
+    "start": "concurrently \"npm run watch:css\" \"npm run watch:jekyll\" \"npm run serve\"",
+    "serve": "vite",
+    "build": "npm run build:css && bundle exec jekyll build && npm run zip",
+    "build:css": "postcss assets/css/*.css --dir assets/built --ext css",
+    "watch:css": "postcss assets/css/*.css --dir assets/built --ext css --watch --verbose",
+    "watch:jekyll": "bundle exec jekyll build --watch --incremental",
+    "zip": "bestzip dist/blog.leons.dev.zip assets/built assets/css assets/images assets/js default.hbs index.hbs package.json partials/ *.hbs *.js *.md *.json"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aleons/blog.leons.dev.git"
   },
-  "author": "Leons",
+  "author": "Leon",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^10.4.19",
-    "browser-sync": "^3.0.0",
+    "bestzip": "^2.2.1",
+    "concurrently": "^8.2.2",
     "cssnano": "^7.0.1",
-    "fancy-log": "^2.0.0",
-    "gulp": "^5.0.0",
-    "gulp-postcss": "^10.0.0",
-    "gulp-sourcemaps": "^3.0.0",
-    "gulp-zip": "^6.0.0",
     "postcss": "^8.4.38",
+    "postcss-cli": "^11.0.0",
     "postcss-color-mod-function": "^3.0.3",
     "postcss-custom-properties": "^13.3.10",
-    "postcss-easy-import": "^4.0.0",
-    "postcss-import": "^16.1.0"
+    "postcss-import": "^16.1.0",
+    "vite": "^5.2.11"
   },
   "config": {
     "posts_per_page": 25
