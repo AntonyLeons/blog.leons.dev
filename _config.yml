@@ -57,38 +57,21 @@ feed:
 # Disqus comments as a per-post basis
 # ...
 
-# Settings for builing master branch with travis-ci
-# with jekyll-travis
+# Settings for building master branch with travis-ci
+# removed as part of cleanup
 
-# Settings for deploy rake task
-# Username and repo of Github repo, e.g.
-# https://github.com/USERNAME/REPO.git
-# username defaults to ENV['GIT_NAME'] used by Travis
-# repo defaults to USERNAME.github.io
-# Branch defaults to "source" for USERNAME.github.io
-# or "master" otherwise
 safe: False
 lsi: False
-username: AntonyLeons
-repo: blog.leons.dev
-branch: master
-# relative_source: ../blog.leons.dev/
-# destination: ../blog.leons.dev-pages/
 
 exclude:
   - assets/css
   - node_modules
   - vendor
-  - .travis.yml
   - Gemfile
   - Gemfile.lock
-  - GHOST.txt
-  - gulpfile.js
   - LICENSE
   - package.json
-  - Rakefile
   - README.md
-  - script.py
   - changelog.md
   - "*.Rmd"
   - .git*

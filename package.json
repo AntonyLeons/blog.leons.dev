@@ -2,16 +2,14 @@
   "name": "blog.leons.dev",
   "version": "1.0.0",
   "description": "Personal blog",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"npm run watch:css\" \"npm run watch:jekyll\" \"npm run serve\"",
     "serve": "vite",
-    "build": "npm run build:css && bundle exec jekyll build && npm run zip",
+    "build": "npm run build:css && bundle exec jekyll build",
     "build:css": "postcss assets/css/*.css --dir assets/built --ext css",
     "watch:css": "postcss assets/css/*.css --dir assets/built --ext css --watch --verbose",
-    "watch:jekyll": "bundle exec jekyll build --watch --incremental",
-    "zip": "mkdir -p dist && bestzip dist/blog.leons.dev.zip assets/built assets/css assets/images assets/js default.hbs index.hbs package.json partials/ *.hbs *.js *.md *.json"
+    "watch:jekyll": "bundle exec jekyll build --watch --incremental"
   },
   "repository": {
     "type": "git",
@@ -21,7 +19,6 @@
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^10.4.27",
-    "bestzip": "^2.2.1",
     "concurrently": "^9.2.1",
     "cssnano": "^7.1.3",
     "postcss": "^8.5.8",
