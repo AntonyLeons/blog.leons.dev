@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"npm run watch:css\" \"npm run watch:jekyll\" \"npm run serve\"",
     "serve": "vite",
-    "build": "npm run build:css && bundle exec jekyll build",
+    "build": "npm run build:css && bundle exec jekyll build && npm run algolia",
+    "algolia": "bundle exec jekyll algolia",
     "build:css": "postcss assets/css/*.css --dir assets/built --ext css",
     "watch:css": "postcss assets/css/*.css --dir assets/built --ext css --watch --verbose",
     "watch:jekyll": "bundle exec jekyll build --watch --incremental"

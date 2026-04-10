@@ -1,0 +1,64 @@
+---
+layout: page
+title: Search
+description: Search the blog
+---
+
+<div id="search-searchbar"></div>
+<div id="search-hits"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css" />
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
+
+<style>
+  .ais-SearchBox { margin-bottom: 2rem; }
+  .ais-Hits-item { padding: 1rem; margin-bottom: 1rem; border-bottom: 1px solid #eee; box-shadow: none; width: 100%; }
+  .ais-Hits-item h2 { margin-top: 0; font-size: 1.5rem; }
+  .ais-Hits-item p { margin-bottom: 0; color: #666; }
+</style>
+
+<script>
+  const searchClient = algoliasearch(
+    '{{ site.algolia.application_id }}',
+    '{{ site.algolia.search_only_api_key }}'
+  );
+
+  const search = instantsearch({
+    indexName: '{{ site.algolia.index_name }}',
+    searchClient,
+    routing: true
+  });
+
+  search.addWidgets([
+    instantsearch.widgets.searchBox({
+      container: '#search-searchbar',
+      placeholder: 'Search posts...',
+      showReset: false,
+      showSubmit: false,
+      cssClasses: {
+        input: 'form-input'
+      }
+    }),
+    instantsearch.widgets.hits({
+      container: '#search-hits',
+      templates: {
+        item(hit) {
+          const title = hit._highlightResult?.title?.value || hit.title || '';
+          const content = hit._highlightResult?.content?.value || hit.content?.substring(0, 150) || '';
+          return `
+            <div>
+              <h2><a href="{{ site.baseurl }}${hit.url}">${title}</a></h2>
+              <p>${content}</p>
+            </div>
+          `;
+        },
+        empty(results) {
+          return `<div class="text-center">No results found for <strong>${results.query}</strong>.</div>`;
+        }
+      }
+    })
+  ]);
+
+  search.start();
+</script>
