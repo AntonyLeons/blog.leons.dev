@@ -110,7 +110,7 @@ body {
     padding-top: 12px;
     padding-bottom: 12px;
     color: #fff;
-    background: color(var(--darkgrey) l(-5%)) no-repeat center center;
+    background: #000000 no-repeat center center;
     background-size: cover;
 }
 
@@ -141,6 +141,11 @@ body {
 
 .site-header.no-cover:before,
 .site-header.no-cover:after {
+    display: none;
+}
+
+.post-template .site-header:before,
+.post-template .site-header:after {
     display: none;
 }
 
@@ -564,13 +569,13 @@ The first (most recent) post in the list is styled to be bigger than the others 
 
 .post-full-header {
     margin: 0 auto;
-    padding: 6vw 3vw 3vw;
+    padding: 4vw 3vw 3vw;
     max-width: 1040px;
     text-align: center;
 }
 @media (max-width: 500px) {
     .post-full-header {
-        padding: 14vw 3vw 10vw;
+        padding: 10vw 3vw 10vw;
     }
 }
 

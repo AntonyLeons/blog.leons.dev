@@ -14,11 +14,11 @@
     <div class="site-nav-right">
         {% if page.current == 'home' %}
         <div id="search-searchbar" style="margin-right: 15px;"></div>
-        <div class="social-link social-link-search" style="margin-right: 15px; cursor: pointer;">
+        <div class="social-link social-link-search" style="cursor: pointer;">
             {% include search-icon.html %}
         </div>
         {% else %}
-        <a class="social-link social-link-search" href="{{site.baseurl}}" style="margin-right: 15px;">{% include search-icon.html %}</a>
+        <a class="social-link social-link-search" href="{{site.baseurl}}" >{% include search-icon.html %}</a>
         {% endif %}
         <div class="social-links">
             {% if site.github %}
