@@ -4,6 +4,7 @@ import { getCollection, render } from 'astro:content';
 import { site } from '../data/config';
 import SiteNav from '../components/SiteNav.astro';
 import AlgoliaSearch from '../components/AlgoliaSearch.astro';
+import FloatingHeader from '../components/FloatingHeader.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -48,4 +49,58 @@ const { Content } = await render(post);
             <AlgoliaSearch />
         </div>
     </main>
+
+    <FloatingHeader title={post.data.title} url={`/${post.id}`} />
+
+    <script is:inline>
+        // Floating header script
+        document.addEventListener('DOMContentLoaded', function() {
+            var progressBar = document.querySelector('progress');
+            var header = document.querySelector('.floating-header');
+            var title = document.querySelector('.post-full-title');
+            var lastScrollY = window.scrollY;
+            var lastWindowHeight = window.innerHeight;
+            var lastDocumentHeight = document.documentElement.scrollHeight;
+            var ticking = false;
+
+            function onScroll() {
+                lastScrollY = window.scrollY;
+                requestTick();
+            }
+
+            function onResize() {
+                lastWindowHeight = window.innerHeight;
+                lastDocumentHeight = document.documentElement.scrollHeight;
+                requestTick();
+            }
+
+            function requestTick() {
+                if (!ticking) {
+                    requestAnimationFrame(update);
+                }
+                ticking = true;
+            }
+
+            function update() {
+                var trigger = title.getBoundingClientRect().top + window.scrollY;
+                var triggerOffset = title.offsetHeight + 35;
+                var progressMax = lastDocumentHeight - lastWindowHeight;
+
+                if (lastScrollY >= trigger + triggerOffset) {
+                    header.classList.add('floating-active');
+                } else {
+                    header.classList.remove('floating-active');
+                }
+
+                progressBar.setAttribute('max', progressMax);
+                progressBar.setAttribute('value', lastScrollY);
+
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', onScroll, {passive: true});
+            window.addEventListener('resize', onResize, false);
+            update();
+        });
+    </script>
 </Layout>
