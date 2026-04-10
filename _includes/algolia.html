@@ -22,22 +22,24 @@
   .ais-SearchBox-input::placeholder { color: rgba(255,255,255,0.7); }
   .ais-SearchBox-input:focus { outline: none; border-bottom-color: #fff; }
   
-  .ais-Hits { width: 100%; }
+  .ais-Hits { width: 100%; display: flex; }
   .ais-Hits-list { 
       display: flex; 
       flex-wrap: wrap; 
-      margin: 0 -20px; 
+      margin: 0; 
       padding: 0; 
       list-style: none; 
+      width: 100%;
   }
   .ais-Hits-item { 
       flex: 1 1 300px; 
       display: flex; 
-      margin: 0 20px 40px; 
+      margin: 0; 
       padding: 0; 
       box-shadow: none; 
       background: transparent; 
       border: none; 
+      max-width: 100%;
   }
   .post-card-tags-date { color: #738a94; font-size: 1.2rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
   .post-card-tags-date a { color: #738a94; }
