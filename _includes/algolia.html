@@ -137,14 +137,27 @@
           e.preventDefault();
           
           if ($('.ais-SearchBox').hasClass('open')) {
+              // Close search box
+              $('.ais-SearchBox').removeClass('open');
               $('#search-hits').hide();
               $('#posts').show();
-              $('.ais-SearchBox').removeClass('open');
+              // Clear input when closing
+              $('.ais-SearchBox-input').val('').trigger('input');
           } else {
-              $('#search-hits').show();
-              $('#posts').hide();
+              // Open search box
               $('.ais-SearchBox').addClass('open');
               $('.ais-SearchBox-input').focus();
+          }
+      });
+
+      // Only show hits and hide posts when the user actually types something
+      $(document).on('input', '.ais-SearchBox-input', function() {
+          if ($(this).val().trim().length > 0) {
+              $('#posts').hide();
+              $('#search-hits').show();
+          } else {
+              $('#search-hits').hide();
+              $('#posts').show();
           }
       });
   });
