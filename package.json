@@ -8,27 +8,21 @@
     "build:css": "postcss public/assets/css/*.css --dir public/assets/built --ext css",
     "build": "npm run build:css && astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "astro": "astro"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aleons/blog.leons.dev.git"
   },
-  "author": "Leon",
+  "author": "Antony Leons",
   "license": "ISC",
   "devDependencies": {
     "@astrojs/check": "^0.9.8",
-    "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
-    "@rollup/plugin-yaml": "^4.1.2",
     "@tailwindcss/vite": "^4.2.2",
-    "@types/js-yaml": "^4.0.9",
     "astro": "^6.1.5",
     "autoprefixer": "^10.4.27",
-    "concurrently": "^9.2.1",
     "cssnano": "^7.1.3",
-    "js-yaml": "^4.1.1",
     "postcss": "^8.5.8",
     "postcss-cli": "^11.0.1",
     "postcss-color-mod-function": "^4.1.1",
