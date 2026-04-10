@@ -1,0 +1,171 @@
+---
+import { site } from '../data/config';
+---
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css" />
+<script is:inline src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
+
+<style is:global>
+  .ais-SearchBox { margin: 0; display: none; }
+  .ais-SearchBox.open { display: block; }
+  .ais-SearchBox-form { background-color: transparent; margin: 0; padding: 0; box-shadow: none; display: flex; align-items: center; }
+  .ais-SearchBox-input { 
+      padding: 5px 10px; 
+      font-size: 1.6rem; 
+      border: none; 
+      border-bottom: 1px solid rgba(255,255,255,0.3); 
+      border-radius: 0; 
+      background: transparent; 
+      color: #fff; 
+      box-shadow: none; 
+      width: 200px;
+      transition: all 0.3s ease;
+      height: 35px;
+      margin: 0;
+  }
+  .ais-SearchBox-input::placeholder { color: rgba(255,255,255,0.7); }
+  .ais-SearchBox-input:focus { outline: none; border-bottom-color: #fff; box-shadow: none; background: transparent; }
+  
+  .ais-SearchBox-submit, .ais-SearchBox-reset, .ais-SearchBox-loadingIndicator { display: none !important; }
+  
+  .ais-Hits { width: 100%; display: flex; margin-top: 4vw; }
+  .ais-Hits-list { 
+      display: flex; 
+      flex-wrap: wrap; 
+      margin: 0 -20px; 
+      padding: 0; 
+      list-style: none; 
+      width: 100%;
+  }
+  .ais-Hits-item { 
+      flex: 1 1 300px; 
+      display: flex; 
+      margin: 0 20px 40px; 
+      padding: 0; 
+      box-shadow: none !important; 
+      background: transparent !important; 
+      border: none !important; 
+      max-width: 100%;
+  }
+  .post-card-tags-date { color: #738a94; font-size: 1.2rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+  .post-card-tags-date a { color: #738a94; }
+  .post-card-tags-date a:hover { color: #3eb0ef; text-decoration: none; }
+</style>
+
+<script is:inline define:vars={{ appId: site.algolia?.application_id, apiKey: site.algolia?.search_only_api_key, indexName: site.algolia?.index_name }}>
+  if (appId && apiKey && indexName) {
+    const searchClient = algoliasearch(appId, apiKey);
+
+    const search = instantsearch({
+      indexName: indexName,
+      searchClient,
+      routing: false
+    });
+
+    const hitTemplate = function(hit) {
+        let isCover = hit.cover;
+        let articleClass = "post-card";
+        if (!isCover) articleClass += " no-image";
+
+        const title = hit._highlightResult?.title?.value || hit.title || '';
+        const content = hit._highlightResult?.content?.value || hit.content?.substring(0, 150) || '';
+        const authorName = hit.author || 'Author'; 
+        
+        // Remove trailing slash and .html from legacy URLs if they exist
+        let cleanUrl = hit.url || '';
+        if (cleanUrl.startsWith('/')) {
+            cleanUrl = cleanUrl.substring(1);
+        }
+        if (cleanUrl.endsWith('.html')) {
+            cleanUrl = cleanUrl.substring(0, cleanUrl.length - 5);
+        }
+        
+        let template = `<article class="${articleClass}">`;
+        
+        if (isCover) {
+            template += `
+              <a class="post-card-image-link" href="/${cleanUrl}">
+                  <div class="post-card-image" style="background-image: url(${ hit.cover })"></div>
+              </a>`;
+        }
+
+        template += `
+              <div class="post-card-content">
+              <a class="post-card-content-link" href="/${cleanUrl}">
+                <header class="post-card-header">`;
+
+        if ('tags' in hit && hit.tags && hit.tags.length) {
+            hit.tags.forEach((tag, index) => {
+                template += `<span class="post-card-tags">${tag}</span>`;
+            });
+        }
+
+        template += `
+          <h2 class="post-card-title">${title}</h2>
+          </header>
+          <section class="post-card-excerpt">                    
+              <p>${content}...</p>
+          </section>
+          </a>
+          </div>
+          </article>`;
+        return template;
+    }
+
+    search.addWidgets([
+      instantsearch.widgets.searchBox({
+        container: '#search-searchbar',
+        placeholder: 'Search into posts...',
+        cssClasses: {
+          root: 'ais-SearchBox',
+          form: 'ais-SearchBox-form',
+          input: 'ais-SearchBox-input',
+          submit: 'ais-SearchBox-submit',
+          reset: 'ais-SearchBox-reset'
+        }
+      }),
+      instantsearch.widgets.hits({
+        container: '#search-hits',
+        templates: {
+          item: hitTemplate
+        }
+      })
+    ]);
+
+    search.start();
+
+    // Setup toggle logic
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchIcon = document.querySelector('.social-link-search');
+        const searchBox = document.querySelector('.ais-SearchBox');
+        const searchInput = document.querySelector('.ais-SearchBox-input');
+        const searchHits = document.querySelector('#search-hits');
+        const postsContainer = document.querySelector('#posts');
+        
+        if(searchIcon && searchBox) {
+            searchIcon.addEventListener('click', function(e) {
+                e.preventDefault();
+                searchBox.classList.toggle('open');
+                if (searchBox.classList.contains('open')) {
+                    searchInput.focus();
+                } else {
+                    searchInput.value = '';
+                    searchHits.style.display = 'none';
+                    postsContainer.style.display = 'flex';
+                }
+            });
+
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.target.value.trim() === '') {
+                    searchHits.style.display = 'none';
+                    postsContainer.style.display = 'flex';
+                } else {
+                    searchHits.style.display = 'flex';
+                    postsContainer.style.display = 'none';
+                }
+            });
+        }
+    });
+  }
+</script>

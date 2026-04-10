@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import { site } from '../data/config';
+import SiteNav from '../components/SiteNav.astro';
+import AlgoliaSearch from '../components/AlgoliaSearch.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={post.data.title} class="post-template">
+    <header class="site-header outer">
+        <div class="inner">
+            <SiteNav />
+        </div>
+    </header>
+
+    <main id="site-main" class="site-main outer" role="main">
+        <div class="inner">
+            <div id="search-hits" class="post-feed" style="display: none;"></div>
+            <article class="post-full">
+                <header class="post-full-header">
+                    <section class="post-full-meta">
+                        <time class="post-full-meta-date" datetime={post.data.date.toISOString()}>{post.data.date.toDateString()}</time>
+                    </section>
+                    <h1 class="post-full-title">{post.data.title}</h1>
+                </header>
+
+                {post.data.cover && (
+                    <figure class="post-full-image" style={`background-image: url(${post.data.cover})`}></figure>
+                )}
+
+                <section class="post-full-content">
+                    <div class="kg-card-markdown">
+                        <Content />
+                    </div>
+                </section>
+            </article>
+            <AlgoliaSearch />
+        </div>
+    </main>
+</Layout>

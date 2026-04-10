@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../data/config';
+import SiteNav from '../components/SiteNav.astro';
+import AlgoliaSearch from '../components/AlgoliaSearch.astro';
+
+const posts = await getCollection('posts');
+posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title={site.title} class="home-template">
+    <header class="site-header outer" style={`background-image: url(${site.cover})`}>
+        <div class="inner">
+            <div class="site-header-content">
+                <h1 class="site-title">
+                    <img class="site-logo" src={site.logo} alt={site.title}/>
+                </h1>
+                <h2 class="site-description">{site.description}</h2>
+            </div>
+            <SiteNav />
+        </div>
+    </header>
+
+    <main id="site-main" class="site-main outer" role="main">
+        <div class="inner">
+            <div id="search-hits" class="post-feed" style="display: none;"></div>
+            <div id="posts" class="post-feed">
+                {posts.map(post => (
+                    <article class="post-card">
+                        {post.data.cover && (
+                            <a class="post-card-image-link" href={`/${post.id}`}>
+                                <div class="post-card-image" style={`background-image: url(${post.data.cover})`}></div>
+                            </a>
+                        )}
+                        <div class="post-card-content">
+                            <a class="post-card-content-link" href={`/${post.id}`}>
+                                <header class="post-card-header">
+                                    {post.data.tags && <span class="post-card-tags">{post.data.tags[0]}</span>}
+                                    <h2 class="post-card-title">{post.data.title}</h2>
+                                </header>
+                                <section class="post-card-excerpt">
+                                    <p>{post.body?.substring(0, 150) || ''}...</p>
+                                </section>
+                            </a>
+                        </div>
+                    </article>
+                ))}
+            </div>
+            <AlgoliaSearch />
+        </div>
+    </main>
+</Layout>

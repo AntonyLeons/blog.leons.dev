@@ -1,7 +1,7 @@
 ---
 layout: post
 current: post
-cover:  assets/images/Hull-Uni-cover.jpg
+cover:  /assets/images/Hull-Uni-cover.jpg
 navigation: True
 title: Connecting to Hull 🏫
 date: 2019-09-04 10:00:00
@@ -19,7 +19,7 @@ The most important thing on this list, you can find it [here](https://mytimetabl
 
 Using the ical feed and attaching it to your calendar is the best way forward, this will sync nicely with your timetable. I recommend google calendar, but any good calendar will support an ical feed. Just hit menu in the top left, then connect to calendar app. you should copy a link similar to this.
 
-![alt text](assets/images/calendar-link.png "Calendar Link")
+![alt text](/assets/images/calendar-link.png "Calendar Link")
 
 Just paste it to your calendar app and you should be good to go.
 
@@ -32,7 +32,7 @@ On [google calendar](https://calendar.google.com "Google Calendar") open it on a
   
 You should end up with something that resembles this
 
-![alt text](assets/images/calendar-screenshot.png "Calendar Screenshot")
+![alt text](/assets/images/calendar-screenshot.png "Calendar Screenshot")
 
 If it doesn't show remember to tick show in the google calendar menu.
 
@@ -48,7 +48,7 @@ You can sync your uni Email to your phone, very handy for people who forget to c
 * allow admin rights (a bit worrying yes but oh well)
 
 The server settings should get automatically get picked up but if you’re having trouble here is my entire config.
-![alt text](assets/images/email-screenshot.jpg "Email Screenshot")
+![alt text](/assets/images/email-screenshot.jpg "Email Screenshot")
 This also sync your calendar events to google calendar if you have an android phone.
 
 # Wifi
