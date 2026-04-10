@@ -144,6 +144,15 @@ body {
     display: none;
 }
 
+.post-template .site-header {
+    padding-bottom: 0;
+}
+
+.post-template .site-header:before,
+.post-template .site-header:after {
+    display: none;
+}
+
 .site-header-content {
     display: flex;
     flex-direction: column;
@@ -564,13 +573,13 @@ The first (most recent) post in the list is styled to be bigger than the others 
 
 .post-full-header {
     margin: 0 auto;
-    padding: 6vw 3vw 3vw;
+    padding: 4vw 3vw 3vw;
     max-width: 1040px;
     text-align: center;
 }
 @media (max-width: 500px) {
     .post-full-header {
-        padding: 14vw 3vw 10vw;
+        padding: 10vw 3vw 10vw;
     }
 }
 
