@@ -1,9 +1,10 @@
 ---
 ---
+@use "sass:color";
 
-@import "global";
-.highlight pre { background: darken($darkgrey, 3%); }
-.highlight .hll { background: darken($darkgrey, 3%); }
+@use "global" as *;
+.highlight pre { background: color.adjust($darkgrey, $lightness: -3%); }
+.highlight .hll { background: color.adjust($darkgrey, $lightness: -3%); }
 .highlight .c { color: #75715e } /* Comment */
 .highlight .err { color: #960050; background-color: #1e0010 } /* Error */
 .highlight .k { color: #66d9ef } /* Keyword */

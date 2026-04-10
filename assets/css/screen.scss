@@ -1,5 +1,6 @@
 ---
 ---
+@use "sass:color";
 
 /* Table of Contents
 /* ------------------------------------------------------------
@@ -29,7 +30,7 @@ production stylesheet in assets/built/screen.css
 
 /* 1. Global - Set up the things
 /* ---------------------------------------------------------- */
-@import "global";
+@use "global" as *;
 
 body {
     background: #f4f8fb;
@@ -598,7 +599,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
 
 .post-full-title {
     margin: 0;
-    color: darken($darkgrey, 5%);
+    color: color.adjust($darkgrey, $lightness: -5%);
 }
 
 .date-divider {
@@ -736,7 +737,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
 
 .post-full-content strong,
 .post-full-content em {
-    color: darken($darkgrey, 5%);
+    color: color.adjust($darkgrey, $lightness: -5%);
 }
 
 .post-full-content small {
@@ -827,11 +828,11 @@ Usage (In Ghost editor):
     margin: 1.5em 0 3em;
     padding: 20px;
     max-width: 100%;
-    border: darken($darkgrey, 10%) 1px solid;
+    border: color.adjust($darkgrey, $lightness: -10%) 1px solid;
     color: $whitegrey;
     font-size: 1.4rem;
     line-height: 1.5em;
-    background: darken($darkgrey, 3%);
+    background: color.adjust($darkgrey, $lightness: -3%);
     border-radius: 5px;
 }
 
@@ -863,7 +864,7 @@ Usage (In Ghost editor):
     margin-left: -10px;
     width: 1px;
     height: 30px;
-    background: lighten($lightgrey, 10%);
+    background: color.adjust($lightgrey, $lightness: 10%);
     box-shadow: #fff 0 0 0 5px;
     transform: rotate(45deg);
 }
@@ -874,7 +875,7 @@ Usage (In Ghost editor):
 .post-full-content h4,
 .post-full-content h5,
 .post-full-content h6 {
-    color: darken($darkgrey, 5%);
+    color: color.adjust($darkgrey, $lightness: -5%);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
@@ -1042,13 +1043,13 @@ Usage (In Ghost editor):
     letter-spacing: 0.2px;
     text-align: left;
     text-transform: uppercase;
-    background-color: lighten($whitegrey, 4%);
+    background-color: color.adjust($whitegrey, $lightness: 4%);
 }
 
 .post-full-content table th,
 .post-full-content table td {
     padding: 6px 12px;
-    border: desaturate(darken($whitegrey, 1%), 5%) 1px solid;
+    border: color.adjust($whitegrey, $lightness: -1%, $saturation: -5%) 1px solid;
 }
 
 
@@ -1058,9 +1059,9 @@ Usage (In Ghost editor):
 .subscribe-form {
     margin: 1.5em 0;
     padding: 6.5vw 7vw 7vw;
-    border: lighten($whitegrey, 2%) 1px solid;
+    border: color.adjust($whitegrey, $lightness: 2%) 1px solid;
     text-align: center;
-    background: lighten($whitegrey, 4%);
+    background: color.adjust($whitegrey, $lightness: 4%);
     border-radius: 7px;
 }
 
@@ -1097,7 +1098,7 @@ Usage (In Ghost editor):
     display: block;
     padding: 10px;
     width: 100%;
-    border: lighten($lightgrey, 7%) 1px solid;
+    border: color.adjust($lightgrey, $lightness: 7%) 1px solid;
     color: $midgrey;
     font-size: 1.8rem;
     line-height: 1em;
@@ -1111,7 +1112,7 @@ Usage (In Ghost editor):
 
 .subscribe-email:focus {
     outline: 0;
-    border-color: darken($lightgrey, 2%);
+    border-color: color.adjust($lightgrey, $lightness: -2%);
 }
 
 .subscribe-form button {
@@ -1127,10 +1128,10 @@ Usage (In Ghost editor):
     text-align: center;
     text-shadow: 0 -1px 0 rgba(0,0,0,0.1);
     background: linear-gradient(
-    mix(white, $blue, 7%),
-    desaturate(darken($blue, 7%), 10%) 60%,
-    desaturate(darken($blue, 7%), 10%) 90%,
-    desaturate(darken($blue, 4%), 10%)
+    color.mix(white, $blue, 7%),
+    color.adjust($blue, $lightness: -7%, $saturation: -10%) 60%,
+    color.adjust($blue, $lightness: -7%, $saturation: -10%) 90%,
+    color.adjust($blue, $lightness: -4%, $saturation: -10%)
     );
     border-radius: 5px;
     box-shadow: 0 0 0 1px inset rgba(0,0,0,0.14);
@@ -1140,7 +1141,7 @@ Usage (In Ghost editor):
 
 .subscribe-form button:active,
 .subscribe-form button:focus {
-    background: desaturate(darken($blue, 9%), 10%);
+    background: color.adjust($blue, $lightness: -9%, $saturation: -10%);
 }
 
 @media (max-width: 650px) {
@@ -1218,7 +1219,7 @@ Usage (In Ghost editor):
 .author-card-button {
     display: block;
     padding: 9px 16px;
-    border: lighten($midgrey, 20%) 1px solid;
+    border: color.adjust($midgrey, $lightness: 20%) 1px solid;
     color: $midgrey;
     font-size: 1.2rem;
     line-height: 1;
@@ -1806,7 +1807,7 @@ Usage (In Ghost editor):
 
 .subscribe-email:focus {
     outline: 0;
-    border-color: darken($lightgrey, 2%);
+    border-color: color.adjust($lightgrey, $lightness: -2%);
 }
 
 .subscribe-overlay button {
@@ -1822,10 +1823,10 @@ Usage (In Ghost editor):
     text-align: center;
     text-shadow: 0 -1px 0 rgba(0,0,0,0.1);
     background: linear-gradient(
-    mix(white, $blue, 7%),
-    desaturate(darken($blue, 7%), 10%) 60%,
-    desaturate(darken($blue, 7%), 10%) 90%,
-    desaturate(darken($blue, 4%), 10%)
+    color.mix(white, $blue, 7%),
+    color.adjust($blue, $lightness: -7%, $saturation: -10%) 60%,
+    color.adjust($blue, $lightness: -7%, $saturation: -10%) 90%,
+    color.adjust($blue, $lightness: -4%, $saturation: -10%)
     );
     border-radius: 8px;
     box-shadow: 0 0 0 1px inset rgba(0,0,0,0.14);
@@ -1835,7 +1836,7 @@ Usage (In Ghost editor):
 
 .subscribe-overlay button:active,
 .subscribe-overlay button:focus {
-    background: desaturate(darken($blue, 9%), 10%);
+    background: color.adjust($blue, $lightness: -9%, $saturation: -10%);
 }
 
 .subscribe-overlay-close {
@@ -1886,7 +1887,7 @@ Usage (In Ghost editor):
     padding-top: 20px;
     padding-bottom: 60px;
     color: #fff;
-    background: darken($darkgrey, 15%);
+    background: color.adjust($darkgrey, $lightness: -15%);
 }
 
 .site-footer-content {
