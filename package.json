@@ -4,12 +4,13 @@
   "description": "Personal blog",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run watch:css\" \"npm run serve\"",
-    "serve": "bundle exec jekyll serve --livereload --incremental",
+    "start": "concurrently \"npm run watch:css\" \"npm run watch:jekyll\" \"npm run serve\"",
+    "serve": "vite",
     "build": "npm run build:css && bundle exec jekyll build && npm run algolia",
     "algolia": "bundle exec jekyll algolia",
     "build:css": "postcss assets/css/*.css --dir assets/built --ext css",
-    "watch:css": "postcss assets/css/*.css --dir assets/built --ext css --watch --verbose"
+    "watch:css": "postcss assets/css/*.css --dir assets/built --ext css --watch --verbose",
+    "watch:jekyll": "bundle exec jekyll build --watch --incremental"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,8 @@
     "postcss-cli": "^11.0.1",
     "postcss-color-mod-function": "^4.1.1",
     "postcss-custom-properties": "^15.0.1",
-    "postcss-import": "^16.1.1"
+    "postcss-import": "^16.1.1",
+    "vite": "^8.0.0"
   },
   "config": {
     "posts_per_page": 25
