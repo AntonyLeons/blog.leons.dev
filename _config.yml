@@ -73,7 +73,6 @@ safe: False
 lsi: False
 
 exclude:
-  - assets/css
   - node_modules
   - vendor
   - Gemfile

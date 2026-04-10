@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "bundle exec jekyll build && bundle exec jekyll algolia"
   publish = "_site"
 
 [build.environment]
