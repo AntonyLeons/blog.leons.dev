@@ -17,12 +17,36 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <script>
+        // Theme toggle script
+        (function() {
+            var currentTheme = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (currentTheme === 'dark' || (!currentTheme && prefersDark)) {
+                document.documentElement.classList.add('dark-mode');
+            } else {
+                document.documentElement.classList.add('light-mode');
+            }
+        })();
+    </script>
+
     <!-- Styles'n'Scripts -->
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}assets/css/screen.css" />
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}assets/css/screen.edited.css" />
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}assets/css/syntax.css" />
     <!-- highlight.js  -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11/styles/github.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11/styles/github.min.css" id="highlight-light" media="all">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11/styles/github-dark.min.css" id="highlight-dark" media="all">
+    <script>
+        (function() {
+            var isDark = document.documentElement.classList.contains('dark-mode');
+            if (isDark) {
+                document.getElementById('highlight-light').disabled = true;
+            } else {
+                document.getElementById('highlight-dark').disabled = true;
+            }
+        })();
+    </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
 
     <!-- jQuery + Fitvids, which makes all video embeds responsive -->
@@ -102,6 +126,39 @@
 
     <!-- Add Google Analytics  -->
     {% include analytics.html %}
+
+    <script>
+        $(document).ready(function() {
+            var $html = $('html');
+            
+            // Initial toggle icon state
+            if ($html.hasClass('dark-mode')) {
+                $('.icon-moon').hide();
+                $('.icon-sun').show();
+            }
+
+            $('.theme-toggle').on('click', function(e) {
+                e.preventDefault();
+                var isDark = $html.hasClass('dark-mode');
+                
+                if (isDark) {
+                    $html.removeClass('dark-mode').addClass('light-mode');
+                    localStorage.setItem('theme', 'light');
+                    document.getElementById('highlight-light').disabled = false;
+                    document.getElementById('highlight-dark').disabled = true;
+                    $('.icon-moon').show();
+                    $('.icon-sun').hide();
+                } else {
+                    $html.removeClass('light-mode').addClass('dark-mode');
+                    localStorage.setItem('theme', 'dark');
+                    document.getElementById('highlight-dark').disabled = false;
+                    document.getElementById('highlight-light').disabled = true;
+                    $('.icon-sun').show();
+                    $('.icon-moon').hide();
+                }
+            });
+        });
+    </script>
 
     <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
     {% if page.class == "post-template" %}

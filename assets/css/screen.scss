@@ -295,7 +295,7 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
 }
 
 .social-links a:last-of-type {
-    padding-right: 20px;
+    padding-right: 5px;
 }
 
 .social-link {
@@ -1941,3 +1941,154 @@ Usage (In Ghost editor):
         margin-left: 0;
     }
 }
+
+/* 12. Dark Mode
+/* ---------------------------------------------------------- */
+
+@mixin dark-mode-screen() {
+    body {
+        background: $darkgrey;
+        color: $whitegrey;
+    }
+    
+    .site-main,
+    .post-template .site-main,
+    .page-template .site-main {
+        background: $darkgrey;
+    }
+    
+    .post-card {
+        background: color.adjust($darkgrey, $lightness: 5%);
+    }
+    
+    .post-card-content-link {
+        color: $whitegrey;
+    }
+    
+    .post-card-excerpt {
+        color: $midgrey;
+    }
+    
+    .post-full-content {
+        background: $darkgrey;
+        color: $whitegrey;
+    }
+    
+    .post-full-title {
+        color: #fff;
+    }
+    
+    .post-full-content h1,
+    .post-full-content h2,
+    .post-full-content h3,
+    .post-full-content h4,
+    .post-full-content h5,
+    .post-full-content h6 {
+        color: #fff;
+    }
+    
+    .post-full-content a {
+        color: #fff;
+        box-shadow: $blue 0 -1px 0 inset;
+    }
+    
+    .post-full-content a:hover {
+        color: $blue;
+    }
+    
+    .post-full-content strong,
+    .post-full-content em {
+        color: #fff;
+    }
+    
+    .post-full-content hr:after {
+        background: color.adjust($darkgrey, $lightness: 10%);
+        box-shadow: $darkgrey 0 0 0 5px;
+    }
+    
+    .post-full-content code {
+        background: color.adjust($darkgrey, $lightness: 10%);
+        color: $whitegrey;
+    }
+    
+    .post-full-content pre {
+        background: color.adjust($darkgrey, $lightness: -5%);
+        border-color: color.adjust($darkgrey, $lightness: -10%);
+    }
+    
+    .post-full-content table {
+        background: radial-gradient(ellipse at left, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 75%) 0 center, radial-gradient(ellipse at right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 75%) 100% center;
+        background-attachment: scroll, scroll;
+        background-size: 10px 100%, 10px 100%;
+        background-repeat: no-repeat;
+    }
+
+    .post-full-content table td:first-child {
+        background-image: linear-gradient(to right, $darkgrey 50%, rgba($darkgrey, 0) 100%);
+    }
+
+    .post-full-content table td:last-child {
+        background-image: linear-gradient(to left, $darkgrey 50%, rgba($darkgrey, 0) 100%);
+    }
+    
+    .post-full-content table th {
+        color: $whitegrey;
+        background-color: color.adjust($darkgrey, $lightness: 5%);
+    }
+    
+    .post-full-content table th,
+    .post-full-content table td {
+        border-color: color.adjust($darkgrey, $lightness: 10%);
+    }
+    
+    .floating-header {
+        background: rgba($darkgrey, 0.95);
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .floating-header-title {
+        color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .floating-header-logo a {
+        color: #fff;
+    }
+    
+    .floating-header-share-label {
+        color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .floating-header-share-label svg {
+        stroke: rgba(255, 255, 255, 0.7);
+    }
+    
+    .author-card-name a {
+        color: #fff;
+    }
+    
+    .subscribe-form {
+        background: color.adjust($darkgrey, $lightness: 5%);
+        border-color: color.adjust($darkgrey, $lightness: 10%);
+    }
+    
+    .subscribe-form-title {
+        color: #fff;
+    }
+    
+    .subscribe-email {
+        background: $darkgrey;
+        border-color: color.adjust($darkgrey, $lightness: 10%);
+        color: $whitegrey;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    html:not(.light-mode) {
+        @include dark-mode-screen();
+    }
+}
+
+html.dark-mode {
+    @include dark-mode-screen();
+}
+

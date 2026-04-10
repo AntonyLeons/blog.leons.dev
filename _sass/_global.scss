@@ -490,3 +490,20 @@ h6 {
         width: 100%;
     }
 }
+
+@mixin dark-mode-global() {
+    body {
+        background: $darkgrey;
+        color: $whitegrey;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    html:not(.light-mode) {
+        @include dark-mode-global();
+    }
+}
+
+html.dark-mode {
+    @include dark-mode-global();
+}

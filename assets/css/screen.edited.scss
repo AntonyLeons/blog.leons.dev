@@ -119,6 +119,27 @@ production stylesheet in assets/built/screen.css
     box-shadow: #f4f8fb 0 0 0 5px;
 }
 
+@mixin dark-mode-edited() {
+    .extra-pagination:after {
+        background: #15171A;
+        box-shadow: #15171A 0 0 0 5px;
+    }
+    .pagination:before {
+        background: #15171A;
+        box-shadow: #15171A 0 0 0 5px;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    html:not(.light-mode) {
+        @include dark-mode-edited();
+    }
+}
+
+html.dark-mode {
+    @include dark-mode-edited();
+}
+
 figure.highlight,
 .highlight pre,
 .highlight code,
