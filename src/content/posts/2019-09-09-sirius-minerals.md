@@ -17,7 +17,7 @@ Also a shout out to Hull Uni for letting me know through their [jobteaser platfo
 
 # Sirius Minerals
 Sirius Minerals is a fertilizer development company. Most people would describe it as a mining company, and I wouldn’t blame them they are developing mine, so it makes sense. They’re a start-up but a billion-dollar start-up so I was pretty excited to join the team. 
-<div style ="text-align:centre">Every start up needs a ping pong table...</div>
+<div style ="text-align:center">Every start up needs a ping pong table...</div>
 <img src="/assets/images/sirius_social.jpg" alt="Social Space">
 
 Our mission is really to ensure food security for the world for a minimum of another 50 years so for a project of this scale with an estimated 9.7 billion mouths to feed by 2050, you can really see why investing in this area is key. Contracts and trails are already been signed or in progress from India all the way to Argentina. The main product is [POLY4]( https://www.poly4.com) which contains 4 of 6 macronutrients(potassium, sulphur, magnesium and calcium) that all plants need. 
