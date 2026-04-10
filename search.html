@@ -1,21 +1,63 @@
 ---
-layout: page
+layout: default
 title: Search
 description: Search the blog
 ---
 
-<div id="search-searchbar"></div>
-<div id="search-hits"></div>
+<header class="site-header outer">
+    <div class="inner">
+        {% include site-nav.html %}
+    </div>
+</header>
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+        <div class="post-feed" style="margin-top: 40px;">
+            <div id="search-searchbar" style="width: 100%; margin-bottom: 40px;"></div>
+            <div id="search-hits" class="post-feed" style="width: 100%; display: flex; flex-wrap: wrap; justify-content: center;"></div>
+        </div>
+    </div>
+</main>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css" />
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
 <style>
-  .ais-SearchBox { margin-bottom: 2rem; }
-  .ais-Hits-item { padding: 1rem; margin-bottom: 1rem; border-bottom: 1px solid #eee; box-shadow: none; width: 100%; }
-  .ais-Hits-item h2 { margin-top: 0; font-size: 1.5rem; }
-  .ais-Hits-item p { margin-bottom: 0; color: #666; }
+  .ais-SearchBox { margin-bottom: 2rem; width: 100%; }
+  .ais-SearchBox-form { background-color: transparent; }
+  .ais-SearchBox-input { 
+      padding: 15px 20px; 
+      font-size: 2rem; 
+      border: none; 
+      border-bottom: 2px solid #e3e9ed; 
+      border-radius: 0; 
+      background: transparent; 
+      color: #15171a; 
+      box-shadow: none; 
+  }
+  .ais-SearchBox-input:focus { outline: none; border-bottom-color: #3eb0ef; }
+  .ais-Hits { width: 100%; }
+  .ais-Hits-list { 
+      display: flex; 
+      flex-wrap: wrap; 
+      margin: 0 -20px; 
+      padding: 0; 
+      list-style: none; 
+  }
+  .ais-Hits-item { 
+      flex: 1 1 300px; 
+      display: flex; 
+      margin: 0 20px 40px; 
+      padding: 0; 
+      box-shadow: none; 
+      background: transparent; 
+      border: none; 
+  }
+  .post-card-tags-date { color: #738a94; font-size: 1.2rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+  .post-card-tags-date a { color: #738a94; }
+  .post-card-tags-date a:hover { color: #3eb0ef; text-decoration: none; }
 </style>
 
 <script>
@@ -30,31 +72,72 @@ description: Search the blog
     routing: true
   });
 
+  const hitTemplate = function(hit) {
+      let isCover = hit.cover;
+      let articleClass = "post-card";
+      if (!isCover) articleClass += " no-image";
+
+      const title = hit._highlightResult?.title?.value || hit.title || '';
+      const content = hit._highlightResult?.content?.value || hit.content?.substring(0, 150) || '';
+      
+      let template = `<article class="${articleClass}">`;
+      
+      if (isCover) {
+          template += `
+            <a class="post-card-image-link" href="{{ site.baseurl }}${hit.url.substring(1)}">
+                <div class="post-card-image" style="background-image: url({{ site.baseurl }}${ hit.cover })"></div>
+            </a>`;
+      }
+
+      template += `
+            <div class="post-card-content">
+            <a class="post-card-content-link" href="{{ site.baseurl }}${hit.url.substring(1)}">
+              <header class="post-card-header">`;
+
+      let date = '';
+      if (hit.date) {
+          date = moment.unix(hit.date).format('D MMMM YYYY');
+          template += `
+                <time class="post-card-tags-date" datetime="${date}">${date}</time>`;
+      }
+
+      if ('tags' in hit && hit.tags && hit.tags.length) {
+          template += `<span class="post-card-tags-date"> / </span>`;
+          hit.tags.forEach((tag, index) => {
+              let comma = index === hit.tags.length - 1 ? '' : ', ';
+              template += `<span class="post-card-tags-date">${tag}${comma}</span>`;
+          });
+      }
+
+      template += `
+        </header>
+        <h2 class="post-card-title">${title}</h2>
+        <section class="post-card-excerpt">                    
+            <p>${content}...</p>
+        </section>
+        </a>
+        <footer class="post-card-meta">
+            <!-- Author info could go here -->
+        </footer>
+        </div>
+    </article>`;
+
+      return template;
+  };
+
   search.addWidgets([
     instantsearch.widgets.searchBox({
       container: '#search-searchbar',
-      placeholder: 'Search posts...',
+      placeholder: 'Search into posts...',
       showReset: false,
       showSubmit: false,
-      cssClasses: {
-        input: 'form-input'
-      }
     }),
     instantsearch.widgets.hits({
       container: '#search-hits',
       templates: {
-        item(hit) {
-          const title = hit._highlightResult?.title?.value || hit.title || '';
-          const content = hit._highlightResult?.content?.value || hit.content?.substring(0, 150) || '';
-          return `
-            <div>
-              <h2><a href="{{ site.baseurl }}${hit.url}">${title}</a></h2>
-              <p>${content}</p>
-            </div>
-          `;
-        },
+        item: hitTemplate,
         empty(results) {
-          return `<div class="text-center">No results found for <strong>${results.query}</strong>.</div>`;
+          return `<div class="text-center" style="width: 100%; margin-top: 40px; font-size: 2rem; color: #738a94;">No results found for <strong>${results.query}</strong>.</div>`;
         }
       }
     })
