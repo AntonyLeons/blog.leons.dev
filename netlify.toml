@@ -1,6 +1,3 @@
 [build]
   command = "bundle exec jekyll build && bundle exec jekyll algolia"
   publish = "_site"
-
-[build.environment]
-  NODE_VERSION = "24"
