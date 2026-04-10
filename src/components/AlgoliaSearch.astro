@@ -13,19 +13,22 @@ import { site } from '../data/config';
   .ais-SearchBox-input { 
       padding: 5px 10px; 
       font-size: 1.6rem; 
-      border: none; 
-      border-bottom: 1px solid rgba(255,255,255,0.3); 
-      border-radius: 0; 
-      background: transparent; 
+      border: none !important; 
+      border-bottom: 1px solid rgba(255,255,255,0.3) !important; 
+      border-radius: 0 !important; 
+      background: transparent !important; 
       color: #fff; 
-      box-shadow: none; 
+      box-shadow: none !important; 
       width: 200px;
       transition: all 0.3s ease;
       height: 35px;
       margin: 0;
+      outline: none !important;
+      -webkit-appearance: none;
+      appearance: none;
   }
   .ais-SearchBox-input::placeholder { color: rgba(255,255,255,0.7); }
-  .ais-SearchBox-input:focus { outline: none; border-bottom-color: #fff; box-shadow: none; background: transparent; }
+  .ais-SearchBox-input:focus { outline: none !important; border-bottom-color: #fff !important; box-shadow: none !important; background: transparent !important; }
   
   .ais-SearchBox-submit, .ais-SearchBox-reset, .ais-SearchBox-loadingIndicator { display: none !important; }
   
