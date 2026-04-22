@@ -6,8 +6,7 @@ group :jekyll_plugins do
   gem 'jekyll-feed'
   gem 'jekyll-sitemap'
   gem 'jekyll-algolia'
-  gem 'jekyll-sass-converter'
 end
 
+gem 'jekyll-sass-converter'
 gem 'ostruct'
-gem 'wdm', github: 'Maher4Ever/wdm', platforms: [:windows]
