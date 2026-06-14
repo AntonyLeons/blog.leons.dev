@@ -5,7 +5,7 @@ export async function GET(context: any) {
   const posts = await getCollection('posts');
   posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
   
-  const siteUrl = context.site || 'https://jekyllt.github.io/jasper2/';
+  const siteUrl = context.site || 'https://jekyllt.github.io/casper/';
   const feedUrl = new URL(getAssetUrl('/feed.xml'), siteUrl).toString();
   const indexUrl = new URL(getAssetUrl('/'), siteUrl).toString();
   const lastUpdated = posts.length > 0 ? new Date(posts[0].data.date).toISOString() : new Date().toISOString();

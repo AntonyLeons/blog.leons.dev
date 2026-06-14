@@ -9,11 +9,18 @@ export const SITE_CONFIG = {
   subscribers: true,
   twitter: 'tryghost',
   facebook: 'ghost',
+  xUsername: 'tryghost',
+  github: 'tryghost',
   disqus: false,
   disqusShortname: 'jekyllt',
   googleAnalytics: 'UA-69281367-1',
   wordsPerMinute: 200,
   pageSize: 25,
+  algolia: {
+    applicationId: '08WJSG8GMW',
+    indexName: 'jasper2',
+    searchOnlyApiKey: '899d0b22cae5a8affeb4f1f9f35adcc4',
+  },
 };
 
 /**
@@ -24,7 +31,7 @@ export function getAssetUrl(path: string | null | undefined): string {
   if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('//')) {
     return path;
   }
-  const base = import.meta.env.BASE_URL; // e.g. "/jasper2/" or "/"
+  const base = import.meta.env.BASE_URL; // e.g. "/casper/" or "/"
   const cleanPath = path.replace(/^\//, '');
   return `${base}${cleanPath}`;
 }

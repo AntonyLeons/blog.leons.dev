@@ -36,7 +36,7 @@ pnpm run dev
 npm run dev
 ```
 
-Your blog will be accessible locally at `http://localhost:4321/jasper2/` (matching the configured subpath).
+Your blog will be accessible locally at `http://localhost:4321/casper/` (matching the configured subpath).
 
 ### 3. Static Build
 Compile the blog into optimized static HTML files:

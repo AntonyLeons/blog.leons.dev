@@ -48,6 +48,33 @@ const bodyClass = current === 'home' ? 'home-template' : `${current || 'page'}-t
       tags={tags}
       author={author}
     />
+    <script is:inline>
+        // Theme toggle script to prevent FOUC
+        (function() {
+            var currentTheme = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (currentTheme === 'dark' || (!currentTheme && prefersDark)) {
+                document.documentElement.classList.add('dark-mode');
+                document.documentElement.classList.remove('light-mode');
+            } else {
+                document.documentElement.classList.add('light-mode');
+                document.documentElement.classList.remove('dark-mode');
+            }
+        })();
+
+        // Re-run theme check on page transitions
+        document.addEventListener('astro:after-swap', function() {
+            var currentTheme = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (currentTheme === 'dark' || (!currentTheme && prefersDark)) {
+                document.documentElement.classList.add('dark-mode');
+                document.documentElement.classList.remove('light-mode');
+            } else {
+                document.documentElement.classList.add('light-mode');
+                document.documentElement.classList.remove('dark-mode');
+            }
+        });
+    </script>
     <ClientRouter />
 </head>
 <body class={bodyClass}>
@@ -69,8 +96,13 @@ const bodyClass = current === 'home' ? 'home-template' : `${current || 'page'}-t
                     {SITE_CONFIG.facebook && (
                         <a href={`https://facebook.com/${SITE_CONFIG.facebook}`} target="_blank" rel="noopener">Facebook</a>
                     )}
-                    {SITE_CONFIG.twitter && (
+                    {SITE_CONFIG.xUsername ? (
+                        <a href={`https://x.com/${SITE_CONFIG.xUsername}`} target="_blank" rel="noopener">X</a>
+                    ) : SITE_CONFIG.twitter && (
                         <a href={`https://twitter.com/${SITE_CONFIG.twitter}`} target="_blank" rel="noopener">Twitter</a>
+                    )}
+                    {SITE_CONFIG.github && (
+                        <a href={`https://github.com/${SITE_CONFIG.github}`} target="_blank" rel="noopener">GitHub</a>
                     )}
                     <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
                 </nav>

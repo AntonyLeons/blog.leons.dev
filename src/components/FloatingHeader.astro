@@ -1,8 +1,9 @@
 ---
 import { SITE_CONFIG, getAssetUrl } from '../config';
 import HandPoint from './icons/HandPoint.astro';
-import Twitter from './icons/Twitter.astro';
+import X from './icons/X.astro';
 import Facebook from './icons/Facebook.astro';
+import LinkedIn from './icons/LinkedIn.astro';
 
 interface Props {
   title: string;
@@ -12,7 +13,7 @@ interface Props {
 const { title, slug } = Astro.props;
 
 // Absolute canonical URL of the post for sharing
-const siteUrl = Astro.site ? Astro.site.toString() : 'https://jekyllt.github.io/jasper2/';
+const siteUrl = Astro.site ? Astro.site.toString() : 'https://jekyllt.github.io/casper/';
 const postUrl = new URL(getAssetUrl(`/${slug}/`), siteUrl).toString();
 ---
 
@@ -32,13 +33,17 @@ const postUrl = new URL(getAssetUrl(`/${slug}/`), siteUrl).toString();
             Share this 
             <HandPoint class="point-icon" style="width:18px;height:18px;display:inline-block;vertical-align:middle;margin-left:4px;" />
         </div>
-        <a class="floating-header-share-tw" href={`https://twitter.com/share?text=${encodeURIComponent(title)}&url=${encodeURIComponent(postUrl)}`}
-            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
-            <Twitter style="width:16px;height:16px;" />
+        <a class="floating-header-share-x" href={`https://x.com/intent/post?text=${encodeURIComponent(title)}&url=${encodeURIComponent(postUrl)}`}
+            onclick="window.open(this.href, 'share-x', 'width=550,height=235');return false;">
+            <X style="width:16px;height:16px;" />
         </a>
         <a class="floating-header-share-fb" href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`}
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <Facebook style="width:16px;height:16px;" />
+        </a>
+        <a class="floating-header-share-li" href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(postUrl)}&title=${encodeURIComponent(title)}`}
+            onclick="window.open(this.href, 'share-linkedin', 'width=580,height=496');return false;">
+            <LinkedIn style="width:16px;height:16px;" />
         </a>
     </div>
 

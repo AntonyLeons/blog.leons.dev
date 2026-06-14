@@ -3,5 +3,13 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://jekyllt.github.io',
-  base: '/jasper2/',
+  base: '/casper/',
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
+    },
+  },
 });

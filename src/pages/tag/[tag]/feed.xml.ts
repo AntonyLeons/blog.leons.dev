@@ -27,7 +27,7 @@ export async function GET(context: any) {
   );
   filteredPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
   
-  const siteUrl = context.site || 'https://jekyllt.github.io/jasper2/';
+  const siteUrl = context.site || 'https://jekyllt.github.io/casper/';
   const feedUrl = new URL(getAssetUrl(`/tag/${tag}/feed.xml`), siteUrl).toString();
   const indexUrl = new URL(getAssetUrl(`/tag/${tag}/`), siteUrl).toString();
   const lastUpdated = filteredPosts.length > 0 ? new Date(filteredPosts[0].data.date).toISOString() : new Date().toISOString();
