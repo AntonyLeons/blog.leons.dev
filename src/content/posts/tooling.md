@@ -1,6 +1,6 @@
 ---
 current: post
-cover: assets/images/tooling.jpg
+cover: /assets/images/tooling.jpg
 navigation: true
 title: Tooling
 date: 2019-03-29 10:00:00

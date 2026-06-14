@@ -1,6 +1,6 @@
 ---
 current: post
-cover: assets/images/welcome.jpg
+cover: /assets/images/welcome.jpg
 navigation: true
 title: Welcome to My Blog
 date: 2019-03-19 10:00:00
