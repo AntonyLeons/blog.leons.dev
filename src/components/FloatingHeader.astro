@@ -13,7 +13,7 @@ interface Props {
 const { title, slug } = Astro.props;
 
 // Absolute canonical URL of the post for sharing
-const siteUrl = Astro.site ? Astro.site.toString() : 'https://jekyllt.github.io/casper/';
+const siteUrl = Astro.site ? Astro.site.toString() : 'https://casper.leons.dev/';
 const postUrl = new URL(getAssetUrl(`/${slug}/`), siteUrl).toString();
 ---
 

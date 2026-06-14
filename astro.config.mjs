@@ -2,8 +2,8 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://jekyllt.github.io',
-  base: '/casper/',
+  site: 'https://casper.leons.dev',
+  base: '/',
   markdown: {
     shikiConfig: {
       themes: {

@@ -22,7 +22,7 @@ export async function GET(context: any) {
   const filteredPosts = allPosts.filter(post => post.data.author && post.data.author.id === author);
   filteredPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
   
-  const siteUrl = context.site || 'https://jekyllt.github.io/casper/';
+  const siteUrl = context.site || 'https://casper.leons.dev/';
   const feedUrl = new URL(getAssetUrl(`/author/${author}/feed.xml`), siteUrl).toString();
   const indexUrl = new URL(getAssetUrl(`/author/${author}/`), siteUrl).toString();
   const lastUpdated = filteredPosts.length > 0 ? new Date(filteredPosts[0].data.date).toISOString() : new Date().toISOString();

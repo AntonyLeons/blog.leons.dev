@@ -12,7 +12,7 @@ export const SITE_CONFIG = {
   xUsername: 'tryghost',
   github: 'tryghost',
   disqus: false,
-  disqusShortname: 'jekyllt',
+  disqusShortname: 'antonyleons',
   googleAnalytics: 'UA-69281367-1',
   wordsPerMinute: 200,
   pageSize: 25,
