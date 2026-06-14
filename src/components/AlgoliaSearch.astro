@@ -5,7 +5,32 @@ const { algolia } = SITE_CONFIG;
 
 {algolia && (
   <!-- Algolia Search Libraries -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css" />
+  <style>
+    .ais-SearchBox { margin: 0; display: none; position: relative; }
+    .ais-SearchBox.open { display: block; }
+    .ais-SearchBox-form { background: transparent; margin: 0; padding: 0; box-shadow: none; display: flex; align-items: center; }
+    .ais-SearchBox-input {
+      padding: 5px 10px; font-size: 1.6rem; border: none !important;
+      border-bottom: 1px solid rgba(255,255,255,0.3) !important;
+      border-radius: 0 !important; background: transparent !important;
+      color: #fff; box-shadow: none !important; width: 200px;
+      height: 35px; margin: 0; outline: none !important;
+    }
+    .ais-SearchBox-input::placeholder { color: rgba(255,255,255,0.7); }
+    .ais-SearchBox-input:focus { border-bottom-color: #fff !important; }
+    .ais-SearchBox-submit, .ais-SearchBox-reset, .ais-SearchBox-loadingIndicator { display: none !important; }
+    .ais-Hits { width: 100%; display: flex; margin-top: 4vw; }
+    .ais-Hits-list {
+      display: flex; flex-wrap: wrap; margin: 0 -20px; padding: 0;
+      list-style: none; width: 100%;
+    }
+    .ais-Hits-item {
+      flex: 1 1 300px; display: flex; margin: 0 20px 40px; padding: 0;
+      box-shadow: none !important; background: transparent !important;
+      border: none !important; max-width: 100%;
+    }
+    .ais-Hits-item .post-card { width: 100%; }
+  </style>
   <script is:inline src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
   <script is:inline src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
 
