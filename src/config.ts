@@ -10,7 +10,7 @@ export const SITE_CONFIG = {
   twitter: 'tryghost',
   facebook: 'ghost',
   xUsername: 'tryghost',
-  github: 'tryghost',
+  github: 'AntonyLeons/casper',
   disqus: false,
   disqusShortname: 'antonyleons',
   googleAnalytics: 'UA-69281367-1',
