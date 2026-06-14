@@ -1,0 +1,287 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import Layout from './Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import PostCard from '../components/PostCard.astro';
+import FloatingHeader from '../components/FloatingHeader.astro';
+import SubscribeForm from '../components/SubscribeForm.astro';
+import { SITE_CONFIG, getAssetUrl, getReadingTime } from '../config';
+import authors from '../data/authors.json';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { title, cover, tags = [], author, date, description, subclass, disqus } = post.data;
+
+// Resolve author
+const authorKey = author as keyof typeof authors;
+const authorData = authorKey in authors ? authors[authorKey] : null;
+
+// Get all posts for next/prev/related suggestions
+const allPosts = await getCollection('posts');
+allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const currentIndex = allPosts.findIndex(p => p.slug === post.slug);
+const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+
+// Related posts
+const primaryTag = tags[0];
+const relatedPosts = primaryTag
+  ? allPosts.filter(p => p.slug !== post.slug && p.data.tags.includes(primaryTag))
+  : [];
+const relatedCount = relatedPosts.length;
+const topRelated = relatedPosts.slice(0, 3);
+
+// Format date
+const formattedDate = new Date(date).toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric'
+});
+
+const isDisqusEnabled = disqus !== false && SITE_CONFIG.disqus;
+---
+
+<Layout
+  title={title}
+  description={description}
+  image={cover}
+  type="article"
+  articleDate={date}
+  tags={tags}
+  author={authorData?.name}
+  current="post"
+>
+    <!-- Post Header -->
+    <header class="site-header outer">
+        <div class="inner">
+            <SiteNav current="post" />
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="site-main" class="site-main outer" role="main">
+        <div class="inner">
+            <article class={`post-full ${tags.map(t => `tag-${t.toLowerCase().replace(/\s+/g, '-')}`).join(' ')} ${subclass || ''} ${!cover ? 'no-image' : ''}`}>
+                <header class="post-full-header">
+                    <section class="post-full-meta">
+                        <time class="post-full-meta-date" datetime={new Date(date).toISOString().split('T')[0]}>{formattedDate}</time>
+                        {tags.length > 0 && (
+                            <>
+                                <span class="date-divider">/</span>
+                                {tags.map((tag, i) => (
+                                  <>
+                                    <a href={getAssetUrl(`/tag/${tag.toLowerCase().replace(/\s+/g, '-')}/`)}>{tag.toUpperCase()}</a>
+                                    {i < tags.length - 1 && <span>, </span>}
+                                  </>
+                                ))}
+                            </>
+                        )}
+                    </section>
+                    <h1 class="post-full-title">{title}</h1>
+                </header>
+
+                {cover && (
+                    <figure class="post-full-image" style={`background-image: url(${getAssetUrl(cover)})`}>
+                    </figure>
+                )}
+
+                <section class="post-full-content">
+                    <div class="kg-card-markdown">
+                        <!-- Render post body -->
+                        <slot />
+                    </div>
+                </section>
+
+                <!-- Email subscribe form at the bottom of the page -->
+                {SITE_CONFIG.subscribers && (
+                    <section class="subscribe-form">
+                        <h3 class="subscribe-form-title">Subscribe to {SITE_CONFIG.title}</h3>
+                        <p>Get the latest posts delivered right to your inbox</p>
+                        <SubscribeForm placeholder="youremail@example.com" />
+                    </section>
+                )}
+
+                <footer class="post-full-footer">
+                    {authorData && (
+                        <section class="author-card">
+                            {authorData.picture && (
+                                <img class="author-profile-image" src={getAssetUrl(authorData.picture)} alt={author} />
+                            )}
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href={getAssetUrl(`/author/${author}/`)}>{authorData.name}</a></h4>
+                                {authorData.bio ? (
+                                    <p>{authorData.bio}</p>
+                                ) : (
+                                    <p>Read <a href={getAssetUrl(`/author/${author}/`)}>more posts</a> by this author.</p>
+                                )}
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href={getAssetUrl(`/author/${author}/`)}>Read More</a>
+                        </div>
+                    )}
+                </footer>
+
+                <!-- Disqus comments -->
+                {isDisqusEnabled && (
+                    <section class="post-full-comments">
+                        <div id="disqus_thread"></div>
+                        <script is:inline define:vars={{
+                          shortname: SITE_CONFIG.disqusShortname,
+                          url: Astro.url.href,
+                          id: post.slug,
+                          title: title
+                        }}>
+                            var disqus_config = function () {
+                                this.page.url = url;
+                                this.page.identifier = id;
+                                this.page.title = title;
+                            };
+                            (function() {
+                                var d = document, s = d.createElement('script');
+                                s.src = 'https://' + shortname + '.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                            })();
+                        </script>
+                    </section>
+                )}
+            </article>
+        </div>
+    </main>
+
+    <!-- Links to Previous/Next posts -->
+    <aside class="read-next outer">
+        <div class="inner">
+            <div class="read-next-feed">
+                <!-- Related posts card -->
+                {relatedCount > 1 && primaryTag && (
+                    <article class="read-next-card" style={SITE_CONFIG.cover ? `background-image: url(${getAssetUrl(SITE_CONFIG.cover)})` : cover ? `background-image: url(${getAssetUrl(cover)})` : ''}>
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; {SITE_CONFIG.title} &mdash;</small>
+                            <h3 class="read-next-card-header-title"><a href={getAssetUrl(`/tag/${primaryTag.toLowerCase().replace(/\s+/g, '-')}/`)}>{primaryTag}</a></h3>
+                        </header>
+                        <div class="read-next-divider">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/></svg>
+                        </div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                {topRelated.map(p => (
+                                    <li><a href={getAssetUrl(`/${p.slug}/`)}>{p.data.title}</a></li>
+                                ))}
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href={getAssetUrl(`/tag/${primaryTag.toLowerCase().replace(/\s+/g, '-')}/`)}>
+                                {relatedCount > 1 ? `See all ${relatedCount - 1} posts →` : '1 post →'}
+                            </a>
+                        </footer>
+                    </article>
+                )}
+
+                <!-- Next/Prev cards -->
+                {nextPost && <PostCard post={nextPost} indexClass="post-card-next" />}
+                {prevPost && <PostCard post={prevPost} indexClass="post-card-previous" />}
+            </div>
+        </div>
+    </aside>
+
+    <!-- Floating Header -->
+    <FloatingHeader title={title} slug={post.slug} />
+</Layout>
+
+<script>
+  // Client-side Javascript: Scroll progress, FitVids, and Floating Header
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. FitVids
+    const videoSelectors = [
+      'iframe[src*="player.vimeo.com"]',
+      'iframe[src*="youtube.com"]',
+      'iframe[src*="youtube-nocookie.com"]',
+      'iframe[src*="kickstarter.com"][src*="video.html"]',
+      'object',
+      'embed'
+    ];
+    const postContent = document.querySelector('.post-full-content');
+    if (postContent) {
+      const allVideos = postContent.querySelectorAll(videoSelectors.join(','));
+      allVideos.forEach((video) => {
+        const vid = video as HTMLElement;
+        if (vid.tagName.toLowerCase() === 'embed' && vid.parentNode?.nodeName.toLowerCase() === 'object') return;
+        if (vid.closest('.fluid-width-video-wrapper')) return;
+        
+        const hAttr = vid.getAttribute('height');
+        const wAttr = vid.getAttribute('width');
+        const height = (vid.tagName.toLowerCase() === 'object' || hAttr) ? parseInt(hAttr || '0', 10) : vid.clientHeight;
+        const width = wAttr ? parseInt(wAttr || '0', 10) : vid.clientWidth;
+        const aspectRatio = (height && width) ? height / width : 9 / 16;
+        
+        const wrapper = document.createElement('div');
+        wrapper.className = 'fluid-width-video-container';
+        const innerWrapper = document.createElement('div');
+        innerWrapper.className = 'fluid-width-video-wrapper';
+        innerWrapper.style.paddingTop = `${aspectRatio * 100}%`;
+        innerWrapper.style.width = '100%';
+        innerWrapper.style.position = 'relative';
+        
+        vid.style.position = 'absolute';
+        vid.style.top = '0';
+        vid.style.left = '0';
+        vid.style.width = '100%';
+        vid.style.height = '100%';
+        
+        if (vid.parentNode) {
+          vid.parentNode.insertBefore(wrapper, vid);
+          innerWrapper.appendChild(vid);
+          wrapper.appendChild(innerWrapper);
+        }
+        
+        vid.removeAttribute('height');
+        vid.removeAttribute('width');
+      });
+    }
+
+    // 2. Scroll Progress & Floating Header
+    const progressBar = document.querySelector('progress') as HTMLProgressElement | null;
+    const header = document.querySelector('.floating-header');
+    const title = document.querySelector('.post-full-title') as HTMLElement | null;
+
+    if (progressBar && header && title) {
+      let ticking = false;
+
+      const update = () => {
+        const trigger = title.getBoundingClientRect().top + window.scrollY;
+        const triggerOffset = title.offsetHeight + 35;
+        const progressMax = document.documentElement.scrollHeight - window.innerHeight;
+
+        // show/hide floating header
+        if (window.scrollY >= trigger + triggerOffset) {
+          header.classList.add('floating-active');
+        } else {
+          header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax.toString());
+        progressBar.setAttribute('value', window.scrollY.toString());
+
+        ticking = false;
+      };
+
+      const onScroll = () => {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      update();
+    }
+  });
+</script>

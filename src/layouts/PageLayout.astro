@@ -1,0 +1,102 @@
+---
+import Layout from './Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import { SITE_CONFIG, getAssetUrl } from '../config';
+
+interface Props {
+  title: string;
+  cover?: string | null;
+  description?: string;
+  subclass?: string;
+}
+
+const { title, cover, description, subclass } = Astro.props;
+---
+
+<Layout
+  title={title}
+  description={description}
+  image={cover}
+  current="page"
+>
+    <!-- Page Header -->
+    <header class="site-header outer">
+        <div class="inner">
+            <SiteNav current="page" />
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="site-main" class="site-main outer" role="main">
+        <div class="inner">
+            <article class={`post-full ${subclass || ''} ${!cover ? 'no-image' : ''}`}>
+                <header class="post-full-header">
+                    <h1 class="post-full-title">{title}</h1>
+                </header>
+
+                {cover && (
+                    <figure class="post-full-image" style={`background-image: url(${getAssetUrl(cover)})`}>
+                    </figure>
+                )}
+
+                <section class="post-full-content">
+                    <div class="kg-card-markdown">
+                        <slot />
+                    </div>
+                </section>
+            </article>
+        </div>
+    </main>
+</Layout>
+
+<script>
+  // FitVids for pages
+  document.addEventListener('DOMContentLoaded', () => {
+    const videoSelectors = [
+      'iframe[src*="player.vimeo.com"]',
+      'iframe[src*="youtube.com"]',
+      'iframe[src*="youtube-nocookie.com"]',
+      'iframe[src*="kickstarter.com"][src*="video.html"]',
+      'object',
+      'embed'
+    ];
+    const postContent = document.querySelector('.post-full-content');
+    if (postContent) {
+      const allVideos = postContent.querySelectorAll(videoSelectors.join(','));
+      allVideos.forEach((video) => {
+        const vid = video as HTMLElement;
+        if (vid.tagName.toLowerCase() === 'embed' && vid.parentNode?.nodeName.toLowerCase() === 'object') return;
+        if (vid.closest('.fluid-width-video-wrapper')) return;
+        
+        const hAttr = vid.getAttribute('height');
+        const wAttr = vid.getAttribute('width');
+        const height = (vid.tagName.toLowerCase() === 'object' || hAttr) ? parseInt(hAttr || '0', 10) : vid.clientHeight;
+        const width = wAttr ? parseInt(wAttr || '0', 10) : vid.clientWidth;
+        const aspectRatio = (height && width) ? height / width : 9 / 16;
+        
+        const wrapper = document.createElement('div');
+        wrapper.className = 'fluid-width-video-container';
+        const innerWrapper = document.createElement('div');
+        innerWrapper.className = 'fluid-width-video-wrapper';
+        innerWrapper.style.paddingTop = `${aspectRatio * 100}%`;
+        innerWrapper.style.width = '100%';
+        innerWrapper.style.position = 'relative';
+        
+        vid.style.position = 'absolute';
+        vid.style.top = '0';
+        vid.style.left = '0';
+        vid.style.width = '100%';
+        vid.style.height = '100%';
+        
+        if (vid.parentNode) {
+          vid.parentNode.insertBefore(wrapper, vid);
+          innerWrapper.appendChild(vid);
+          wrapper.appendChild(innerWrapper);
+        }
+        
+        vid.removeAttribute('height');
+        vid.removeAttribute('width');
+      });
+    }
+  });
+</script>

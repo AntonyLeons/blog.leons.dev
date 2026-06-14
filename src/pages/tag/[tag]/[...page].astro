@@ -1,0 +1,143 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import SiteNav from '../../../components/SiteNav.astro';
+import PostCard from '../../../components/PostCard.astro';
+import { SITE_CONFIG, getAssetUrl } from '../../../config';
+import tagsData from '../../../data/tags.json';
+
+export async function getStaticPaths({ paginate }: any) {
+  const allPosts = await getCollection('posts');
+  const tagSlugs = new Set<string>();
+  
+  allPosts.forEach(post => {
+    post.data.tags.forEach(t => {
+      if (t) {
+        tagSlugs.add(t.toLowerCase().replace(/\s+/g, '-'));
+      }
+    });
+  });
+  
+  const paths: any[] = [];
+  
+  for (const tag of Array.from(tagSlugs)) {
+    const filteredPosts = allPosts.filter(post => 
+      post.data.tags.some(t => t.toLowerCase().replace(/\s+/g, '-') === tag)
+    );
+    filteredPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+    
+    const pages = paginate(filteredPosts, { 
+      pageSize: SITE_CONFIG.pageSize,
+      params: { tag }
+    });
+    
+    pages.forEach((p: any) => {
+      paths.push({
+        params: { 
+          tag, 
+          page: p.params.page === 1 || p.params.page === '1' || !p.params.page ? undefined : `page${p.params.page}`
+        },
+        props: {
+          pageProps: p.props,
+          maxPages: pages.length
+        }
+      });
+    });
+  }
+  
+  return paths;
+}
+
+const { tag } = Astro.params;
+const { pageProps, maxPages } = Astro.props;
+const { page } = pageProps;
+
+// Look up tag metadata
+const tagInfo = tag in tagsData ? (tagsData as any)[tag] : null;
+const tagName = tagInfo?.name || tag.replace(/-/g, ' ');
+const tagDescription = tagInfo?.description || `A collection of ${page.total} posts`;
+const tagCover = tagInfo?.cover ? getAssetUrl(tagInfo.cover) : null;
+
+// Capitalize tag helper
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+const title = capitalize(tagName);
+---
+
+<Layout title={title} description={tagDescription} image={tagCover} current="tag">
+    <!-- Header -->
+    <header class={`site-header outer ${tagCover ? '' : 'no-cover'}`} style={tagCover ? `background-image: url(${tagCover})` : ''}>
+        <div class="inner">
+            <SiteNav current="tag" />
+            <div class="site-header-content">
+                <h1 class="site-title">{title}</h1>
+                <h2 class="site-description">{tagDescription}</h2>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="site-main" class="site-main outer" role="main">
+        <div class="inner">
+            <div class="post-feed" data-max-pages={maxPages} data-base-url={getAssetUrl(`/tag/${tag}/`)}>
+                {page.data.map((post: any) => (
+                    <PostCard post={post} />
+                ))}
+            </div>
+        </div>
+    </main>
+</Layout>
+
+<script>
+  // Tag Feed Infinite Scroll
+  document.addEventListener('DOMContentLoaded', () => {
+    const postFeed = document.querySelector('.post-feed') as HTMLElement | null;
+    if (postFeed) {
+      let currentPage = 1;
+      const maxPages = parseInt(postFeed.getAttribute('data-max-pages') || '1', 10);
+      const baseUrl = postFeed.getAttribute('data-base-url') || '/';
+      let isLoading = false;
+      
+      const infiniteScroll = async () => {
+        if (isLoading || currentPage >= maxPages) return;
+        
+        const threshold = 100;
+        const scrollPos = window.scrollY + window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        
+        if (scrollPos >= documentHeight - threshold) {
+          isLoading = true;
+          currentPage++;
+          
+          try {
+            const nextPageUrl = `${baseUrl}page${currentPage}/`;
+            const res = await fetch(nextPageUrl);
+            if (!res.ok) throw new Error('Failed to fetch next tag page');
+            
+            const html = await res.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            
+            const newPosts = doc.querySelectorAll('.post-feed .post-card');
+            newPosts.forEach((post) => {
+              const el = post as HTMLElement;
+              el.style.opacity = '0';
+              postFeed.appendChild(el);
+              setTimeout(() => {
+                el.style.transition = 'opacity 0.3s ease';
+                el.style.opacity = '1';
+              }, 50);
+            });
+          } catch (err) {
+            console.error('Error loading tag page:', err);
+            currentPage = maxPages;
+          } finally {
+            isLoading = false;
+          }
+        }
+      };
+      
+      window.addEventListener('scroll', infiniteScroll, { passive: true });
+      window.addEventListener('resize', infiniteScroll, { passive: true });
+    }
+  });
+</script>
