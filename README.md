@@ -166,6 +166,29 @@ To deploy:
 
 ---
 
+## 🔄 Keeping Your Blog Updated
+
+If you created your blog by **forking** or **cloning** this repository, you can pull upstream updates, fixes, and performance optimizations (like code refactoring or package upgrades) into your personal repository using Git.
+
+### 1. Add Upstream Remote
+Inside your local blog repository directory, link this template repository as an `upstream` remote:
+```bash
+git remote add upstream https://github.com/AntonyLeons/casper.git
+```
+
+### 2. Fetch and Merge Changes
+To pull the latest template updates and merge them:
+```bash
+# Fetch changes from the template repo
+git fetch upstream
+
+# Merge upstream main branch into your current branch
+git merge upstream/main
+```
+If you customized configurations (e.g., in `src/config.ts`) or added custom content, resolve any merge conflicts that arise, and then commit and push to your remote repository.
+
+---
+
 ## 📝 License
 
 Distributed under the MIT License. Same license as original Casper theme by the Ghost Foundation.
