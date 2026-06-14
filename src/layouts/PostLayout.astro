@@ -117,19 +117,19 @@ const isDisqusEnabled = disqus !== false && SITE_CONFIG.disqus;
                     {authorData && (
                         <section class="author-card">
                             {authorData.picture && (
-                                <img class="author-profile-image" src={getAssetUrl(authorData.picture)} alt={author} loading="lazy" />
+                                <img class="author-profile-image" src={getAssetUrl(authorData.picture)} alt={authorData.name} loading="lazy" />
                             )}
                             <section class="author-card-content">
-                                <h4 class="author-card-name"><a href={getAssetUrl(`/author/${author}/`)}>{authorData.name}</a></h4>
+                                <h4 class="author-card-name"><a href={getAssetUrl(`/author/${authorKey}/`)}>{authorData.name}</a></h4>
                                 {authorData.bio ? (
                                     <p>{authorData.bio}</p>
                                 ) : (
-                                    <p>Read <a href={getAssetUrl(`/author/${author}/`)}>more posts</a> by this author.</p>
+                                    <p>Read <a href={getAssetUrl(`/author/${authorKey}/`)}>more posts</a> by this author.</p>
                                 )}
                             </section>
                         </section>
                         <div class="post-full-footer-right">
-                            <a class="author-card-button" href={getAssetUrl(`/author/${author}/`)}>Read More</a>
+                            <a class="author-card-button" href={getAssetUrl(`/author/${authorKey}/`)}>Read More</a>
                         </div>
                     )}
                 </footer>
