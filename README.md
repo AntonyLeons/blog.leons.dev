@@ -15,7 +15,7 @@ Deploy your own copy of this blog template to the cloud with a single click:
 - **Astro 6 & TypeScript**: Full TypeScript configuration and strict schema validations.
 - **Type-Safe Content Schema**: Powered by Astro Content Collections and Zod to validate posts, tags, and authors.
 - **Modern Asset Pipeline**: Stylesheets are bundled, minified, and optimized via Vite out of the box.
-- **Zero-Dependency Vanilla JS Interactivity**: Ported jQuery scripts (infinite scrolling, scroll progress bar, floating headers, and FitVids responsive videos) to clean, performant **Vanilla JS**.
+- **Zero-Dependency Vanilla JS Interactivity**: Ported jQuery scripts (infinite scrolling, scroll progress bar, and floating headers) to clean, performant **Vanilla JS**, and replaced FitVids with a native, zero-JS **CSS aspect-ratio** solution.
 - **100% SEO Compliance**: Automatic metadata, canonical URLs, Open Graph images, Twitter cards, and Schema.org JSON-LD data pre-rendered on the server.
 - **Compliance Feeds**: Auto-generated Atom XML RSS feeds matching the original Jekyll feeds exactly (`/feed.xml`, `/tag/[tag]/feed.xml`, `/author/[author]/feed.xml`).
 - **Disqus & Subscribe Forms**: Out-of-the-box toggleable Disqus comments and location-aware email newsletter subscription forms.

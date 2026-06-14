@@ -2168,3 +2168,14 @@ html.dark-mode .pagination:before {
         border-radius: 0;
     }
 }
+
+/* ==========================================================================
+   Responsive Video Embeds (CSS Native aspect-ratio)
+   ========================================================================== */
+.post-full-content iframe,
+.post-full-content object,
+.post-full-content embed {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9;
+}

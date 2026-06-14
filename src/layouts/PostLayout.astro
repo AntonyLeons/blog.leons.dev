@@ -226,12 +226,8 @@ const isDisqusEnabled = disqus !== false && SITE_CONFIG.disqus;
 </Layout>
 
 <script>
-  import { initFitVids } from '../utils/fitvids';
-
-  // Client-side Javascript: Scroll progress, FitVids, and Floating Header
+  // Client-side Javascript: Scroll progress and Floating Header
   document.addEventListener('astro:page-load', () => {
-    initFitVids();
-
     const progressBar = document.querySelector('progress') as HTMLProgressElement | null;
     const header = document.querySelector('.floating-header');
     const title = document.querySelector('.post-full-title') as HTMLElement | null;
