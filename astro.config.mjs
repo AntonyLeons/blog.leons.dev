@@ -2,7 +2,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://casper.leons.dev',
+  site: 'https://blog.leons.dev',
   base: '/',
   markdown: {
     shikiConfig: {
