@@ -19,17 +19,17 @@ const { algolia } = SITE_CONFIG;
     .ais-SearchBox-input::placeholder { color: rgba(255,255,255,0.7); }
     .ais-SearchBox-input:focus { border-bottom-color: #fff !important; }
     .ais-SearchBox-submit, .ais-SearchBox-reset, .ais-SearchBox-loadingIndicator { display: none !important; }
-    .ais-Hits { width: 100%; display: flex; margin-top: 4vw; }
+    .ais-Hits { width: 100%; display: flex; }
     .ais-Hits-list {
-      display: flex; flex-wrap: wrap; margin: 0 -20px; padding: 0;
+      display: flex; flex-wrap: wrap; margin: 0; padding: 0;
       list-style: none; width: 100%;
     }
     .ais-Hits-item {
-      flex: 1 1 300px; display: flex; margin: 0 20px 0; padding: 0;
+      flex: 1 1 300px; display: flex; margin: 0; padding: 0;
       box-shadow: none !important; background: transparent !important;
       border: none !important; max-width: 100%;
     }
-    .ais-Hits-item .post-card { width: 100%; margin: 0; }
+    .ais-Hits-item .post-card { width: 100%; }
   </style>
   <script is:inline src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
   <script is:inline src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
