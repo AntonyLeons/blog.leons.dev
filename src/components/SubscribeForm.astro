@@ -8,6 +8,7 @@ interface Props {
 const { placeholder = 'youremail@example.com' } = Astro.props;
 ---
 
+{SITE_CONFIG.subscribers && (
 <form method="post" action="/subscribe/" class="">
     <input class="confirm" type="hidden" name="confirm" />
     <input class="location" type="hidden" name="location" />
@@ -26,3 +27,4 @@ const { placeholder = 'youremail@example.com' } = Astro.props;
       })(window,document,'querySelector','value');
     </script>
 </form>
+)}
