@@ -57,11 +57,6 @@ const { algolia } = SITE_CONFIG;
         routing: false
       });
 
-      const authorPictures = {
-        antony: baseUrl + 'assets/images/antony.png',
-        ghost: baseUrl + 'assets/images/ghost.png',
-      };
-
       const hitTemplate = function(hit) {
         let isCover = hit.cover;
         let articleClass = "post-card";
@@ -92,7 +87,7 @@ const { algolia } = SITE_CONFIG;
             </a>`;
         }
 
-        const authorPicture = authorPictures[authorSlug] || '';
+        const authorPicture = authorSlug ? baseUrl + 'assets/images/' + authorSlug + '.png' : '';
 
         template += `
             <div class="post-card-content">
