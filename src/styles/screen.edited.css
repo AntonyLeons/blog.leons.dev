@@ -554,6 +554,16 @@ html.dark-mode .pagination:before {
         width: 110px !important;
         font-size: 1.4rem !important;
     }
+
+    /* Reduce logo margin on mobile to prevent right side from being clipped */
+    .site-nav-logo {
+        margin-right: 12px;
+    }
+
+    /* Allow horizontal overflow so right side items aren't clipped */
+    .site-nav {
+        overflow-x: visible;
+    }
 }
 
 /* ==========================================================================
