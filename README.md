@@ -71,6 +71,43 @@ The output will be generated inside the `dist/` directory.
 
 ---
 
+## ⚙️ Configuration & Integration
+
+### 1. Algolia Search Setup
+
+The theme includes a lightweight, pre-configured **Algolia InstantSearch** overlay. To configure search:
+
+1. Create an index on [Algolia](https://www.algolia.com/).
+2. Index your site posts. You can index them using Algolia's web crawler or upload your post list JSON feed.
+3. Open [config.ts](file:///c:/Users/anton/Documents/Github/casper/src/config.ts) and add your Algolia credentials to the `SITE_CONFIG` object:
+   ```typescript
+   algolia: {
+     applicationId: 'YOUR_APP_ID',
+     indexName: 'YOUR_INDEX_NAME',
+     searchOnlyApiKey: 'YOUR_SEARCH_ONLY_API_KEY',
+   }
+   ```
+4. If the `algolia` configuration block is removed or undefined, the search icons and widget will automatically disable.
+
+---
+
+### 2. Decap CMS (Netlify CMS) Integration
+
+A fully configured Decap CMS admin dashboard is built into the template under `public/admin/` to manage posts, authors, and tags directly from your browser.
+
+#### Setup Instructions:
+1. **Host on Netlify**: Connect your GitHub repository to Netlify.
+2. **Enable Netlify Identity**:
+   - Navigate to **Site Configuration** > **Identity** > **Enable Identity**.
+   - Under **Identity** > **Registration preferences**, change registration from **Public** to **Invite only** to restrict access to yourself.
+3. **Enable Git Gateway**:
+   - Under **Identity** > **Services** > **Git Gateway**, click **Enable Git Gateway** to authorize repository read/write access.
+4. **Log in**:
+   - Send yourself an invite under the **Identity** tab in Netlify.
+   - Click the validation link in the email, create your credentials, and visit `https://yourdomain.com/admin/` to log in and start writing!
+
+---
+
 ## ☁️ Deployment
 
 Since Casper Astro compiles to standard static HTML/CSS files, it can be deployed to any major hosting provider.
