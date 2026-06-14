@@ -87,7 +87,13 @@ const isDisqusEnabled = disqus !== false && SITE_CONFIG.disqus;
                 </header>
 
                 {cover && (
-                    <figure class="post-full-image" style={`background-image: url(${getAssetUrl(cover)})`}>
+                    <figure class="post-full-image">
+                        <img 
+                            src={getAssetUrl(cover)} 
+                            alt={title} 
+                            fetchpriority="high" 
+                            loading="eager" 
+                        />
                     </figure>
                 )}
 

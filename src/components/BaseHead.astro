@@ -42,6 +42,14 @@ const isoDate = articleDate ? new Date(articleDate).toISOString() : undefined;
 <!-- Fonts -->
 <Font cssVariable="--font-inter" preload />
 
+<!-- LCP Image Preloads -->
+{type === 'article' && image && (
+  <link rel="preload" as="image" href={getAssetUrl(image)} fetchpriority="high" />
+)}
+{type === 'website' && SITE_CONFIG.cover && (
+  <link rel="preload" as="image" href={getAssetUrl(SITE_CONFIG.cover)} fetchpriority="high" />
+)}
+
 {SITE_CONFIG.googleAnalytics && (
   <>
     <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${SITE_CONFIG.googleAnalytics}`}></script>
