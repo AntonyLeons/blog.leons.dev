@@ -1,6 +1,14 @@
 ---
+import { getCollection } from 'astro:content';
 import { SITE_CONFIG } from '../config';
+
 const { algolia } = SITE_CONFIG;
+
+// Fetch all authors to build a map of author IDs to picture URLs
+const authors = await getCollection('authors');
+const authorPicturesMap = Object.fromEntries(
+  authors.map(author => [author.id.toLowerCase(), author.data.picture || ''])
+);
 ---
 
 {algolia && (
@@ -34,7 +42,7 @@ const { algolia } = SITE_CONFIG;
   <script is:inline src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
   <script is:inline src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
 
-  <script is:inline define:vars={{ appId: algolia.applicationId, apiKey: algolia.searchOnlyApiKey, indexName: algolia.indexName, baseUrl: import.meta.env.BASE_URL }}>
+  <script is:inline define:vars={{ appId: algolia.applicationId, apiKey: algolia.searchOnlyApiKey, indexName: algolia.indexName, baseUrl: import.meta.env.BASE_URL, authorPicturesMap }}>
     // Initialize Algolia search once DOM loaded
     const initAlgoliaSearch = () => {
       const searchContainer = document.getElementById('search-searchbar');
@@ -87,7 +95,8 @@ const { algolia } = SITE_CONFIG;
             </a>`;
         }
 
-        const authorPicture = authorSlug ? baseUrl + 'assets/images/' + authorSlug + '.png' : '';
+        const authorPicturePath = authorPicturesMap[authorSlug] || '';
+        const authorPicture = authorPicturePath ? baseUrl + authorPicturePath.replace(/^\//, '') : '';
 
         template += `
             <div class="post-card-content">
