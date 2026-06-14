@@ -19,13 +19,13 @@ const { algolia } = SITE_CONFIG;
     .ais-SearchBox-input::placeholder { color: rgba(255,255,255,0.7); }
     .ais-SearchBox-input:focus { border-bottom-color: #fff !important; }
     .ais-SearchBox-submit, .ais-SearchBox-reset, .ais-SearchBox-loadingIndicator { display: none !important; }
-    .ais-Hits { width: 100%; display: flex; margin-top: 4vw; }
+    .ais-Hits { width: 100%; display: flex; }
     .ais-Hits-list {
-      display: flex; flex-wrap: wrap; margin: 0 -20px; padding: 0;
+      display: flex; flex-wrap: wrap; margin: 0; padding: 0;
       list-style: none; width: 100%;
     }
     .ais-Hits-item {
-      flex: 1 1 300px; display: flex; margin: 0 20px 40px; padding: 0;
+      flex: 1 1 300px; display: flex; margin: 0; padding: 0;
       box-shadow: none !important; background: transparent !important;
       border: none !important; max-width: 100%;
     }
@@ -65,7 +65,8 @@ const { algolia } = SITE_CONFIG;
         const title = hit._highlightResult?.title?.value || hit.title || '';
         const content = hit._highlightResult?.content?.value || hit.content?.substring(0, 150) || '';
         const authorName = hit.author || 'Author';
-        
+        const authorSlug = (hit.author || '').toLowerCase();
+
         let cleanUrl = hit.url || '';
         if (cleanUrl.startsWith('/')) {
           cleanUrl = cleanUrl.substring(1);
@@ -86,6 +87,8 @@ const { algolia } = SITE_CONFIG;
             </a>`;
         }
 
+        const authorPicture = authorSlug ? baseUrl + 'assets/images/' + authorSlug + '.png' : '';
+
         template += `
             <div class="post-card-content">
             <a class="post-card-content-link" href="${fullUrl}">
@@ -105,6 +108,7 @@ const { algolia } = SITE_CONFIG;
           </section>
           </a>
           <footer class="post-card-meta">
+              ${authorPicture ? `<img class="author-profile-image" src="${authorPicture}" alt="${authorName}" loading="lazy" />` : ''}
               <span class="post-card-author">
                   <a href="${authorUrl}">${authorName}</a>
               </span>
