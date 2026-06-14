@@ -1,113 +1,82 @@
-## Jasper2
+# Casper Astro ⚡
 
-[![Build Status](https://github.com/jekyllt/jasper2/actions/workflows/jekyll_build.yml/badge.svg)](https://github.com/jekyllt/jasper2/actions/workflows/jekyll_build.yml)
-[![Ruby](https://img.shields.io/badge/ruby-2.6.3-blue.svg?style=flat)](http://travis-ci.org/jekyllt/jasper2)
-[![Jekyll](https://img.shields.io/badge/jekyll-3.9.0-blue.svg?style=flat)](http://travis-ci.org/jekyllt/jasper2)
+A modernized, high-performance port of Ghost's default theme [Casper 2.0](https://github.com/tryghost/casper) built on top of **Astro 5**.
 
-This is a full-featured port of Ghost's default theme [Casper](https://github.com/tryghost/casper)
-[v2.1.9](https://github.com/TryGhost/Casper/releases/tag/2.1.9) for [Jekyll](https://jekyllrb.com/) / [GitHub Pages](https://pages.github.com/).
+This port replaces the original Jekyll setup (`jasper2`), offering incredibly fast builds, type-safe content validation, server-side pre-rendering, and client-side page load times.
 
-## Live Demo
+## 🚀 Key Features
 
-[Ghost's Casper](https://demo.ghost.io) // [Jasper2](https://jekyllt.github.io/jasper2)
+- **Astro 5 & TypeScript**: Full TypeScript configuration and strict schema validations.
+- **Type-Safe Content Schema**: Powered by Astro Content Collections and Zod to validate posts, tags, and authors.
+- **Modern Asset Pipeline**: Stylesheets are bundled, minified, and optimized via Vite out of the box.
+- **Zero-Dependency Vanilla JS Interactivity**: Ported jQuery scripts (infinite scrolling, scroll progress bar, floating headers, and FitVids responsive videos) to clean, performant **Vanilla JS**.
+- **100% SEO Compliance**: Automatic metadata, canonical URLs, Open Graph images, Twitter cards, and Schema.org JSON-LD data pre-rendered on the server.
+- **Compliance Feeds**: Auto-generated Atom XML RSS feeds matching the original Jekyll feeds exactly (`/feed.xml`, `/tag/[tag]/feed.xml`, `/author/[author]/feed.xml`).
+- **Disqus & Subscribe Forms**: Out-of-the-box toggleable Disqus comments and location-aware email newsletter subscription forms.
 
-![home page](https://raw.githubusercontent.com/jekyllt/jasper2/master/assets/screenshot-desktop.jpg)
+---
 
+## 🛠️ Local Development
 
-## Features
-
-* Out of the box support for multiple authors (via `_data/authors.yml`)
-* Full author information including: picture, bio, website, twitter, facebook, etc.
-* Tag description(s) and personalised covers (via `_data/tags.yml`)
-* Related posts view at the bottom of each post
-* All Ghost default pages: Author page(s), Tag page(s), About page(s), 404, etc.
-* Pagination (infinite scrolling or standard pagination, i.e. posts across multiple pages)
-* Atom Feeds by [Jekyll-feed](https://github.com/jekyll/jekyll-feed)
-* Toggleable subscribe button (requires an external service)
-* Code Syntax Highlight with [highlight.js](https://highlightjs.org/)
-* Support for Google Analytics tracking
-* Support for Disqus comments (not Ghost standard)
-
-
-## Getting Started
-
-### Deployment
-
-There are several alternatives to building and deploying the site:
-
-1. build the site with [GitHub Actions](https://github.com/features/actions) which pushes 
-the resulting files (the contents of `_site/` or `../jasper2-pages/`) 
-to the *gh-pages* branch. This is the approach that is currently used. See 
-[jekyll_build.yml](.github/workflows/jekyll_build.yml) for more details.
-
-2. generate the site locally (more details below) and push the resulting
-HTML to a Github repository, that GitHub Pages then host;
-
-3. build the site with [travis-ci](https://travis-ci.org/) (with goodies from
-[jekyll-travis](https://github.com/mfenner/jekyll-travis)) automatically pushing the
-generated HTML files to a *gh-pages* branch.
-
-4. deploy the static website with Jekyll-compatible hosters, such as https://www.netlify.com/, that allow for deployment from the Github repo and publish the website using CDNs. Netlify has a free starter offer.
-
-For option **2)** simply clone this repository (*master branch*), and then run
-`bundle exec jekyll serve` inside the directory. Upload the resulting `_site/` (or `../jasper2-pages/`)
-contents to your repository (*master branch* if uploading as your personal page
-(e.g. username.github.io) or *gh-pages branch* if uploading as a project page
-(as for the [demo](https://github.com/jekyllt/jasper2/tree/gh-pages)).
-
-For option **3)** you will need to set up travis-ci for your personal fork. Briefly all you
-need then is to change your details in *[\_config.yml](_config.yml)* so that you can push
-to your github repo. You will also need to generate a secure key to add to your
-*[.travis.yml](.travis.yml)* (you can find more info on how to do it in that file).
-Also make sure you read the documentation from
-[jekyll-travis](https://github.com/mfenner/jekyll-travis). This approach has clear
-advantages in that you simply push your file changes to GitHub and all the HTML files
-are generated for you and pushed to *gh-pages*. Also you get to know if everything is
-still fine with your site builds. Don't hesitate to contact me if you still have any
-issues (see below about issue tracking).
-
-### Author Pages
-
-In order to properly generate author pages you need to rename the field *author* in the
-front matter of every post to match that of your each author's *username* as defined
-in the *[\_data/authors.yml](_data/authors.yml)* file.
-With the latest update, multiple author blogs are now supported out of the box.
-
-### Compiling Styles
-
-Following on the way Casper styles are compiled as [described here](https://github.com/tryghost/casper#development):
-
-Jasper2 styles are compiled using Gulp/PostCSS to polyfill future CSS spec. You'll need Node and Gulp installed globally. After that, from the theme's root directory:
+### 1. Installation
+Install the project dependencies using `pnpm` (recommended) or `npm`:
 
 ```bash
-$ npm install
-$ gulp
+pnpm install
+# or
+npm install
 ```
 
-Now you can edit `/assets/css/` files, which will be compiled to `/assets/built/` automatically.
+### 2. Development Server
+Start the local hot-reloading development server:
 
-## Issues and Contributing
+```bash
+pnpm run dev
+# or
+npm run dev
+```
 
-This install builds well with Ruby v2.6.3 and Jekyll v3.9.0. If you run into any problems
-please log them on the [issue tracker](https://github.com/jekyllt/jasper2/issues).
+Your blog will be accessible locally at `http://localhost:4321/jasper2/` (matching the configured subpath).
 
-Feel free pull-request your patches and fixes.
+### 3. Static Build
+Compile the blog into optimized static HTML files:
 
-## Thanks
+```bash
+pnpm run build
+# or
+npm run build
+```
 
-Many thanks to the Ghost team for all the design work. Also many thanks to all contributors,
-that help keeping the project alive and updated :smile:
+The output will be generated inside the `dist/` directory.
 
+---
 
-## Copyright & License
+## 📂 Project Structure
 
-Same licence as the one provided by Ghost's team. See Casper's theme [license](GHOST.txt).
+- `src/content/posts/`: Contains all Markdown (`.md`) articles. Add new blog posts here.
+- `src/data/authors.json`: Dictionary mapping author keys to profile data (avatar, bio, website, location, social links).
+- `src/data/tags.json`: Dictionary mapping tags to custom descriptions and cover images.
+- `src/layouts/`: Base design frames:
+  - `Layout.astro`: Standard page shell containing head SEO elements, footers, and modal overlays.
+  - `PostLayout.astro`: Article rendering frame with progress bars, Disqus integrations, and next/prev suggestions.
+  - `PageLayout.astro`: Framework for static information pages (like `/about/`).
+- `src/components/`: Sub-elements like navigation bars (`SiteNav.astro`), post preview feeds (`PostCard.astro`), or share dialogs (`FloatingHeader.astro`).
+- `public/assets/images/`: Stores all static graphics, icons, avatars, and cover photos.
 
-Copyright (C) 2015-2021 - Released under the MIT License.
+---
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+## 🌎 Deploying to GitHub Pages
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+A ready-to-use GitHub Actions workflow is included in `.github/workflows/deploy.yml`. 
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+To deploy:
+1. Push your changes to the `main` branch.
+2. In your GitHub repository settings, navigate to **Pages**.
+3. Under **Build and deployment**, set the **Source** to **GitHub Actions**.
+4. The workflow will automatically trigger, build the Astro application, and publish it directly to GitHub Pages.
+
+---
+
+## 📝 License
+
+Distributed under the MIT License. Same license as original Casper theme by the Ghost Foundation.
