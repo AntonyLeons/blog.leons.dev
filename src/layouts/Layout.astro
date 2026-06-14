@@ -7,8 +7,6 @@ import { ClientRouter } from 'astro:transitions';
 // Import CSS stylesheets so Astro bundles them
 import '../styles/global.css';
 import '../styles/screen.css';
-import '../styles/screen.edited.css';
-import '../styles/syntax.css';
 
 interface Props {
   title?: string;
@@ -89,7 +87,7 @@ const bodyClass = current === 'home' ? 'home-template' : `${current || 'page'}-t
                     <a href={getAssetUrl('/')}>{SITE_CONFIG.title}</a> &copy; {currentYear}
                 </section>
                 <section class="poweredby">
-                    Published with <a href="https://astro.build/" target="_blank" rel="noopener">Astro</a> using a <a href={`https://github.com/${SITE_CONFIG.github}`} target="_blank" rel="noopener">Casper theme</a>
+                    Published with <a href="https://astro.build/" target="_blank" rel="noopener">Astro</a> using a <a href="https://github.com/AntonyLeons/casper" target="_blank" rel="noopener">Casper theme</a>
                 </section>
                 <nav class="site-footer-nav">
                     <a href={getAssetUrl('/')}>Latest Posts</a>

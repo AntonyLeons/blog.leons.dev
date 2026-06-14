@@ -26,7 +26,7 @@ production stylesheet in assets/built/screen.css
 
 /* 1. Global - Set up the things
 /* ---------------------------------------------------------- */
-@import "global.css";
+/* Note: global.css is imported directly in Layout.astro */
 
 body {
     background: #f4f8fb;
@@ -1923,5 +1923,248 @@ Usage (In Ghost editor):
     }
     .site-footer-nav a:first-child {
         margin-left: 0;
+    }
+}
+
+/* ==========================================================================
+   Shiki Dual Themes
+   ========================================================================== */
+html.light-mode .astro-code,
+html:not(.dark-mode) .astro-code {
+  background-color: var(--shiki-light-bg) !important;
+  color: var(--shiki-light) !important;
+  font-style: var(--shiki-light-font-style) !important;
+  font-weight: var(--shiki-light-font-weight) !important;
+  text-decoration: var(--shiki-light-text-decoration) !important;
+}
+html.light-mode .astro-code span,
+html:not(.dark-mode) .astro-code span {
+  color: var(--shiki-light) !important;
+  font-style: var(--shiki-light-font-style) !important;
+  font-weight: var(--shiki-light-font-weight) !important;
+  text-decoration: var(--shiki-light-text-decoration) !important;
+}
+
+html.dark-mode .astro-code {
+  background-color: var(--shiki-dark-bg) !important;
+  color: var(--shiki-dark) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+html.dark-mode .astro-code span {
+  color: var(--shiki-dark) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+/* ==========================================================================
+   Dark Mode Customizations
+   ========================================================================== */
+html.dark-mode body {
+    background: var(--darkgrey);
+    color: var(--whitegrey);
+}
+html.dark-mode .site-main,
+html.dark-mode .post-template .site-main,
+html.dark-mode .page-template .site-main {
+    background: var(--darkgrey);
+}
+html.dark-mode .post-card {
+    background: #212428;
+}
+html.dark-mode .post-card-content-link {
+    color: var(--whitegrey);
+}
+html.dark-mode .post-card-excerpt {
+    color: var(--midgrey);
+}
+html.dark-mode .post-full-content {
+    background: var(--darkgrey);
+    color: var(--whitegrey);
+}
+html.dark-mode .post-full-title {
+    color: #fff;
+}
+html.dark-mode .post-full-content h1,
+html.dark-mode .post-full-content h2,
+html.dark-mode .post-full-content h3,
+html.dark-mode .post-full-content h4,
+html.dark-mode .post-full-content h5,
+html.dark-mode .post-full-content h6 {
+    color: #fff;
+}
+html.dark-mode .post-full-content a {
+    color: #fff;
+    box-shadow: var(--blue) 0 -1px 0 inset;
+}
+html.dark-mode .post-full-content a:hover {
+    color: var(--blue);
+}
+html.dark-mode .post-full-content strong,
+html.dark-mode .post-full-content em {
+    color: #fff;
+}
+html.dark-mode .post-full-content hr:after {
+    background: #2e3238;
+    box-shadow: var(--darkgrey) 0 0 0 5px;
+}
+html.dark-mode .post-full-content code {
+    background: #2e3238;
+    color: var(--whitegrey);
+}
+html.dark-mode .post-full-content pre {
+    background: #0b0c0e;
+    border-color: #000000;
+}
+html.dark-mode .post-full-content table {
+    background: radial-gradient(ellipse at left, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 75%) 0 center, radial-gradient(ellipse at right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 75%) 100% center;
+    background-attachment: scroll, scroll;
+    background-size: 10px 100%, 10px 100%;
+    background-repeat: no-repeat;
+}
+html.dark-mode .post-full-content table td:first-child {
+    background-image: linear-gradient(to right, var(--darkgrey) 50%, rgba(21, 23, 26, 0) 100%);
+}
+html.dark-mode .post-full-content table td:last-child {
+    background-image: linear-gradient(to left, var(--darkgrey) 50%, rgba(21, 23, 26, 0) 100%);
+}
+html.dark-mode .post-full-content table th {
+    color: var(--whitegrey);
+    background-color: #212428;
+}
+html.dark-mode .post-full-content table th,
+html.dark-mode .post-full-content table td {
+    border-color: #2e3238;
+}
+html.dark-mode .floating-header {
+    background: rgba(21, 23, 26, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+html.dark-mode .floating-header-title {
+    color: rgba(255, 255, 255, 0.8);
+}
+html.dark-mode .floating-header-logo a {
+    color: #fff;
+}
+html.dark-mode .floating-header-share-label {
+    color: rgba(255, 255, 255, 0.7);
+}
+html.dark-mode .floating-header-share-label svg {
+    stroke: rgba(255, 255, 255, 0.7);
+}
+html.dark-mode .author-card-name a {
+    color: #fff;
+}
+html.dark-mode .subscribe-form {
+    background: #212428;
+    border-color: #2e3238;
+}
+html.dark-mode .subscribe-form-title {
+    color: #fff;
+}
+html.dark-mode .subscribe-email {
+    background: var(--darkgrey);
+    border-color: #2e3238;
+    color: var(--whitegrey);
+}
+html.dark-mode .extra-pagination:after {
+    background: #15171A;
+    box-shadow: #15171A 0 0 0 5px;
+}
+html.dark-mode .pagination:before {
+    background: #15171A;
+    box-shadow: #15171A 0 0 0 5px;
+}
+
+/* ==========================================================================
+   Modern Share Buttons (X and LinkedIn)
+   ========================================================================== */
+.floating-header-share-x,
+.floating-header-share-li {
+    display: block;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    color: #fff;
+    line-height: 48px;
+    text-align: center;
+    transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.floating-header-share-x {
+    background: #000;
+}
+.floating-header-share-li {
+    background: #0077b5;
+}
+.floating-header-share-x:hover,
+.floating-header-share-li:hover {
+    opacity: 0.8;
+}
+@media (max-width: 900px) {
+    .floating-header-share-x,
+    .floating-header-share-li {
+        width: 40px;
+        height: 40px;
+        line-height: 38px;
+    }
+}
+
+/* ==========================================================================
+   Navigation Bar Transparency & Mobile-Friendly Adjustments
+   ========================================================================== */
+.site-header {
+    background-color: #0d0f12 !important;
+}
+
+@media (max-width: 700px) {
+    .site-nav-right {
+        display: flex !important;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    
+    .site-nav-right .social-links,
+    .site-nav-right .nav-divider,
+    .site-nav-right .subscribe-button {
+        display: none !important;
+    }
+    
+    .site-nav-right .social-link-search,
+    .site-nav-right .theme-toggle {
+        margin-right: 15px !important;
+        display: flex !important;
+        align-items: center;
+    }
+
+    .ais-SearchBox-input {
+        width: 110px !important;
+        font-size: 1.4rem !important;
+    }
+
+    .site-nav-logo {
+        margin-right: 12px;
+    }
+
+    .site-nav {
+        overflow-x: visible;
+    }
+}
+
+/* ==========================================================================
+   Largest Contentful Paint (LCP) Cover Image Styling
+   ========================================================================== */
+.post-full-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+@media (max-width: 1170px) {
+    .post-full-image img {
+        border-radius: 0;
     }
 }
