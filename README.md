@@ -4,6 +4,12 @@ A modernized, high-performance port of Ghost's default theme [Casper 2.0](https:
 
 This port replaces the original Jekyll setup (`jasper2`), offering incredibly fast builds, type-safe content validation, server-side pre-rendering, and client-side page load times.
 
+Deploy your own copy of this blog template to the cloud with a single click:
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/AntonyLeons/casper) &nbsp;&nbsp;
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/AntonyLeons/casper) &nbsp;&nbsp;
+[![Use this template](https://img.shields.io/badge/Use_this_template-2ea44f?style=for-the-badge&logo=github)](https://github.com/AntonyLeons/casper/generate)
+
 ## 🚀 Key Features
 
 - **Astro 5 & TypeScript**: Full TypeScript configuration and strict schema validations.
@@ -65,7 +71,51 @@ The output will be generated inside the `dist/` directory.
 
 ---
 
-## 🌎 Deploying to GitHub Pages
+## ☁️ Deployment
+
+Since Casper Astro compiles to standard static HTML/CSS files, it can be deployed to any major hosting provider.
+
+### 1. Netlify
+
+#### Easy Deploy
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/AntonyLeons/casper)
+
+#### Manual Setup
+1. Connect your repository in the Netlify Dashboard.
+2. Configure the following build settings:
+   - **Build command:** `pnpm build` or `npm run build`
+   - **Publish directory:** `dist`
+3. If using the CMS admin panel (`/admin/`), enable **Netlify Identity**:
+   - Go to **Site Configuration** > **Identity** > **Enable Identity**.
+   - Under **Identity** > **Services** > **Git Gateway**, click **Enable Git Gateway** to authorize access to your repository.
+   - Go to the **Identity** tab at the top of your site management overview, invite yourself, and use Netlify Identity to log in at `https://casper.leons.dev/admin/`.
+
+---
+
+### 2. Vercel
+
+1. Connect your repository in the Vercel Dashboard.
+2. Vercel will automatically detect **Astro** and pre-configure:
+   - **Build Command:** `npm run build` or `pnpm build`
+   - **Output Directory:** `dist`
+3. Click **Deploy**.
+
+---
+
+### 3. Cloudflare Pages
+
+1. In the Cloudflare Dashboard, navigate to **Workers & Pages** > **Create Application** > **Pages** > **Connect to Git**.
+2. Select your repository.
+3. Configure the build settings:
+   - **Framework preset:** `Astro`
+   - **Build command:** `pnpm build` or `npm run build`
+   - **Build output directory:** `dist`
+4. Under **Environment variables**, set `NODE_VERSION` to `24` or higher.
+5. Click **Save and Deploy**.
+
+---
+
+### 4. GitHub Pages
 
 A ready-to-use GitHub Actions workflow is included in `.github/workflows/deploy.yml`. 
 
