@@ -14,7 +14,7 @@ export async function GET(context: any) {
   
   // Render up to 10 entries matching Jekyll's limit
   for (const post of posts.slice(0, 10)) {
-    const postUrl = new URL(getAssetUrl(`/${post.slug}/`), siteUrl).toString();
+    const postUrl = new URL(getAssetUrl(`/${post.id}/`), siteUrl).toString();
     const dateIso = new Date(post.data.date).toISOString();
     
     // Resolve author

@@ -41,7 +41,7 @@ export async function GET(context: any) {
   let entriesXml = '';
   
   for (const post of filteredPosts.slice(0, 10)) {
-    const postUrl = new URL(getAssetUrl(`/${post.slug}/`), siteUrl).toString();
+    const postUrl = new URL(getAssetUrl(`/${post.id}/`), siteUrl).toString();
     const dateIso = new Date(post.data.date).toISOString();
     
     const authorEntry = post.data.author ? await getEntry(post.data.author) : null;

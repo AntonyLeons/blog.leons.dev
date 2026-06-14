@@ -25,14 +25,14 @@ const authorKey = authorEntry ? authorEntry.id : '';
 const allPostsUnsorted = await getCollection('posts');
 const allPosts = [...allPostsUnsorted].sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
-const currentIndex = allPosts.findIndex(p => p.slug === post.slug);
+const currentIndex = allPosts.findIndex(p => p.id === post.id);
 const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
 const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
 
 // Related posts
 const primaryTag = tags[0];
 const relatedPosts = primaryTag
-  ? allPosts.filter(p => p.slug !== post.slug && p.data.tags.includes(primaryTag))
+  ? allPosts.filter(p => p.id !== post.id && p.data.tags.includes(primaryTag))
   : [];
 const relatedCount = relatedPosts.length;
 const topRelated = relatedPosts.slice(0, 3);
@@ -135,7 +135,7 @@ const isDisqusEnabled = disqus !== false && SITE_CONFIG.disqus;
                         <script is:inline define:vars={{
                           shortname: SITE_CONFIG.disqusShortname,
                           url: Astro.url.href,
-                          id: post.slug,
+                          id: post.id,
                           title: title
                         }}>
                             var disqus_config = function () {
@@ -196,7 +196,7 @@ const isDisqusEnabled = disqus !== false && SITE_CONFIG.disqus;
                         <div class="read-next-card-content">
                             <ul>
                                 {topRelated.map(p => (
-                                    <li><a href={getAssetUrl(`/${p.slug}/`)}>{p.data.title}</a></li>
+                                    <li><a href={getAssetUrl(`/${p.id}/`)}>{p.data.title}</a></li>
                                 ))}
                             </ul>
                         </div>
@@ -216,7 +216,7 @@ const isDisqusEnabled = disqus !== false && SITE_CONFIG.disqus;
     </aside>
 
     <!-- Floating Header -->
-    <FloatingHeader title={title} slug={post.slug} />
+    <FloatingHeader title={title} slug={post.id} />
 </Layout>
 
 <script>

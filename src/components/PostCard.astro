@@ -17,7 +17,7 @@ const authorData = authorEntry ? authorEntry.data : null;
 const authorId = authorEntry ? authorEntry.id : '';
 
 // Generate links
-const postLink = getAssetUrl(`/${post.slug}/`);
+const postLink = getAssetUrl(`/${post.id}/`);
 const authorLink = getAssetUrl(`/author/${authorId}/`);
 
 // Calculate reading time & excerpt

@@ -1,6 +1,6 @@
 # Casper Astro ⚡
 
-A modernized, high-performance port of Ghost's default theme [Casper 2.0](https://github.com/tryghost/casper) built on top of **Astro 5**.
+A modernized, high-performance port of Ghost's default theme [Casper 2.0](https://github.com/tryghost/casper) built on top of **Astro 6**.
 
 This port replaces the original Jekyll setup (`jasper2`), offering incredibly fast builds, type-safe content validation, server-side pre-rendering, and client-side page load times.
 
@@ -12,7 +12,7 @@ Deploy your own copy of this blog template to the cloud with a single click:
 
 ## 🚀 Key Features
 
-- **Astro 5 & TypeScript**: Full TypeScript configuration and strict schema validations.
+- **Astro 6 & TypeScript**: Full TypeScript configuration and strict schema validations.
 - **Type-Safe Content Schema**: Powered by Astro Content Collections and Zod to validate posts, tags, and authors.
 - **Modern Asset Pipeline**: Stylesheets are bundled, minified, and optimized via Vite out of the box.
 - **Zero-Dependency Vanilla JS Interactivity**: Ported jQuery scripts (infinite scrolling, scroll progress bar, floating headers, and FitVids responsive videos) to clean, performant **Vanilla JS**.
@@ -59,15 +59,17 @@ The output will be generated inside the `dist/` directory.
 
 ## 📂 Project Structure
 
+- `src/content.config.ts`: Configuration file defining content validation schemas and loaders for Astro 6.
 - `src/content/posts/`: Contains all Markdown (`.md`) articles. Add new blog posts here.
-- `src/data/authors.json`: Dictionary mapping author keys to profile data (avatar, bio, website, location, social links).
-- `src/data/tags.json`: Dictionary mapping tags to custom descriptions and cover images.
+- `src/content/authors/`: Contains JSON files for each author (e.g. `ghost.json` defining name, bio, location, and social profiles).
+- `src/content/tags/`: Contains JSON files for tags (e.g. `fables.json` defining name, description, and cover images).
 - `src/layouts/`: Base design frames:
-  - `Layout.astro`: Standard page shell containing head SEO elements, footers, and modal overlays.
-  - `PostLayout.astro`: Article rendering frame with progress bars, Disqus integrations, and next/prev suggestions.
-  - `PageLayout.astro`: Framework for static information pages (like `/about/`).
-- `src/components/`: Sub-elements like navigation bars (`SiteNav.astro`), post preview feeds (`PostCard.astro`), or share dialogs (`FloatingHeader.astro`).
+  - `Layout.astro`: Standard page shell containing head SEO elements, footers, and theme toggler scripts.
+  - `PostLayout.astro`: Article rendering frame with progress bars, Disqus comments lazy-loading, and next/prev suggestions.
+  - `PageLayout.astro`: Framework for static pages (like `/about/`).
+- `src/components/`: Sub-components like navigation bars (`SiteNav.astro`), search overlays (`AlgoliaSearch.astro`), post preview cards (`PostCard.astro`), or sharing tools (`FloatingHeader.astro`).
 - `public/assets/images/`: Stores all static graphics, icons, avatars, and cover photos.
+- `public/admin/`: Decap CMS dashboard files (`index.html` and `config.yml`) to manage content directly from the browser.
 
 ---
 
