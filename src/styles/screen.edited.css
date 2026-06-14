@@ -515,3 +515,44 @@ html.dark-mode .pagination:before {
         line-height: 38px;
     }
 }
+
+/* ==========================================================================
+   Navigation Bar Transparency & Mobile-Friendly Adjustments
+   ========================================================================== */
+
+/* Fix transparency issue caused by invalid color function syntax in Vite */
+.site-header {
+    background-color: #0d0f12 !important; /* Solid dark background matching Ghost's default */
+}
+
+/* Make site navigation more mobile-friendly */
+@media (max-width: 700px) {
+    /* Prevent site-nav-right from being completely hidden so that search and theme toggle are accessible */
+    .site-nav-right {
+        display: flex !important;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    
+    /* Hide non-essential elements on small viewports to save space */
+    .site-nav-right .social-links,
+    .site-nav-right .nav-divider,
+    .site-nav-right .subscribe-button {
+        display: none !important;
+    }
+    
+    /* Optimize margins for search and theme toggle on mobile */
+    .site-nav-right .social-link-search,
+    .site-nav-right .theme-toggle {
+        margin-right: 15px !important;
+        display: flex !important;
+        align-items: center;
+    }
+
+    /* Shrink the search input field to prevent layout overflow on mobile screens */
+    .ais-SearchBox-input {
+        width: 110px !important;
+        font-size: 1.4rem !important;
+    }
+}
+
