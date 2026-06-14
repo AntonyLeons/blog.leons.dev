@@ -57,6 +57,11 @@ const { algolia } = SITE_CONFIG;
         routing: false
       });
 
+      const authorPictures = {
+        antony: baseUrl + 'assets/images/antony.png',
+        ghost: baseUrl + 'assets/images/ghost.png',
+      };
+
       const hitTemplate = function(hit) {
         let isCover = hit.cover;
         let articleClass = "post-card";
@@ -65,7 +70,8 @@ const { algolia } = SITE_CONFIG;
         const title = hit._highlightResult?.title?.value || hit.title || '';
         const content = hit._highlightResult?.content?.value || hit.content?.substring(0, 150) || '';
         const authorName = hit.author || 'Author';
-        
+        const authorSlug = (hit.author || '').toLowerCase();
+
         let cleanUrl = hit.url || '';
         if (cleanUrl.startsWith('/')) {
           cleanUrl = cleanUrl.substring(1);
@@ -86,7 +92,7 @@ const { algolia } = SITE_CONFIG;
             </a>`;
         }
 
-        const authorPicture = hit.authorPicture || hit.author_image || '';
+        const authorPicture = authorPictures[authorSlug] || '';
 
         template += `
             <div class="post-card-content">
