@@ -1,5 +1,6 @@
 ---
 import { SITE_CONFIG, getAssetUrl } from '../config';
+import { Font } from 'astro:assets';
 
 interface Props {
   title?: string;
@@ -39,9 +40,7 @@ const isoDate = articleDate ? new Date(articleDate).toISOString() : undefined;
 <meta name="referrer" content="no-referrer-when-downgrade" />
 
 <!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<Font cssVariable="--font-inter" preload />
 
 {SITE_CONFIG.googleAnalytics && (
   <>
