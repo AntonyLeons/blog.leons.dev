@@ -50,7 +50,7 @@ const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
             {authorData && (
                 <>
                     {authorData.picture && (
-                        <img class="author-profile-image" src={getAssetUrl(authorData.picture)} alt={authorData.name} />
+                        <img class="author-profile-image" src={getAssetUrl(authorData.picture)} alt={authorData.name} loading="lazy" />
                     )}
                     <span class="post-card-author">
                         <a href={authorLink}>{authorData.name}</a>

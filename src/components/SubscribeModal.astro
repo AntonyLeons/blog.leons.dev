@@ -40,6 +40,12 @@ import { SITE_CONFIG, getAssetUrl } from '../config';
 
       window.addEventListener('hashchange', checkHash);
       checkHash();
+
+      const cleanup = () => {
+        window.removeEventListener('hashchange', checkHash);
+        document.removeEventListener('astro:before-swap', cleanup);
+      };
+      document.addEventListener('astro:before-swap', cleanup);
     }
   });
 </script>

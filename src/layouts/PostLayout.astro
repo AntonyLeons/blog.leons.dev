@@ -111,7 +111,7 @@ const isDisqusEnabled = disqus !== false && SITE_CONFIG.disqus;
                     {authorData && (
                         <section class="author-card">
                             {authorData.picture && (
-                                <img class="author-profile-image" src={getAssetUrl(authorData.picture)} alt={author} />
+                                <img class="author-profile-image" src={getAssetUrl(authorData.picture)} alt={author} loading="lazy" />
                             )}
                             <section class="author-card-content">
                                 <h4 class="author-card-name"><a href={getAssetUrl(`/author/${author}/`)}>{authorData.name}</a></h4>
@@ -143,12 +143,35 @@ const isDisqusEnabled = disqus !== false && SITE_CONFIG.disqus;
                                 this.page.identifier = id;
                                 this.page.title = title;
                             };
-                            (function() {
-                                var d = document, s = d.createElement('script');
-                                s.src = 'https://' + shortname + '.disqus.com/embed.js';
-                                s.setAttribute('data-timestamp', +new Date());
-                                (d.head || d.body).appendChild(s);
-                            })();
+                            var loadDisqus = function() {
+                                if (window.DISQUS) {
+                                    window.DISQUS.reset({
+                                        reload: true,
+                                        config: disqus_config
+                                    });
+                                } else {
+                                    var d = document, s = d.createElement('script');
+                                    s.src = 'https://' + shortname + '.disqus.com/embed.js';
+                                    s.setAttribute('data-timestamp', +new Date());
+                                    (d.head || d.body).appendChild(s);
+                                }
+                            };
+                            if ('IntersectionObserver' in window) {
+                                var observer = new IntersectionObserver(function(entries, observer) {
+                                    entries.forEach(function(entry) {
+                                        if (entry.isIntersecting) {
+                                            loadDisqus();
+                                            observer.unobserve(entry.target);
+                                        }
+                                    });
+                                }, { rootMargin: '0px 0px 300px 0px' });
+                                var target = document.getElementById('disqus_thread');
+                                if (target) {
+                                    observer.observe(target);
+                                }
+                            } else {
+                                loadDisqus();
+                            }
                         </script>
                     </section>
                 )}
@@ -279,6 +302,13 @@ const isDisqusEnabled = disqus !== false && SITE_CONFIG.disqus;
           ticking = true;
         }
       };
+
+      const cleanup = () => {
+        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', update);
+        document.removeEventListener('astro:before-swap', cleanup);
+      };
+      document.addEventListener('astro:before-swap', cleanup);
 
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', update, { passive: true });

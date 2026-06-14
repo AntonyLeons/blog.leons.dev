@@ -136,6 +136,13 @@ const title = capitalize(tagName);
         }
       };
       
+      const cleanup = () => {
+        window.removeEventListener('scroll', infiniteScroll);
+        window.removeEventListener('resize', infiniteScroll);
+        document.removeEventListener('astro:before-swap', cleanup);
+      };
+      document.addEventListener('astro:before-swap', cleanup);
+
       window.addEventListener('scroll', infiniteScroll, { passive: true });
       window.addEventListener('resize', infiniteScroll, { passive: true });
     }

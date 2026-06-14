@@ -135,7 +135,7 @@ const { algolia } = SITE_CONFIG;
       searchButton.addEventListener('click', toggleSearch);
 
       // Listen for typing input
-      document.addEventListener('input', (e) => {
+      const inputListener = (e) => {
         if (e.target && e.target.classList.contains('ais-SearchBox-input')) {
           if (e.target.value.trim().length > 0) {
             postsContainer.style.display = 'none';
@@ -145,7 +145,8 @@ const { algolia } = SITE_CONFIG;
             postsContainer.style.display = 'flex';
           }
         }
-      });
+      };
+      document.addEventListener('input', inputListener);
 
       // Handle redirect search focus
       const urlParams = new URLSearchParams(window.location.search);
@@ -156,6 +157,16 @@ const { algolia } = SITE_CONFIG;
         // remove URL parameter cleanly
         window.history.replaceState({}, document.title, window.location.pathname);
       }
+
+      const cleanup = () => {
+        searchButton.removeEventListener('click', toggleSearch);
+        document.removeEventListener('input', inputListener);
+        if (search && typeof search.dispose === 'function') {
+          search.dispose();
+        }
+        document.removeEventListener('astro:before-swap', cleanup);
+      };
+      document.addEventListener('astro:before-swap', cleanup);
     };
 
     document.addEventListener('astro:page-load', initAlgoliaSearch);
