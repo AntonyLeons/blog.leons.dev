@@ -16,5 +16,8 @@
   "devDependencies": {
     "js-yaml": "^4.1.0",
     "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=24"
   }
 }
