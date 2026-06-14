@@ -1,10 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
 import SiteNav from '../../../components/SiteNav.astro';
 import PostCard from '../../../components/PostCard.astro';
 import { SITE_CONFIG, getAssetUrl } from '../../../config';
-import tagsData from '../../../data/tags.json';
 
 export async function getStaticPaths({ paginate }: any) {
   const allPosts = await getCollection('posts');
@@ -52,11 +51,12 @@ const { tag } = Astro.params;
 const { pageProps, maxPages } = Astro.props;
 const { page } = pageProps;
 
-// Look up tag metadata
-const tagInfo = tag in tagsData ? (tagsData as any)[tag] : null;
+// Look up tag metadata from the data collection
+const tagEntry = tag ? await getEntry('tags', tag) : null;
+const tagInfo = tagEntry ? tagEntry.data : null;
 const tagName = tagInfo?.name || tag.replace(/-/g, ' ');
 const tagDescription = tagInfo?.description || `A collection of ${page.total} posts`;
-const tagCover = tagInfo?.cover ? getAssetUrl(tagInfo.cover) : null;
+const tagCover = tagInfo?.cover ? getAssetUrl(tagInfo.cover as string) : null;
 
 // Capitalize tag helper
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
@@ -89,7 +89,7 @@ const title = capitalize(tagName);
 
 <script>
   // Tag Feed Infinite Scroll
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
     const postFeed = document.querySelector('.post-feed') as HTMLElement | null;
     if (postFeed) {
       let currentPage = 1;

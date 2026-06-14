@@ -17,9 +17,9 @@ import { SITE_CONFIG, getAssetUrl } from '../config';
   </div>
 )}
 
-<script is:inline>
+<script>
   // Script to handle closing the subscribe overlay when close button is clicked
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
     const closeBtn = document.querySelector('.subscribe-overlay-close');
     const overlay = document.querySelector('.subscribe-overlay');
     if (closeBtn && overlay) {

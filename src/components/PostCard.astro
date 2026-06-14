@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { getEntry } from 'astro:content';
 import { getAssetUrl, getExcerpt, getReadingTime } from '../config';
-import authors from '../data/authors.json';
 
 interface Props {
   post: CollectionEntry<'posts'>;
@@ -11,13 +11,14 @@ interface Props {
 const { post, indexClass = '' } = Astro.props;
 const { title, cover, tags, author, description } = post.data;
 
-// Resolve author
-const authorKey = author as keyof typeof authors;
-const authorData = authorKey in authors ? authors[authorKey] : null;
+// Resolve author entry using reference
+const authorEntry = author ? await getEntry(author) : null;
+const authorData = authorEntry ? authorEntry.data : null;
+const authorId = authorEntry ? authorEntry.id : '';
 
 // Generate links
 const postLink = getAssetUrl(`/${post.slug}/`);
-const authorLink = getAssetUrl(`/author/${author}/`);
+const authorLink = getAssetUrl(`/author/${authorId}/`);
 
 // Calculate reading time & excerpt
 const readingTime = getReadingTime(post.body || '');

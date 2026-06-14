@@ -1,13 +1,13 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import Layout from './Layout.astro';
 import SiteNav from '../components/SiteNav.astro';
 import PostCard from '../components/PostCard.astro';
 import FloatingHeader from '../components/FloatingHeader.astro';
 import SubscribeForm from '../components/SubscribeForm.astro';
+import Infinity from '../components/icons/Infinity.astro';
 import { SITE_CONFIG, getAssetUrl, getReadingTime } from '../config';
-import authors from '../data/authors.json';
 
 interface Props {
   post: CollectionEntry<'posts'>;
@@ -16,13 +16,14 @@ interface Props {
 const { post } = Astro.props;
 const { title, cover, tags = [], author, date, description, subclass, disqus } = post.data;
 
-// Resolve author
-const authorKey = author as keyof typeof authors;
-const authorData = authorKey in authors ? authors[authorKey] : null;
+// Resolve author using data collection entry reference
+const authorEntry = author ? await getEntry(author) : null;
+const authorData = authorEntry ? authorEntry.data : null;
+const authorKey = authorEntry ? authorEntry.id : '';
 
 // Get all posts for next/prev/related suggestions
-const allPosts = await getCollection('posts');
-allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const allPostsUnsorted = await getCollection('posts');
+const allPosts = [...allPostsUnsorted].sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
 const currentIndex = allPosts.findIndex(p => p.slug === post.slug);
 const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
@@ -167,7 +168,7 @@ const isDisqusEnabled = disqus !== false && SITE_CONFIG.disqus;
                             <h3 class="read-next-card-header-title"><a href={getAssetUrl(`/tag/${primaryTag.toLowerCase().replace(/\s+/g, '-')}/`)}>{primaryTag}</a></h3>
                         </header>
                         <div class="read-next-divider">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/></svg>
+                            <Infinity style="width:24px;height:24px;" />
                         </div>
                         <div class="read-next-card-content">
                             <ul>
@@ -197,7 +198,7 @@ const isDisqusEnabled = disqus !== false && SITE_CONFIG.disqus;
 
 <script>
   // Client-side Javascript: Scroll progress, FitVids, and Floating Header
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
     // 1. FitVids
     const videoSelectors = [
       'iframe[src*="player.vimeo.com"]',

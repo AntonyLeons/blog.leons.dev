@@ -61,7 +61,7 @@ const headerBg = SITE_CONFIG.cover ? getAssetUrl(SITE_CONFIG.cover) : null;
 
 <script>
   // Vanilla JS Infinite Scroll
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
     const postFeed = document.querySelector('.post-feed') as HTMLElement | null;
     if (postFeed) {
       let currentPage = 1;

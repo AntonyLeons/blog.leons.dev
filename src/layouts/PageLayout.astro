@@ -51,7 +51,7 @@ const { title, cover, description, subclass } = Astro.props;
 
 <script>
   // FitVids for pages
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
     const videoSelectors = [
       'iframe[src*="player.vimeo.com"]',
       'iframe[src*="youtube.com"]',

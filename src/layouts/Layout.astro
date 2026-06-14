@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import SubscribeModal from '../components/SubscribeModal.astro';
 import { SITE_CONFIG, getAssetUrl } from '../config';
+import { ClientRouter } from 'astro:transitions';
 
 // Import CSS stylesheets so Astro bundles them
 import '../styles/global.css';
@@ -47,6 +48,7 @@ const bodyClass = current === 'home' ? 'home-template' : `${current || 'page'}-t
       tags={tags}
       author={author}
     />
+    <ClientRouter />
 </head>
 <body class={bodyClass}>
     <div class="site-wrapper">

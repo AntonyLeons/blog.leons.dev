@@ -1,6 +1,5 @@
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import { SITE_CONFIG, getAssetUrl } from '../config';
-import authors from '../data/authors.json';
 
 export async function GET(context: any) {
   const posts = await getCollection('posts');
@@ -19,11 +18,11 @@ export async function GET(context: any) {
     const dateIso = new Date(post.data.date).toISOString();
     
     // Resolve author
-    const authorKey = post.data.author as keyof typeof authors;
-    const authorData = authorKey in authors ? authors[authorKey] : null;
-    const authorName = authorData?.name || post.data.author;
-    const authorEmail = authorData?.email || '';
-    const authorUri = authorData?.url_full || '';
+    const authorEntry = post.data.author ? await getEntry(post.data.author) : null;
+    const authorData = authorEntry ? authorEntry.data : null;
+    const authorName = authorData?.name || (post.data.author?.id || '');
+    const authorEmail = (authorData as any)?.email || '';
+    const authorUri = typeof authorData?.url_full === 'string' ? authorData.url_full : '';
     
     // Clean and escape body content
     const cleanContent = (post.body || '')

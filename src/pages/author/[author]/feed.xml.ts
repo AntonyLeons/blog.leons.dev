@@ -1,25 +1,25 @@
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import { SITE_CONFIG, getAssetUrl } from '../../../config';
-import authors from '../../../data/authors.json';
 
 export async function getStaticPaths() {
-  return Object.keys(authors).map(author => ({
-    params: { author }
+  const allAuthors = await getCollection('authors');
+  return allAuthors.map(authorEntry => ({
+    params: { author: authorEntry.id }
   }));
 }
 
 export async function GET(context: any) {
   const { author } = context.params;
   
-  const authorKey = author as keyof typeof authors;
-  const authorData = authorKey in authors ? authors[authorKey] : null;
+  const authorEntry = author ? await getEntry('authors', author) : null;
+  const authorData = authorEntry ? authorEntry.data : null;
 
   if (!authorData) {
     return new Response('Author not found', { status: 404 });
   }
 
   const allPosts = await getCollection('posts');
-  const filteredPosts = allPosts.filter(post => post.data.author === author);
+  const filteredPosts = allPosts.filter(post => post.data.author && post.data.author.id === author);
   filteredPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
   
   const siteUrl = context.site || 'https://jekyllt.github.io/jasper2/';

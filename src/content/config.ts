@@ -1,4 +1,4 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, reference, z } from 'astro:content';
 
 const posts = defineCollection({
   type: 'content',
@@ -18,7 +18,7 @@ const posts = defineCollection({
     ).default([]),
     class: z.string().optional(),
     subclass: z.string().optional(),
-    author: z.string(),
+    author: reference('authors'), // Type-safe reference to an author document
     current: z.string().optional(),
     navigation: z.union([z.boolean(), z.string()]).optional(),
     layout: z.string().optional(),
@@ -26,6 +26,33 @@ const posts = defineCollection({
   }),
 });
 
+const authors = defineCollection({
+  type: 'data',
+  schema: z.object({
+    username: z.string(),
+    name: z.string(),
+    bio: z.string().optional(),
+    picture: z.string().optional().nullable(),
+    location: z.string().optional(),
+    url: z.union([z.string(), z.boolean()]).optional(),
+    url_full: z.union([z.string(), z.boolean()]).optional(),
+    facebook: z.union([z.string(), z.boolean()]).optional(),
+    twitter: z.union([z.string(), z.boolean()]).optional(),
+    cover: z.union([z.string(), z.boolean()]).optional(),
+  }),
+});
+
+const tags = defineCollection({
+  type: 'data',
+  schema: z.object({
+    name: z.string(),
+    description: z.union([z.string(), z.boolean()]).optional(),
+    cover: z.union([z.string(), z.boolean()]).optional(),
+  }),
+});
+
 export const collections = {
   posts,
+  authors,
+  tags,
 };

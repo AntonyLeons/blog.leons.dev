@@ -1,7 +1,5 @@
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import { SITE_CONFIG, getAssetUrl } from '../../../config';
-import authors from '../../../data/authors.json';
-import tagsData from '../../../data/tags.json';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('posts');
@@ -34,8 +32,9 @@ export async function GET(context: any) {
   const indexUrl = new URL(getAssetUrl(`/tag/${tag}/`), siteUrl).toString();
   const lastUpdated = filteredPosts.length > 0 ? new Date(filteredPosts[0].data.date).toISOString() : new Date().toISOString();
 
-  // Tag info
-  const tagInfo = tag in tagsData ? (tagsData as any)[tag] : null;
+  // Tag info from the data collection
+  const tagEntry = tag ? await getEntry('tags', tag) : null;
+  const tagInfo = tagEntry ? tagEntry.data : null;
   const tagName = tagInfo?.name || tag.replace(/-/g, ' ');
   const tagDescription = tagInfo?.description || `A collection of posts filed under ${tagName}`;
 
@@ -45,11 +44,11 @@ export async function GET(context: any) {
     const postUrl = new URL(getAssetUrl(`/${post.slug}/`), siteUrl).toString();
     const dateIso = new Date(post.data.date).toISOString();
     
-    const authorKey = post.data.author as keyof typeof authors;
-    const authorData = authorKey in authors ? authors[authorKey] : null;
-    const authorName = authorData?.name || post.data.author;
-    const authorEmail = authorData?.email || '';
-    const authorUri = authorData?.url_full || '';
+    const authorEntry = post.data.author ? await getEntry(post.data.author) : null;
+    const authorData = authorEntry ? authorEntry.data : null;
+    const authorName = authorData?.name || (post.data.author?.id || '');
+    const authorEmail = (authorData as any)?.email || '';
+    const authorUri = typeof authorData?.url_full === 'string' ? authorData.url_full : '';
     
     const cleanContent = (post.body || '')
       .replace(/&/g, '&amp;')
