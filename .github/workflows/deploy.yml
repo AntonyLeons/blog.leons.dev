@@ -41,6 +41,9 @@ jobs:
         run: pnpm install --no-frozen-lockfile
       - name: Build with Astro
         run: pnpm run build
+        env:
+          SITE_URL: https://antonyleons.github.io
+          BASE_PATH: /casper/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
