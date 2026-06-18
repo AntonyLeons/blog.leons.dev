@@ -286,7 +286,7 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
 }
 
 .social-links a:last-of-type {
-    padding-right: 20px;
+    padding-right: 10px;
 }
 
 .social-link {
