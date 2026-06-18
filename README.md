@@ -1,5 +1,4 @@
-# Casper Astro ⚡
-
+# Casper Astro ⚡ [![Netlify Status](https://api.netlify.com/api/v1/badges/8150a992-e702-4ebe-927f-8729c808a5b6/deploy-status)](https://app.netlify.com/projects/casperastro/deploys) [![Deploy to GitHub Pages](https://github.com/AntonyLeons/casper/actions/workflows/deploy.yml/badge.svg)](https://github.com/AntonyLeons/casper/actions/workflows/deploy.yml)
 A modernized, high-performance port of Ghost's default theme [Casper 2.0](https://github.com/tryghost/casper) built on top of **Astro 6**.
 
 This port replaces the original Jekyll setup (`jasper2`), offering incredibly fast builds, type-safe content validation, server-side pre-rendering, and client-side page load times.
