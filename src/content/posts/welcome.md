@@ -10,14 +10,13 @@ subclass: "post"
 author: antony
 ---
 
-Hey! Welcome to my blog, it's great to have you ✨
+Hey! Welcome to my blog, it's great to have you! ✨
 
-This is just an intro into how and why I created my website, the tools I used and future improvements I'm figuring out how to do.
-I'll give a brief overview of costing(a lot less than you think), and maybe I'll write some tutorial over summer depending on
-how bored I am.
+This is just an intro to how and why I created my website, the tools I used, and future improvements I'm figuring out how to implement.
+I'll give a brief overview of the costs (a lot less than you think), and maybe I'll write some tutorials over the summer depending on how bored I am.
 
 Follow my socials or bookmark this page and check in every month or so.
 
-I'll also be publishing opinion pieces but they'll be tagged appropriately so I can save you some time.
+I'll also be publishing opinion pieces, but they'll be tagged appropriately so I can save you some time.
 
-But if you're here cheers for browsing to my blog and stay tuned for updates
+If you're here, thanks for checking out my blog, and stay tuned for updates!
