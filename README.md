@@ -1,5 +1,4 @@
-# Casper Astro ⚡
-
+# Casper Astro ⚡ [![Netlify Status](https://api.netlify.com/api/v1/badges/8150a992-e702-4ebe-927f-8729c808a5b6/deploy-status)](https://app.netlify.com/projects/casperastro/deploys) [![Deploy to GitHub Pages](https://github.com/AntonyLeons/casper/actions/workflows/deploy.yml/badge.svg)](https://github.com/AntonyLeons/casper/actions/workflows/deploy.yml)
 A modernized, high-performance port of Ghost's default theme [Casper 2.0](https://github.com/tryghost/casper) built on top of **Astro 6**.
 
 This port replaces the original Jekyll setup (`jasper2`), offering incredibly fast builds, type-safe content validation, server-side pre-rendering, and client-side page load times.
@@ -15,7 +14,7 @@ Deploy your own copy of this blog template to the cloud with a single click:
 - **Astro 6 & TypeScript**: Full TypeScript configuration and strict schema validations.
 - **Type-Safe Content Schema**: Powered by Astro Content Collections and Zod to validate posts, tags, and authors.
 - **Modern Asset Pipeline**: Stylesheets are bundled, minified, and optimized via Vite out of the box.
-- **Zero-Dependency Vanilla JS Interactivity**: Ported jQuery scripts (infinite scrolling, scroll progress bar, floating headers, and FitVids responsive videos) to clean, performant **Vanilla JS**.
+- **Zero-Dependency Vanilla JS Interactivity**: Ported jQuery scripts (infinite scrolling, scroll progress bar, and floating headers) to clean, performant **Vanilla JS**, and replaced FitVids with a native, zero-JS **CSS aspect-ratio** solution.
 - **100% SEO Compliance**: Automatic metadata, canonical URLs, Open Graph images, Twitter cards, and Schema.org JSON-LD data pre-rendered on the server.
 - **Compliance Feeds**: Auto-generated Atom XML RSS feeds matching the original Jekyll feeds exactly (`/feed.xml`, `/tag/[tag]/feed.xml`, `/author/[author]/feed.xml`).
 - **Disqus & Subscribe Forms**: Out-of-the-box toggleable Disqus comments and location-aware email newsletter subscription forms.
@@ -163,6 +162,29 @@ To deploy:
 2. In your GitHub repository settings, navigate to **Pages**.
 3. Under **Build and deployment**, set the **Source** to **GitHub Actions**.
 4. The workflow will automatically trigger, build the Astro application, and publish it directly to GitHub Pages.
+
+---
+
+## 🔄 Keeping Your Blog Updated
+
+If you created your blog by **forking** or **cloning** this repository, you can pull upstream updates, fixes, and performance optimizations (like code refactoring or package upgrades) into your personal repository using Git.
+
+### 1. Add Upstream Remote
+Inside your local blog repository directory, link this template repository as an `upstream` remote:
+```bash
+git remote add upstream https://github.com/AntonyLeons/casper.git
+```
+
+### 2. Fetch and Merge Changes
+To pull the latest template updates and merge them:
+```bash
+# Fetch changes from the template repo
+git fetch upstream
+
+# Merge upstream main branch into your current branch
+git merge upstream/main
+```
+If you customized configurations (e.g., in `src/config.ts`) or added custom content, resolve any merge conflicts that arise, and then commit and push to your remote repository.
 
 ---
 

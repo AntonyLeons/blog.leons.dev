@@ -10,8 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^6.1.10",
-    "@astrojs/rss": "^4.0.10"
+    "@astrojs/rss": "^4.0.10",
+    "astro": "^6.4.8"
   },
   "devDependencies": {
     "js-yaml": "^4.1.0",

@@ -286,7 +286,7 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
 }
 
 .social-links a:last-of-type {
-    padding-right: 20px;
+    padding-right: 10px;
 }
 
 .social-link {
@@ -2167,4 +2167,15 @@ html.dark-mode .pagination:before {
     .post-full-image img {
         border-radius: 0;
     }
+}
+
+/* ==========================================================================
+   Responsive Video Embeds (CSS Native aspect-ratio)
+   ========================================================================== */
+.post-full-content iframe,
+.post-full-content object,
+.post-full-content embed {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9;
 }
