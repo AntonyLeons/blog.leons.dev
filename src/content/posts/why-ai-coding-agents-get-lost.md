@@ -116,12 +116,20 @@ Adjust the sliders below to configure the agent's parameters, then use the contr
     background: #0f172a;
     border-radius: 12px;
     padding: 20px;
-    color: #e2e8f0;
+    color: #f1f5f9 !important;
     font-family: var(--font-inter, sans-serif);
     margin: 30px auto;
     max-width: 1040px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     border: 1px solid #1e293b;
+  }
+
+  /* Force light colors on headers to override parent theme */
+  .agent-sim-container h3,
+  .agent-sim-container h4,
+  .agent-sim-container .sim-section-title,
+  .agent-sim-container .card-title {
+    color: #f1f5f9 !important;
   }
 
   .sim-sidebar {
@@ -138,7 +146,7 @@ Adjust the sliders below to configure the agent's parameters, then use the contr
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #94a3b8;
+    color: #cbd5e1 !important;
     margin-bottom: 5px;
     border-bottom: 1px solid #334155;
     padding-bottom: 5px;
@@ -153,7 +161,7 @@ Adjust the sliders below to configure the agent's parameters, then use the contr
   .slider-group label {
     font-size: 13px;
     font-weight: 600;
-    color: #cbd5e1;
+    color: #f8fafc !important;
   }
 
   .slider-group input[type="range"] {
@@ -164,7 +172,7 @@ Adjust the sliders below to configure the agent's parameters, then use the contr
 
   .slider-hint {
     font-size: 11px;
-    color: #64748b;
+    color: #cbd5e1 !important;
   }
 
   .control-buttons {
@@ -218,7 +226,7 @@ Adjust the sliders below to configure the agent's parameters, then use the contr
 
   .step-indicator {
     font-size: 12px;
-    color: #94a3b8;
+    color: #cbd5e1 !important;
     text-align: center;
     font-weight: bold;
   }
@@ -226,7 +234,7 @@ Adjust the sliders below to configure the agent's parameters, then use the contr
   .step-description {
     font-size: 12px;
     line-height: 1.4;
-    color: #cbd5e1;
+    color: #f1f5f9 !important;
     background: #0f172a;
     padding: 10px;
     border-radius: 6px;
@@ -306,63 +314,65 @@ Adjust the sliders below to configure the agent's parameters, then use the contr
     align-items: center;
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0 !important;
+    min-height: 28px !important;
   }
 
   /* Block Types and Colors */
   .block-system {
-    background: rgba(62, 176, 239, 0.2);
+    background: rgba(62, 176, 239, 0.25);
     border-left: 4px solid #3eb0ef;
-    color: #3eb0ef;
+    color: #bae6fd !important;
   }
 
   .block-tools {
-    background: rgba(164, 208, 55, 0.2);
+    background: rgba(164, 208, 55, 0.25);
     border-left: 4px solid #a4d037;
-    color: #a4d037;
+    color: #d9f99d !important;
   }
 
   .block-task {
-    background: rgba(254, 205, 53, 0.2);
+    background: rgba(254, 205, 53, 0.25);
     border-left: 4px solid #fecd35;
-    color: #fecd35;
+    color: #fef08a !important;
   }
 
   .block-search {
-    background: rgba(173, 38, 180, 0.2);
+    background: rgba(173, 38, 180, 0.25);
     border-left: 4px solid #ad26b4;
-    color: #ad26b4;
+    color: #f5d0fe !important;
   }
 
   .block-files {
-    background: rgba(96, 165, 250, 0.2);
+    background: rgba(96, 165, 250, 0.25);
     border-left: 4px solid #60a5fa;
-    color: #93c5fd;
+    color: #bfdbfe !important;
   }
 
   .block-logs {
-    background: rgba(240, 82, 48, 0.2);
+    background: rgba(240, 82, 48, 0.25);
     border-left: 4px solid #f05230;
-    color: #fca5a5;
+    color: #fee2e2 !important;
   }
 
   .block-pivot {
-    background: rgba(250, 58, 87, 0.2);
+    background: rgba(250, 58, 87, 0.25);
     border-left: 4px solid #fa3a57;
-    color: #fca5a5;
+    color: #fecdd3 !important;
   }
 
   .block-drift {
-    background: rgba(163, 130, 26, 0.2);
+    background: rgba(163, 130, 26, 0.25);
     border-left: 4px solid #a3821a;
-    color: #fde047;
+    color: #fef08a !important;
   }
 
   .block-forgotten {
-    background: rgba(71, 85, 105, 0.2) !important;
+    background: rgba(71, 85, 105, 0.25) !important;
     border-left: 4px solid #475569 !important;
-    color: #64748b !important;
+    color: #94a3b8 !important;
     text-decoration: line-through;
-    opacity: 0.5;
+    opacity: 0.55;
   }
 
   /* Right Column Status elements */
