@@ -38,42 +38,96 @@ const headerBg = SITE_CONFIG.cover ? getAssetUrl(SITE_CONFIG.cover) : null;
                 <h1 class="site-title">
                     <!-- Inline Animated Mascot SVG -->
                     <svg id="homepage-mascot" viewBox="0 0 200 210" style="width: 140px; height: 147px; overflow: visible; cursor: pointer; display: inline-block;">
-                        <!-- Antennas -->
-                        <path d="M 85 45 L 70 25" stroke="white" stroke-width="4" stroke-linecap="round" />
-                        <circle cx="70" cy="25" r="4" fill="white" />
-                        <path d="M 115 45 L 130 25" stroke="white" stroke-width="4" stroke-linecap="round" />
-                        <circle cx="130" cy="25" r="4" fill="white" />
+                        <defs>
+                            <!-- Filter to create the wobbly, hand-drawn chalk/pencil effect -->
+                            <filter id="hand-drawn-filter" x="-10%" y="-10%" width="120%" height="120%">
+                                <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+                                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G" />
+                            </filter>
+                        </defs>
 
-                        <!-- Stand / Base -->
-                        <path d="M 90 140 L 93 160 L 107 160 L 110 140 Z" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" />
-                        <path d="M 75 160 Q 100 170 125 160" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" />
+                        <!-- Main group applying the hand-drawn filter -->
+                        <g filter="url(#hand-drawn-filter)">
+                            <!-- Antennas -->
+                            <!-- Dome base -->
+                            <path d="M 98 52 C 100 48, 108 48, 110 52" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" />
+                            <!-- Left Antenna -->
+                            <path d="M 102 50 C 99 42, 95 35, 90 30" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" />
+                            <path d="M 90 30 C 88 28, 86 28, 84 30 C 82 32, 82 34, 84 36 C 86 38, 88 38, 90 36 C 92 34, 92 32, 90 30 Z" fill="none" stroke="white" stroke-width="2.5" />
+                            <!-- Right Antenna -->
+                            <path d="M 106 50 C 109 42, 113 35, 118 30" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" />
+                            <path d="M 118 30 C 120 28, 122 28, 124 30 C 126 32, 126 34, 124 36 C 122 38, 120 38, 118 36 C 116 34, 116 32, 118 30 Z" fill="none" stroke="white" stroke-width="2.5" />
 
-                        <!-- Monitor Body -->
-                        <rect x="40" y="45" width="120" height="95" rx="16" fill="#1e293b" stroke="white" stroke-width="5" />
-                        <!-- Screen -->
-                        <rect x="52" y="57" width="96" height="71" rx="8" fill="#090d16" stroke="white" stroke-width="3" />
+                            <!-- Stand / Base / Neck / Legs -->
+                            <!-- Neck -->
+                            <path d="M 92 124 C 91 131, 88 138, 86 141" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
+                            <path d="M 112 124 C 111 131, 115 138, 118 141" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
+                            <!-- Base Oval -->
+                            <path d="M 78 141 C 95 137, 115 137, 126 141" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
+                            <path d="M 74 144 C 95 148, 115 148, 128 144" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
+                            <path d="M 78 141 C 75 142, 73 143, 74 144" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
+                            <path d="M 126 141 C 128 142, 129 143, 128 144" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
+                            <!-- Legs/Feet -->
+                            <path d="M 93 146 C 93 153, 93 158, 93 158 C 93 160, 90 160, 87 160" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
+                            <path d="M 111 146 C 111 153, 111 157, 111 157 C 111 159, 114 159, 117 159" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
 
-                        <!-- Eyes Group (moves with mouse) -->
-                        <g id="mascot-eyes" style="transition: transform 0.1s ease-out;">
-                            <path d="M 75 88 Q 85 78 95 88" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
-                            <path d="M 105 88 Q 115 78 125 88" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
+                            <!-- Monitor Body (Combined Silhouette for Fill) -->
+                            <path d="M 67 123 C 58 123, 50 122, 46 116 C 42 106, 40 92, 41 78 C 41 68, 48 58, 62 53 C 90 51, 120 52, 148 55 C 148 77, 147 99, 142 121 C 114 123, 86 124, 67 123 Z" fill="#1e293b" stroke="white" stroke-width="4.5" stroke-linejoin="round" />
+                            
+                            <!-- Crease line separating left side case from front face -->
+                            <path d="M 62 53 C 63 77, 63 99, 67 123" fill="none" stroke="white" stroke-width="3" />
+
+                            <!-- Vents on Left Case -->
+                            <path d="M 49 76 C 50 78, 52 82, 54 84" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+                            <path d="M 49 84 C 50 86, 52 90, 54 92" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+                            <path d="M 49 92 C 50 94, 52 98, 54 100" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+                            <path d="M 49 100 C 50 102, 52 106, 54 108" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+
+                            <!-- Bezel Inner Border -->
+                            <path d="M 66 59 C 91 57, 117 58, 142 61 C 142 80, 141 99, 137 116 C 114 118, 91 119, 71 118 C 67 99, 66 80, 66 59 Z" fill="none" stroke="white" stroke-width="3" />
+
+                            <!-- Screen (Filled with dark color) -->
+                            <path d="M 72 65 C 93 63, 114 64, 134 67 C 134 81, 133 96, 130 110 C 111 112, 92 113, 76 112 C 73 96, 72 81, 72 65 Z" fill="#090d16" stroke="white" stroke-width="3" />
+
+                            <!-- Bezel Details (Dial, dots, button) -->
+                            <!-- Dial -->
+                            <path d="M 78 114 C 80 114, 81 115, 81 117 C 81 119, 80 120, 78 120 C 76 120, 75 119, 75 117 C 75 115, 76 114, 78 114 Z" fill="none" stroke="white" stroke-width="2.5" />
+                            <path d="M 78 117 L 76 115" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" />
+                            <!-- Dots -->
+                            <path d="M 84 117 L 85 117 M 88 117 L 89 117" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+                            <!-- Button -->
+                            <path d="M 128 113 C 130 113, 131 114, 131 116 C 131 118, 130 119, 128 119 C 126 119, 125 118, 125 116 C 125 114, 126 113, 128 113 Z" fill="none" stroke="white" stroke-width="2.5" />
+
+                            <!-- Eyes Group (moves with mouse) -->
+                            <g id="mascot-eyes" style="transition: transform 0.1s ease-out;">
+                                <!-- Left Eye -->
+                                <path d="M 85 82 C 87 76, 93 76, 95 82" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
+                                <!-- Right Eye -->
+                                <path d="M 111 82 C 113 76, 119 76, 121 82" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
+                                <!-- Blush Marks (Left Cheek) -->
+                                <path d="M 78 86 L 80 89 M 80 86 L 82 89 M 82 86 L 84 89 M 84 86 L 86 89" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.85" />
+                                <!-- Blush Marks (Right Cheek) -->
+                                <path d="M 120 86 L 122 89 M 122 86 L 124 89 M 124 86 L 126 89 M 126 86 L 128 89" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.85" />
+                            </g>
+
+                            <!-- Mouth -->
+                            <path d="M 99 90 C 101 94, 105 94, 107 90" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
+
+                            <!-- Left Arm (pointing down/out) -->
+                            <g>
+                                <path d="M 42 100 C 35 103, 28 108, 29 116" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
+                                <path d="M 29 116 L 25 120 M 29 116 L 27 124 M 29 116 L 31 124 M 29 116 L 35 121" fill="none" stroke="white" stroke-width="3.2" stroke-linecap="round" />
+                            </g>
+
+                            <!-- Right Arm (Waving) -->
+                            <g id="mascot-right-arm" style="transform-origin: 146px 92px; transition: transform 0.15s ease;">
+                                <path d="M 146 92 C 153 90, 159 84, 164 76" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
+                                <path d="M 164 76 L 160 72 M 164 76 L 163 68 M 164 76 L 169 68 M 164 76 L 174 72 M 164 76 L 176 77" fill="none" stroke="white" stroke-width="3.2" stroke-linecap="round" />
+                            </g>
                         </g>
 
-                        <!-- Mouth -->
-                        <path d="M 95 105 Q 100 112 105 105" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
-
-                        <!-- Left Arm -->
-                        <path d="M 40 100 Q 25 110 32 125" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" />
-
-                        <!-- Right Arm (Waving) -->
-                        <g id="mascot-right-arm" style="transform-origin: 160px 100px; transition: transform 0.15s ease;">
-                            <path d="M 160 100 Q 180 85 172 65" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" />
-                            <path d="M 172 65 Q 175 60 178 63" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" />
-                            <path d="M 172 65 Q 170 58 173 60" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" />
-                        </g>
-
-                        <!-- Text "leons.dev" -->
-                        <text x="100" y="198" fill="white" font-size="18" font-family="system-ui, -apple-system, sans-serif" font-weight="bold" text-anchor="middle" letter-spacing="0.5">leons.dev</text>
+                        <!-- Text "leons.dev" (cursive/hand-drawn fonts list) -->
+                        <text x="100" y="196" fill="white" font-size="22" font-family="'Patrick Hand', 'Comic Neue', 'Comic Sans MS', cursive, sans-serif" font-weight="bold" text-anchor="middle" letter-spacing="0.5">leons.dev</text>
                     </svg>
                 </h1>
                 <h2 class="site-description">{SITE_CONFIG.description}</h2>
@@ -101,6 +155,8 @@ const headerBg = SITE_CONFIG.cover ? getAssetUrl(SITE_CONFIG.cover) : null;
 </Layout>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
   #homepage-mascot:hover #mascot-right-arm {
     animation: mascotWave 0.5s ease-in-out infinite alternate;
   }
