@@ -1429,6 +1429,10 @@ Usage (In Ghost editor):
     max-height: 20px;
 }
 
+html:not(.dark-mode) .floating-header-logo img {
+    filter: invert(1);
+}
+
 .floating-header-divider {
     margin: 0 5px;
     line-height: 1em;
