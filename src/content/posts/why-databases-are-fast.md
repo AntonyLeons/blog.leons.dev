@@ -18,109 +18,242 @@ SELECT * FROM users WHERE email = 'alice@example.com';
 
 In a small development environment, this query returns in less than a millisecond. But what happens when your application scales to millions of users? Why doesn't the database grind to a halt when searching through gigabytes of raw data stored on slow disk drives?
 
-The secret lies in a combination of B-Trees, caching layers, and the Query Planner. Let's look at how databases avoid reading raw data, and run an interactive simulation to see how queries execute under the hood.
+To understand how databases stay fast, we need to break down the query lifecycle into four distinct concepts: **Table Scans**, **B-Tree Indexes**, **Buffer Pool Caching**, and the **Query Planner**. 
+
+Let's explore each concept step-by-step with interactive visualizations.
 
 ---
 
-## The Database Query Simulator
+## 1. The Naive Approach: Table Scans
 
-Adjust the database state using the controls below, select a target query, and hit **Run Query** to watch how the database locates the record.
+When a database has no lookup index on a column, it must execute a **Table Scan** (or Sequential Scan). The database engine starts at the first page of data on disk and reads every single row sequentially until it finds a match.
 
-<div class="db-sim-container">
-<!-- Sidebar Controls -->
-<div class="db-sidebar">
-<h3 class="db-section-title">Query Planner Settings</h3>
-<div class="toggle-group">
-<label for="toggle-index">Index on `email` column</label>
-<div class="switch-wrapper">
-<input type="checkbox" id="toggle-index" checked>
-<span class="switch-label">Enabled</span>
+This results in a linear time complexity of **$O(N)$**. If you have 10,000,000 rows, the database must perform up to 10,000,000 comparisons.
+
+### Interactive Table Scan Simulator
+Adjust the table size slider below, select a target query, and click **Run Table Scan** to watch the database sequentially scan through data pages.
+
+<div class="db-widget" id="widget-scan">
+<div class="widget-main">
+<div class="widget-visual-col">
+<h4 class="widget-visual-title">Sequential Disk Scan</h4>
+<div class="scan-grid-wrapper">
+<div class="scan-grid" id="scan-grid">
+<!-- Page blocks populated by JS -->
 </div>
-<span class="db-hint">Without an index, the database must scan the entire table.</span>
 </div>
+</div>
+<div class="widget-control-col">
+<h4 class="db-card-title">Scan Configuration</h4>
 <div class="slider-group">
-<label for="slider-rows">Table Size: <span id="val-rows">1,000,000</span> rows</label>
-<input type="range" id="slider-rows" min="1000" max="10000000" step="999000" value="1000000">
-<span class="db-hint">Larger tables exponentially increase table scan times.</span>
+<label for="scan-slider-rows">Table Size: <span id="scan-val-rows">1,000,000</span> rows</label>
+<input type="range" id="scan-slider-rows" min="1000" max="10000000" step="999000" value="1000000">
+<span class="db-hint">Larger tables require reading more pages from disk.</span>
 </div>
-<div class="toggle-group">
-<label for="toggle-cache">Buffer Pool Cache</label>
-<div class="switch-wrapper">
-<input type="checkbox" id="toggle-cache" checked>
-<span class="switch-label">Cache Hit (RAM)</span>
-</div>
-<span class="db-hint">Cache hits avoid hitting the physical disk.</span>
-</div>
-<h3 class="db-section-title">Execute Query</h3>
 <div class="query-select-group">
-<label for="query-select">Select SQL Statement:</label>
-<select id="query-select" class="db-select">
-<option value="alice@example.com">SELECT * FROM users WHERE email = 'alice@example.com' (Row 10,000)</option>
-<option value="bob@example.com">SELECT * FROM users WHERE email = 'bob@example.com' (Row 500,000)</option>
-<option value="charlie@example.com">SELECT * FROM users WHERE email = 'charlie@example.com' (Row 990,000)</option>
+<label for="scan-query-select">Target Email:</label>
+<select id="scan-query-select" class="db-select">
+<option value="alice@example.com">alice@example.com (Row 150,000)</option>
+<option value="bob@example.com">bob@example.com (Row 500,000)</option>
+<option value="charlie@example.com">charlie@example.com (Row 950,000)</option>
 </select>
 </div>
 <div class="db-control-buttons">
-<button id="btn-run" class="db-btn db-btn-primary">Run Query</button>
-<button id="btn-reset" class="db-btn db-btn-danger">Reset</button>
+<button id="scan-btn-run" class="db-btn db-btn-primary">Run Table Scan</button>
+<button id="scan-btn-reset" class="db-btn db-btn-danger">Reset</button>
+</div>
+<div class="metrics-panel">
+<div class="metric-box">
+<span class="metric-lbl">Rows Checked</span>
+<span class="metric-val" id="scan-metric-checked">0</span>
+</div>
+<div class="metric-box">
+<span class="metric-lbl">Estimated Duration</span>
+<span class="metric-val" id="scan-metric-time">0.00 ms</span>
 </div>
 </div>
-<!-- Main Simulator View -->
-<div class="db-main">
-<!-- Left Column: Visual Search Space -->
-<div class="db-col-visual">
-<h3 class="db-section-title">Execution Visualization</h3>
-<div class="visualization-window" id="visualization-window">
-<!-- Content populated dynamically based on state -->
-<div class="placeholder-text" id="vis-placeholder">Select settings and run a query to visualize execution.</div>
 </div>
 </div>
-<!-- Right Column: Planner & Metrics -->
-<div class="db-col-status">
-<div class="db-status-card">
-<h4 class="db-card-title">Query Planner Output</h4>
-<div class="planner-box" id="planner-output">
-EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
+</div>
+
+---
+
+## 2. Searching in Logarithmic Time: B-Tree Indexes
+
+Instead of reading raw data, databases use a **B-Tree** (Balanced Tree) index to find keys in **$O(\log N)$** logarithmic time. 
+
+A B-Tree organizes keys in sorted order inside nodes:
+1. **Root Node:** Directs the search path left or right.
+2. **Internal Nodes:** Intermediate layers that route queries based on alphabetical or numerical ranges.
+3. **Leaf Nodes:** The bottom layer pointing to the exact physical data blocks.
+
+Each B-Tree traversal discards massive blocks of the database instantly. For a table of 10,000,000 rows, a B-Tree search locates the record in just **3 to 4 comparisons**.
+
+### Interactive B-Tree Simulator
+Select a target email and click **Run Index Search** to watch the search pathway route through the tree. Toggling the table size slider illustrates how the B-Tree depth remains flat (3 node checks) even when scaling from 1,000 to 10,000,000 rows.
+
+<div class="db-widget" id="widget-btree">
+<div class="widget-main">
+<div class="widget-visual-col">
+<h4 class="widget-visual-title">B-Tree Index Traversal</h4>
+<div class="btree-wrapper-box">
+<div class="btree-wrapper" id="btree-container">
+<!-- Tree structures populated dynamically -->
 </div>
 </div>
-<div class="db-status-row">
-<div class="db-status-card text-center">
-<h4 class="db-card-title">Rows Checked</h4>
-<div class="metric-value" id="metric-checked">0</div>
-<div class="metric-total">out of <span id="metric-total-rows">1,000,000</span></div>
 </div>
-<div class="db-status-card text-center">
-<h4 class="db-card-title">Query Duration</h4>
-<div class="metric-value" id="metric-time">0.00 ms</div>
-<div class="metric-label" id="metric-medium">Disk Access</div>
+<div class="widget-control-col">
+<h4 class="db-card-title">Index Configuration</h4>
+<div class="slider-group">
+<label for="tree-slider-rows">Table Size: <span id="tree-val-rows">1,000,000</span> rows</label>
+<input type="range" id="tree-slider-rows" min="1000" max="10000000" step="999000" value="1000000">
+<span class="db-hint">Increasing table size from 1K to 10M rows barely affects B-tree depth.</span>
+</div>
+<div class="query-select-group">
+<label for="tree-query-select">Target Email:</label>
+<select id="tree-query-select" class="db-select">
+<option value="alice@example.com">alice@example.com (A-E Branch)</option>
+<option value="bob@example.com">bob@example.com (F-L Branch)</option>
+<option value="charlie@example.com">charlie@example.com (T-Z Branch)</option>
+</select>
+</div>
+<div class="db-control-buttons">
+<button id="tree-btn-run" class="db-btn db-btn-primary">Run Index Search</button>
+<button id="tree-btn-reset" class="db-btn db-btn-danger">Reset</button>
+</div>
+<div class="metrics-panel">
+<div class="metric-box">
+<span class="metric-lbl">Node Checks</span>
+<span class="metric-val" id="tree-metric-checked">0 / 3</span>
+</div>
+<div class="metric-box">
+<span class="metric-lbl">Rows Discarded</span>
+<span class="metric-val" id="tree-metric-discarded">0</span>
 </div>
 </div>
-<div class="db-status-card">
-<h4 class="db-card-title">Storage Media Path</h4>
+</div>
+</div>
+</div>
+
+---
+
+## 3. Minimizing Hardware Latency: Caching
+
+Even with a B-Tree index, fetching data from physical disk drives is slow. An average Solid State Drive (SSD) takes around 0.1ms to 1.0ms to fetch a page, while mechanical hard drives (HDDs) take up to 10ms. RAM, however, reads data in less than 0.0001ms.
+
+To minimize disk I/O, databases maintain a RAM cache called the **Buffer Pool**.
+- **Cache Hit:** The requested page is found in RAM and returned instantly (0.05ms).
+- **Cache Miss:** The page must be fetched from physical disk, loaded into RAM, and then returned (10ms).
+
+### Interactive Cache Latency Simulator
+Toggle the cache status to simulate memory latency. Watch the storage media path light up to see how cache hits bypass disk reads.
+
+<div class="db-widget" id="widget-cache">
+<div class="widget-main">
+<div class="widget-visual-col">
+<h4 class="widget-visual-title">Storage Path Fetch</h4>
 <div class="media-path-container">
-<div class="media-node" id="node-ram">
+<div class="media-node" id="cache-node-ram">
 <div class="media-icon">⚡</div>
 <div>RAM Cache</div>
 <div class="node-time">0.05ms</div>
 </div>
-<div class="media-connector" id="connector-disk">➔</div>
-<div class="media-node" id="node-disk">
+<div class="media-connector" id="cache-connector-disk">➔</div>
+<div class="media-node" id="cache-node-disk">
 <div class="media-icon">💿</div>
 <div>Disk Drive</div>
 <div class="node-time">10.0ms</div>
 </div>
 </div>
 </div>
+<div class="widget-control-col">
+<h4 class="db-card-title">Cache Configuration</h4>
+<div class="toggle-group">
+<label for="cache-toggle-hit">Buffer Pool State</label>
+<div class="switch-wrapper">
+<input type="checkbox" id="cache-toggle-hit" checked>
+<span class="switch-label" id="cache-hit-status">Cache Hit (RAM)</span>
+</div>
+<span class="db-hint">Cache misses force the database to wait for disk access.</span>
+</div>
+<div class="db-control-buttons" style="margin-top: 15px;">
+<button id="cache-btn-run" class="db-btn db-btn-primary">Fetch Data</button>
+<button id="cache-btn-reset" class="db-btn db-btn-danger">Reset</button>
+</div>
+<div class="metrics-panel">
+<div class="metric-box">
+<span class="metric-lbl">Access Duration</span>
+<span class="metric-val" id="cache-metric-time">0.00 ms</span>
+</div>
+<div class="metric-box">
+<span class="metric-lbl">Storage Path</span>
+<span class="metric-val" id="cache-metric-path">Standing by</span>
+</div>
+</div>
 </div>
 </div>
 </div>
 
+---
+
+## 4. The Intelligence: The Query Planner
+
+When you send a SQL query to a database, the engine does not execute it immediately. It passes the SQL to the **Query Planner**. 
+
+The Query Planner analyzes table statistics, checks which columns have B-Tree indexes, and calculates estimated CPU and I/O costs to construct an optimal execution plan.
+
+### Interactive Query Planner Console
+Choose a query and toggle the B-Tree index checkbox to watch the Query Planner output the `EXPLAIN ANALYZE` execution plan dynamically. Note how the planner shifts between `Seq Scan` and `Index Scan`.
+
+<div class="db-widget" id="widget-planner">
+<div class="widget-main">
+<div class="widget-visual-col">
+<h4 class="widget-visual-title">Planner Console Output</h4>
+<div class="planner-box" id="planner-console">
+EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
+</div>
+</div>
+<div class="widget-control-col">
+<h4 class="db-card-title">Planner Inputs</h4>
+<div class="toggle-group">
+<label for="planner-toggle-index">Index on `email` column</label>
+<div class="switch-wrapper">
+<input type="checkbox" id="planner-toggle-index" checked>
+<span class="switch-label" id="planner-idx-status">Enabled</span>
+</div>
+<span class="db-hint">Disabling the index forces the planner to choose a Seq Scan.</span>
+</div>
+<div class="query-select-group">
+<label for="planner-query-select">Select SQL query:</label>
+<select id="planner-query-select" class="db-select">
+<option value="alice@example.com">SELECT * FROM users WHERE email = 'alice@example.com'</option>
+<option value="bob@example.com">SELECT * FROM users WHERE email = 'bob@example.com'</option>
+<option value="charlie@example.com">SELECT * FROM users WHERE email = 'charlie@example.com'</option>
+</select>
+</div>
+<div class="metrics-panel" style="margin-top: 15px;">
+<div class="metric-box">
+<span class="metric-lbl">Planner Strategy</span>
+<span class="metric-val" id="planner-metric-strategy" style="font-size: 13px; color: #a4d037 !important;">Index Scan</span>
+</div>
+<div class="metric-box">
+<span class="metric-lbl">Estimated Cost</span>
+<span class="metric-val" id="planner-metric-cost" style="font-size: 13px; color: #fecd35 !important;">4.20..8.40</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+---
+
+## Conclusion: Designing for Scale
+
+Databases are fast because they combine physical hardware acceleration with smart data structures. By using B-Trees, we avoid checking every record. By using Buffer Pools, we avoid hitting the physical disk. And by using the Query Planner, the database automatically selects the fastest execution pathway so your applications can scale seamlessly.
+
 <style>
-  /* Database Simulation Dashboard Styles */
-  .db-sim-container {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 20px;
+  /* Base Widgets Layout */
+  .db-widget {
     background: #0f172a;
     border-radius: 12px;
     padding: 20px;
@@ -128,7 +261,7 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
     font-family: var(--font-inter, sans-serif);
     margin: 30px auto;
     width: 92vw !important;
-    max-width: 1280px !important;
+    max-width: 1100px !important;
     position: relative !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
@@ -137,48 +270,70 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
     box-sizing: border-box;
   }
 
-  /* Force high contrast text to override global theme */
-  .db-sim-container h3,
-  .db-sim-container h4,
-  .db-sim-container .db-section-title,
-  .db-sim-container .db-card-title,
-  .db-sim-container label,
-  .db-sim-container span,
-  .db-sim-container select,
-  .db-sim-container option {
+  /* Force high contrast text */
+  .db-widget h3,
+  .db-widget h4,
+  .db-widget .widget-visual-title,
+  .db-widget .db-card-title,
+  .db-widget label,
+  .db-widget span,
+  .db-widget select,
+  .db-widget option {
     color: #f1f5f9 !important;
   }
 
-  .db-sidebar {
+  .widget-main {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 20px;
+  }
+
+  .widget-visual-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .widget-control-col {
     background: #1e293b;
     border-radius: 8px;
     padding: 16px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 15px;
     border: 1px solid #334155;
   }
 
-  .db-section-title {
-    font-size: 14px;
+  .widget-visual-title {
+    font-size: 13px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     color: #cbd5e1 !important;
     margin-bottom: 5px;
+  }
+
+  .db-card-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #cbd5e1 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     border-bottom: 1px solid #334155;
     padding-bottom: 5px;
+    margin-bottom: 5px;
   }
 
   .slider-group, .toggle-group, .query-select-group {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
   }
 
   .slider-group label, .toggle-group label, .query-select-group label {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
-    color: #f8fafc !important;
+    color: #cbd5e1 !important;
   }
 
   .db-select {
@@ -189,6 +344,7 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
     color: #f1f5f9 !important;
     font-size: 12px;
     cursor: pointer;
+    width: 100%;
   }
 
   .db-select option {
@@ -215,7 +371,7 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
 
   .switch-label {
     font-size: 12px;
-    color: #cbd5e1 !important;
+    color: #f1f5f9 !important;
     font-weight: bold;
   }
 
@@ -254,50 +410,60 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
     background: #ef4444;
   }
 
-  /* Main View Area */
-  .db-main {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 20px;
+  .db-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
 
-  .db-col-visual {
+  .metrics-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+    border-top: 1px solid #334155;
+    padding-top: 10px;
+  }
+
+  .metric-box {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    background: #0f172a;
+    border-radius: 6px;
+    padding: 8px;
+    border: 1px solid #334155;
   }
 
-  .visualization-window {
+  .metric-lbl {
+    font-size: 9px;
+    text-transform: uppercase;
+    color: #94a3b8 !important;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+
+  .metric-val {
+    font-size: 14px;
+    font-weight: 800;
+    color: #fecd35;
+    margin-top: 2px;
+  }
+
+  /* Scan Grid Specific Styles */
+  .scan-grid-wrapper {
     background: #090d16;
     border: 2px solid #334155;
     border-radius: 8px;
-    flex-grow: 1;
-    min-height: 400px;
-    height: 480px;
-    position: relative;
-    padding: 16px;
+    height: 300px;
+    padding: 12px;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow-y: auto;
   }
 
-  .placeholder-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 13px;
-    color: #64748b;
-    text-align: center;
-    width: 80%;
-    line-height: 1.5;
-  }
-
-  /* Sequential Scan Visualization */
   .scan-grid {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 6px;
-    height: 100%;
     align-content: start;
   }
 
@@ -310,7 +476,7 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
     align-items: center;
     justify-content: center;
     font-size: 9px;
-    color: #475569;
+    color: #cbd5e1;
     transition: all 0.05s ease;
   }
 
@@ -325,7 +491,7 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
     border-color: #fca5a5 !important;
     color: #0f172a !important;
     font-weight: bold;
-    transform: scale(1.1);
+    transform: scale(1.08);
     box-shadow: 0 0 10px #f05230;
     z-index: 10;
   }
@@ -341,16 +507,26 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
 
   @keyframes matchPulse {
     0% {
-      transform: scale(1.1);
+      transform: scale(1.08);
       box-shadow: 0 0 8px #a4d037;
     }
     100% {
-      transform: scale(1.22);
-      box-shadow: 0 0 25px #a4d037;
+      transform: scale(1.18);
+      box-shadow: 0 0 20px #a4d037;
     }
   }
 
-  /* B-Tree Visualization */
+  /* BTree Simulator Specific Styles */
+  .btree-wrapper-box {
+    background: #090d16;
+    border: 2px solid #334155;
+    border-radius: 8px;
+    height: 300px;
+    padding: 12px;
+    box-sizing: border-box;
+    position: relative;
+  }
+
   .btree-wrapper {
     display: flex;
     flex-direction: column;
@@ -371,8 +547,8 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
     background: #1e293b;
     border: 2px solid #334155;
     border-radius: 6px;
-    padding: 8px 12px;
-    font-size: 10px;
+    padding: 6px 10px;
+    font-size: 9px;
     font-weight: bold;
     color: #cbd5e1;
     text-align: center;
@@ -435,77 +611,27 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
   }
 
   .tree-link.discarded {
-    stroke: rgba(51, 65, 85, 0.2);
+    stroke: rgba(51, 65, 85, 0.15);
   }
 
-  /* Right Column Status */
-  .db-col-status {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .db-status-card {
-    background: #1e293b;
-    border: 1px solid #334155;
-    border-radius: 8px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .db-status-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-  }
-
-  .db-card-title {
-    font-size: 12px;
-    font-weight: 700;
-    color: #cbd5e1 !important;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .planner-box {
-    background: #090d16;
-    border: 1px solid #334155;
-    border-radius: 6px;
-    padding: 10px;
-    min-height: 80px;
-    font-family: monospace;
-    font-size: 11px;
-    color: #a4d037 !important;
-    white-space: pre-wrap;
-    line-height: 1.4;
-  }
-
-  .metric-value {
-    font-size: 22px;
-    font-weight: 800;
-    color: #fecd35;
-  }
-
-  .metric-total, .metric-label {
-    font-size: 11px;
-    color: #94a3b8 !important;
-  }
-
-  /* Storage Media Paths */
+  /* Cache Simulator Specific Styles */
   .media-path-container {
+    background: #090d16;
+    border: 2px solid #334155;
+    border-radius: 8px;
+    height: 200px;
+    padding: 12px;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 10px 0;
   }
 
   .media-node {
     background: #0f172a;
     border: 2px solid #334155;
     border-radius: 8px;
-    padding: 8px 12px;
+    padding: 12px 18px;
     text-align: center;
     font-size: 11px;
     font-weight: bold;
@@ -513,7 +639,7 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
     transition: all 0.3s ease;
   }
 
@@ -548,275 +674,232 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
   }
 
   .media-icon {
-    font-size: 18px;
+    font-size: 24px;
   }
 
   .node-time {
     font-size: 9px;
-    color: #64748b;
+    color: #cbd5e1;
   }
 
   .media-connector {
-    font-size: 18px;
+    font-size: 22px;
     color: #334155;
     transition: color 0.3s ease;
   }
 
   .media-connector.active {
     color: #fecd35;
+    animation: connectorFlash 0.5s infinite alternate;
   }
 
-  /* Responsive Design */
-  @media (max-width: 900px) {
-    .db-sim-container {
+  @keyframes connectorFlash {
+    0% { opacity: 0.4; }
+    100% { opacity: 1; }
+  }
+
+  /* Planner Simulator Specific Styles */
+  .planner-box {
+    background: #090d16;
+    border: 2px solid #334155;
+    border-radius: 8px;
+    padding: 14px;
+    height: 180px;
+    box-sizing: border-box;
+    font-family: monospace;
+    font-size: 11px;
+    color: #a4d037 !important;
+    white-space: pre-wrap;
+    line-height: 1.4;
+    overflow-y: auto;
+  }
+
+  /* Responsive Design Adjustments */
+  @media (max-width: 800px) {
+    .widget-main {
       grid-template-columns: 1fr;
     }
-    .db-main {
-      grid-template-columns: 1fr;
+    .media-path-container {
+      height: 150px;
     }
   }
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Sliders & Checkboxes
-    const toggleIndex = document.getElementById('toggle-index');
-    const slideRows = document.getElementById('slider-rows');
-    const toggleCache = document.getElementById('toggle-cache');
-    const querySelect = document.getElementById('query-select');
-    
-    const valRows = document.getElementById('val-rows');
-    const metricTotalRows = document.getElementById('metric-total-rows');
-    
-    // Buttons
-    const btnRun = document.getElementById('btn-run');
-    const btnReset = document.getElementById('btn-reset');
-    
-    // Outputs
-    const visWindow = document.getElementById('visualization-window');
-    const plannerOutput = document.getElementById('planner-output');
-    const metricChecked = document.getElementById('metric-checked');
-    const metricTime = document.getElementById('metric-time');
-    const metricMedium = document.getElementById('metric-medium');
-    
-    // Media nodes
-    const nodeRam = document.getElementById('node-ram');
-    const nodeDisk = document.getElementById('node-disk');
-    const connectorDisk = document.getElementById('connector-disk');
-
-    let state = {
-      indexEnabled: true,
-      rows: 1000000,
-      cacheHit: true,
-      queryValue: "alice@example.com",
-      isRunning: false
-    };
-
-    let animationInterval = null;
-
-    function formatNumber(num) {
+    // Helper to format large numbers
+    function formatNum(num) {
       return num.toLocaleString();
     }
 
-    function updateConfig() {
-      state.indexEnabled = toggleIndex.checked;
-      state.rows = parseInt(slideRows.value);
-      state.cacheHit = toggleCache.checked;
-      state.queryValue = querySelect.value;
-      
-      valRows.textContent = formatNumber(state.rows);
-      metricTotalRows.textContent = formatNumber(state.rows);
-      
-      // Update label texts for toggle switches
-      toggleIndex.nextElementSibling.textContent = state.indexEnabled ? "Enabled" : "Disabled";
-      toggleCache.nextElementSibling.textContent = state.cacheHit ? "Cache Hit (RAM)" : "Cache Miss (Disk)";
-      
-      updatePlannerExplanation();
+    // ==========================================
+    // 1. TABLE SCAN WIDGET
+    // ==========================================
+    const scanSlider = document.getElementById('scan-slider-rows');
+    const scanValRows = document.getElementById('scan-val-rows');
+    const scanQuerySelect = document.getElementById('scan-query-select');
+    const scanBtnRun = document.getElementById('scan-btn-run');
+    const scanBtnReset = document.getElementById('scan-btn-reset');
+    const scanGrid = document.getElementById('scan-grid');
+    const scanMetricChecked = document.getElementById('scan-metric-checked');
+    const scanMetricTime = document.getElementById('scan-metric-time');
+
+    let scanInterval = null;
+    let scanState = { rows: 1000000, query: "alice@example.com", isRunning: false };
+
+    function updateScanSlider() {
+      scanState.rows = parseInt(scanSlider.value);
+      scanValRows.textContent = formatNum(scanState.rows);
     }
 
-    function updatePlannerExplanation() {
-      if (state.isRunning) return;
-      
-      if (state.indexEnabled) {
-        plannerOutput.textContent = `EXPLAIN ANALYZE
-SELECT * FROM users WHERE email = '${state.queryValue}';
-
-Planning Time: 0.12 ms
-Execution Plan:
--> Index Scan using users_email_idx on users (cost=0.43..8.45 rows=1 width=36)
-   Index Cond: (email = '${state.queryValue}')`;
-      } else {
-        plannerOutput.textContent = `EXPLAIN ANALYZE
-SELECT * FROM users WHERE email = '${state.queryValue}';
-
-Planning Time: 0.08 ms
-Execution Plan:
--> Seq Scan on users (cost=0.00..18450.00 rows=1 width=36)
-   Filter: (email = '${state.queryValue}')`;
-      }
-    }
-
-    function resetSimulation() {
-      clearInterval(animationInterval);
-      state.isRunning = false;
-      btnRun.disabled = false;
-      querySelect.disabled = false;
-      toggleIndex.disabled = false;
-      slideRows.disabled = false;
-      toggleCache.disabled = false;
-      
-      visWindow.innerHTML = '<div class="placeholder-text" id="vis-placeholder">Select settings and run a query to visualize execution.</div>';
-      metricChecked.textContent = "0";
-      metricTime.textContent = "0.00 ms";
-      metricMedium.textContent = "Standing by";
-      
-      nodeRam.className = "media-node";
-      nodeDisk.className = "media-node";
-      connectorDisk.className = "media-connector";
-      
-      updatePlannerExplanation();
-    }
-
-    function runSimulation() {
-      resetSimulation();
-      state.isRunning = true;
-      btnRun.disabled = true;
-      querySelect.disabled = true;
-      toggleIndex.disabled = true;
-      slideRows.disabled = true;
-      toggleCache.disabled = true;
-      
-      if (state.indexEnabled) {
-        runBTreeSimulation();
-      } else {
-        runSeqScanSimulation();
-      }
-    }
-
-    // Table Scan / Sequential Scan
-    function runSeqScanSimulation() {
-      visWindow.innerHTML = '';
-      
-      const grid = document.createElement('div');
-      grid.className = 'scan-grid';
-      visWindow.appendChild(grid);
-      
-      const blockCount = 48; // Total visual page blocks
-      const blocks = [];
-      
-      // Determine where the matching record is based on query dropdown value
-      let matchBlockIndex = 47; // Default end of table (Charlie)
-      if (state.queryValue === "alice@example.com") {
-        matchBlockIndex = Math.floor(blockCount * 0.15); // near start
-      } else if (state.queryValue === "bob@example.com") {
-        matchBlockIndex = Math.floor(blockCount * 0.50); // middle
-      }
-      
-      for (let i = 0; i < blockCount; i++) {
+    function initScanGrid() {
+      scanGrid.innerHTML = '';
+      const totalBlocks = 36;
+      for (let i = 0; i < totalBlocks; i++) {
         const block = document.createElement('div');
         block.className = 'grid-block';
-        block.innerHTML = `Page ${i+1}`;
-        grid.appendChild(block);
-        blocks.push(block);
+        block.textContent = `Page ${i+1}`;
+        scanGrid.appendChild(block);
       }
-      
-      let currentIndex = 0;
-      const speed = 70; // ms per block
-      
-      // Cache state highlight
-      if (state.cacheHit) {
-        nodeRam.className = "media-node active-hit";
-      } else {
-        nodeRam.className = "media-node active-miss";
-        nodeDisk.className = "media-node active-miss";
-        connectorDisk.className = "media-connector active";
-      }
-      
-      plannerOutput.textContent = `EXPLAIN ANALYZE
--> Running Sequential Scan...
-Scanning every row in users table...`;
+    }
 
-      animationInterval = setInterval(() => {
+    function resetScan() {
+      clearInterval(scanInterval);
+      scanState.isRunning = false;
+      scanBtnRun.disabled = false;
+      scanSlider.disabled = false;
+      scanQuerySelect.disabled = false;
+      
+      initScanGrid();
+      scanMetricChecked.textContent = "0";
+      scanMetricTime.textContent = "0.00 ms";
+    }
+
+    function runScan() {
+      resetScan();
+      scanState.isRunning = true;
+      scanBtnRun.disabled = true;
+      scanSlider.disabled = true;
+      scanQuerySelect.disabled = true;
+
+      const blocks = scanGrid.children;
+      const totalBlocks = blocks.length;
+      let currentIndex = 0;
+
+      // Determine match index
+      let matchIndex = totalBlocks - 1; // Default: Charlie
+      if (scanQuerySelect.value === "alice@example.com") {
+        matchIndex = Math.floor(totalBlocks * 0.15);
+      } else if (scanQuerySelect.value === "bob@example.com") {
+        matchIndex = Math.floor(totalBlocks * 0.50);
+      }
+
+      scanInterval = setInterval(() => {
         if (currentIndex > 0) {
           blocks[currentIndex - 1].className = 'grid-block scanned';
         }
-        
         blocks[currentIndex].className = 'grid-block active';
-        
-        // Calculate dynamic checking count
-        const checkedRows = Math.floor((currentIndex + 1) * (state.rows / blockCount));
-        metricChecked.textContent = formatNumber(checkedRows);
-        
-        // Time estimation (sequential scan is disk heavy, cache hit makes it faster but still O(N))
-        const baseSpeed = state.cacheHit ? 0.005 : 0.05; // ms per 1000 rows
-        const estimatedTime = (checkedRows * baseSpeed);
-        metricTime.textContent = `${estimatedTime.toFixed(2)} ms`;
-        metricMedium.textContent = state.cacheHit ? "Sequential Scan (Memory)" : "Sequential Scan (Disk)";
-        
-        if (currentIndex === matchBlockIndex) {
-          clearInterval(animationInterval);
-          blocks[currentIndex].className = 'grid-block matched';
-          
-          // Complete output
-          plannerOutput.textContent = `EXPLAIN ANALYZE
-SELECT * FROM users WHERE email = '${state.queryValue}';
 
-Planning Time: 0.08 ms
-Execution Plan:
--> Seq Scan on users (cost=0.00..18450.00 rows=1 width=36)
-   Filter: (email = '${state.queryValue}')
-   Rows Removed by Filter: ${formatNumber(checkedRows - 1)}
-   
-Execution Time: ${estimatedTime.toFixed(2)} ms`;
-          
-          btnRun.disabled = false;
-          state.isRunning = false;
+        // Update metrics
+        const checkedRows = Math.floor((currentIndex + 1) * (scanState.rows / totalBlocks));
+        scanMetricChecked.textContent = formatNum(checkedRows);
+        
+        // table scan speed estimate: 0.04 ms per 1000 rows
+        const timeEstimate = checkedRows * 0.00004;
+        scanMetricTime.textContent = `${timeEstimate.toFixed(2)} ms`;
+
+        if (currentIndex === matchIndex) {
+          clearInterval(scanInterval);
+          blocks[currentIndex].className = 'grid-block matched';
+          scanBtnRun.disabled = false;
+          scanState.isRunning = false;
         } else {
           currentIndex++;
         }
-      }, speed);
+      }, 80);
     }
 
-    // B-Tree Index Scan
-    function runBTreeSimulation() {
-      visWindow.innerHTML = '';
-      
-      const btree = document.createElement('div');
-      btree.className = 'btree-wrapper';
-      visWindow.appendChild(btree);
-      
-      // Create B-Tree structure in visualization window
-      btree.innerHTML = `
-        <svg class="btree-svg" id="btree-svg">
-          <line id="link-root-left" class="tree-link" x1="50%" y1="20%" x2="25%" y2="50%"></line>
-          <line id="link-root-right" class="tree-link" x1="50%" y1="20%" x2="75%" y2="50%"></line>
-          <line id="link-left-leaf1" class="tree-link" x1="25%" y1="50%" x2="12.5%" y2="80%"></line>
-          <line id="link-left-leaf2" class="tree-link" x1="25%" y1="50%" x2="37.5%" y2="80%"></line>
-          <line id="link-right-leaf3" class="tree-link" x1="75%" y1="50%" x2="62.5%" y2="80%"></line>
-          <line id="link-right-leaf4" class="tree-link" x1="75%" y1="50%" x2="87.5%" y2="80%"></line>
+    scanSlider.addEventListener('input', updateScanSlider);
+    scanBtnRun.addEventListener('click', runScan);
+    scanBtnReset.addEventListener('click', resetScan);
+    
+    // Initialize Widget 1
+    updateScanSlider();
+    initScanGrid();
+
+
+    // ==========================================
+    // 2. B-TREE WIDGET
+    // ==========================================
+    const treeSlider = document.getElementById('tree-slider-rows');
+    const treeValRows = document.getElementById('tree-val-rows');
+    const treeQuerySelect = document.getElementById('tree-query-select');
+    const treeBtnRun = document.getElementById('tree-btn-run');
+    const treeBtnReset = document.getElementById('tree-btn-reset');
+    const btreeContainer = document.getElementById('btree-container');
+    const treeMetricChecked = document.getElementById('tree-metric-checked');
+    const treeMetricDiscarded = document.getElementById('tree-metric-discarded');
+
+    let treeInterval = null;
+    let treeState = { rows: 1000000, query: "alice@example.com", isRunning: false };
+
+    function updateTreeSlider() {
+      treeState.rows = parseInt(treeSlider.value);
+      treeValRows.textContent = formatNum(treeState.rows);
+    }
+
+    function initBTree() {
+      btreeContainer.innerHTML = `
+        <svg class="btree-svg" id="tree-svg">
+          <line id="link-root-left" class="tree-link" x1="50%" y1="18%" x2="25%" y2="50%"></line>
+          <line id="link-root-right" class="tree-link" x1="50%" y1="18%" x2="75%" y2="50%"></line>
+          <line id="link-left-leaf1" class="tree-link" x1="25%" y1="50%" x2="12.5%" y2="82%"></line>
+          <line id="link-left-leaf2" class="tree-link" x1="25%" y1="50%" x2="37.5%" y2="82%"></line>
+          <line id="link-right-leaf3" class="tree-link" x1="75%" y1="50%" x2="62.5%" y2="82%"></line>
+          <line id="link-right-leaf4" class="tree-link" x1="75%" y1="50%" x2="87.5%" y2="82%"></line>
         </svg>
         <div class="btree-level" style="margin-top: 10px;">
-          <div id="node-root" class="tree-node" style="position: absolute; left: calc(50% - 35px); top: 10px;">Root: [M]</div>
+          <div id="tree-node-root" class="tree-node" style="position: absolute; left: calc(50% - 30px); top: 5px;">Root: [M]</div>
         </div>
-        <div class="btree-level" style="position: absolute; width: 100%; top: 150px; left: 0;">
-          <div id="node-left" class="tree-node" style="position: absolute; left: calc(25% - 35px);">Node: [F]</div>
-          <div id="node-right" class="tree-node" style="position: absolute; left: calc(75% - 35px);">Node: [T]</div>
+        <div class="btree-level" style="position: absolute; width: 100%; top: 120px; left: 0;">
+          <div id="tree-node-left" class="tree-node" style="position: absolute; left: calc(25% - 30px);">Node: [F]</div>
+          <div id="tree-node-right" class="tree-node" style="position: absolute; left: calc(75% - 30px);">Node: [T]</div>
         </div>
-        <div class="btree-level" style="position: absolute; width: 100%; top: 290px; left: 0;">
-          <div id="node-leaf1" class="tree-node" style="position: absolute; left: calc(12.5% - 35px);">Leaf: [A-E]</div>
-          <div id="node-leaf2" class="tree-node" style="position: absolute; left: calc(37.5% - 35px);">Leaf: [F-L]</div>
-          <div id="node-leaf3" class="tree-node" style="position: absolute; left: calc(62.5% - 35px);">Leaf: [M-S]</div>
-          <div id="node-leaf4" class="tree-node" style="position: absolute; left: calc(87.5% - 35px);">Leaf: [T-Z]</div>
+        <div class="btree-level" style="position: absolute; width: 100%; top: 240px; left: 0;">
+          <div id="tree-node-leaf1" class="tree-node" style="position: absolute; left: calc(12.5% - 30px);">Leaf: [A-E]</div>
+          <div id="tree-node-leaf2" class="tree-node" style="position: absolute; left: calc(37.5% - 30px);">Leaf: [F-L]</div>
+          <div id="tree-node-leaf3" class="tree-node" style="position: absolute; left: calc(62.5% - 30px);">Leaf: [M-S]</div>
+          <div id="tree-node-leaf4" class="tree-node" style="position: absolute; left: calc(87.5% - 30px);">Leaf: [T-Z]</div>
         </div>
       `;
+    }
+
+    function resetTree() {
+      clearInterval(treeInterval);
+      treeState.isRunning = false;
+      treeBtnRun.disabled = false;
+      treeSlider.disabled = false;
+      treeQuerySelect.disabled = false;
       
-      const nodeRoot = document.getElementById('node-root');
-      const nodeLeft = document.getElementById('node-left');
-      const nodeRight = document.getElementById('node-right');
-      const nodeLeaf1 = document.getElementById('node-leaf1');
-      const nodeLeaf2 = document.getElementById('node-leaf2');
-      const nodeLeaf3 = document.getElementById('node-leaf3');
-      const nodeLeaf4 = document.getElementById('node-leaf4');
+      initBTree();
+      treeMetricChecked.textContent = "0 / 3";
+      treeMetricDiscarded.textContent = "0";
+    }
+
+    function runTree() {
+      resetTree();
+      treeState.isRunning = true;
+      treeBtnRun.disabled = true;
+      treeSlider.disabled = true;
+      treeQuerySelect.disabled = true;
+
+      const nodeRoot = document.getElementById('tree-node-root');
+      const nodeLeft = document.getElementById('tree-node-left');
+      const nodeRight = document.getElementById('tree-node-right');
+      const nodeLeaf1 = document.getElementById('tree-node-leaf1');
+      const nodeLeaf2 = document.getElementById('tree-node-leaf2');
+      const nodeLeaf3 = document.getElementById('tree-node-leaf3');
+      const nodeLeaf4 = document.getElementById('tree-node-leaf4');
       
       const linkRootLeft = document.getElementById('link-root-left');
       const linkRootRight = document.getElementById('link-root-right');
@@ -825,95 +908,52 @@ Execution Time: ${estimatedTime.toFixed(2)} ms`;
       const linkRightLeaf3 = document.getElementById('link-right-leaf3');
       const linkRightLeaf4 = document.getElementById('link-right-leaf4');
 
-      // Cache state highlight
-      if (state.cacheHit) {
-        nodeRam.className = "media-node active-hit";
-      } else {
-        nodeRam.className = "media-node active-miss";
-        nodeDisk.className = "media-node active-miss";
-        connectorDisk.className = "media-connector active";
-      }
-
-      plannerOutput.textContent = `EXPLAIN ANALYZE
--> Index lookup starting at B-tree root...`;
-      
       let step = 0;
-      const stepDuration = 800; // ms per tree jump
       
-      animationInterval = setInterval(() => {
+      treeInterval = setInterval(() => {
         if (step === 0) {
-          // Highlight Root
           nodeRoot.className = "tree-node active";
-          metricChecked.textContent = "1";
-          metricTime.textContent = (state.cacheHit ? "0.01 ms" : "2.50 ms");
-          plannerOutput.textContent = `EXPLAIN ANALYZE
--> Evaluating Root Node...
-Comparing search key '${state.queryValue}' with root key 'M'`;
+          treeMetricChecked.textContent = "1 / 3";
+          treeMetricDiscarded.textContent = "0";
           step++;
-        } 
+        }
         else if (step === 1) {
-          // Decide left or right based on query
           nodeRoot.className = "tree-node";
-          
-          if (state.queryValue === "alice@example.com" || state.queryValue === "bob@example.com") {
-            // Left
+          if (treeQuerySelect.value === "alice@example.com" || treeQuerySelect.value === "bob@example.com") {
             nodeLeft.className = "tree-node active";
             nodeRight.className = "tree-node discarded";
             linkRootLeft.setAttribute('class', 'tree-link active');
             linkRootRight.setAttribute('class', 'tree-link discarded');
-            
-            // Discarded half the search space
-            const discarded = Math.floor(state.rows / 2);
-            plannerOutput.textContent = `EXPLAIN ANALYZE
--> Navigating Left Branch.
-Discarded ${formatNumber(discarded)} rows from search space!`;
           } else {
-            // Right
             nodeRight.className = "tree-node active";
             nodeLeft.className = "tree-node discarded";
             linkRootRight.setAttribute('class', 'tree-link active');
             linkRootLeft.setAttribute('class', 'tree-link discarded');
-            
-            const discarded = Math.floor(state.rows / 2);
-            plannerOutput.textContent = `EXPLAIN ANALYZE
--> Navigating Right Branch.
-Discarded ${formatNumber(discarded)} rows from search space!`;
           }
-          metricChecked.textContent = "2";
-          metricTime.textContent = (state.cacheHit ? "0.02 ms" : "5.00 ms");
+          treeMetricChecked.textContent = "2 / 3";
+          treeMetricDiscarded.textContent = formatNum(Math.floor(treeState.rows / 2));
           step++;
         }
         else if (step === 2) {
-          // Leaf node selection
           nodeLeft.className = "tree-node";
           nodeRight.className = "tree-node";
           
-          if (state.queryValue === "alice@example.com") {
+          if (treeQuerySelect.value === "alice@example.com") {
             nodeLeaf1.className = "tree-node active";
             nodeLeaf2.className = "tree-node discarded";
             nodeLeaf3.className = "tree-node discarded";
             nodeLeaf4.className = "tree-node discarded";
             linkLeftLeaf1.setAttribute('class', 'tree-link active');
             linkLeftLeaf2.setAttribute('class', 'tree-link discarded');
-            
-            const discarded = Math.floor((state.rows / 4) * 3);
-            plannerOutput.textContent = `EXPLAIN ANALYZE
--> Reading Leaf Node [A-E].
-Discarded ${formatNumber(discarded)} total rows!`;
           } 
-          else if (state.queryValue === "bob@example.com") {
+          else if (treeQuerySelect.value === "bob@example.com") {
             nodeLeaf2.className = "tree-node active";
             nodeLeaf1.className = "tree-node discarded";
             nodeLeaf3.className = "tree-node discarded";
             nodeLeaf4.className = "tree-node discarded";
             linkLeftLeaf2.setAttribute('class', 'tree-link active');
             linkLeftLeaf1.setAttribute('class', 'tree-link discarded');
-            
-            const discarded = Math.floor((state.rows / 4) * 3);
-            plannerOutput.textContent = `EXPLAIN ANALYZE
--> Reading Leaf Node [F-L].
-Discarded ${formatNumber(discarded)} total rows!`;
-          }
+          } 
           else {
             nodeLeaf4.className = "tree-node active";
             nodeLeaf1.className = "tree-node discarded";
@@ -921,102 +961,155 @@ Discarded ${formatNumber(discarded)} total rows!`;
             nodeLeaf3.className = "tree-node discarded";
             linkRightLeaf4.setAttribute('class', 'tree-link active');
             linkRightLeaf3.setAttribute('class', 'tree-link discarded');
-            
-            const discarded = Math.floor((state.rows / 4) * 3);
-            plannerOutput.textContent = `EXPLAIN ANALYZE
--> Reading Leaf Node [T-Z].
-Discarded ${formatNumber(discarded)} total rows!`;
           }
-          metricChecked.textContent = "3";
-          metricTime.textContent = (state.cacheHit ? "0.03 ms" : "7.50 ms");
+          treeMetricChecked.textContent = "3 / 3";
+          treeMetricDiscarded.textContent = formatNum(treeState.rows - 1);
           step++;
         }
         else if (step === 3) {
-          // Final record location
-          clearInterval(animationInterval);
-          
+          clearInterval(treeInterval);
           nodeLeaf1.className = "tree-node";
           nodeLeaf2.className = "tree-node";
           nodeLeaf4.className = "tree-node";
-          
-          const finalTime = state.cacheHit ? 0.05 : 10.05;
-          metricTime.textContent = `${finalTime.toFixed(2)} ms`;
-          metricMedium.textContent = state.cacheHit ? "Index Scan (Cache Hit)" : "Index Scan (Disk Fetch)";
-          
-          plannerOutput.textContent = `EXPLAIN ANALYZE
-SELECT * FROM users WHERE email = '${state.queryValue}';
-
-Planning Time: 0.12 ms
-Execution Plan:
--> Index Scan using users_email_idx on users (cost=0.43..8.45 rows=1 width=36)
-   Index Cond: (email = '${state.queryValue}')
-   
-Execution Time: ${finalTime.toFixed(2)} ms`;
-          
-          btnRun.disabled = false;
-          state.isRunning = false;
+          treeBtnRun.disabled = false;
+          treeState.isRunning = false;
         }
-      }, stepDuration);
+      }, 700);
     }
 
-    // Event listeners
-    toggleIndex.addEventListener('change', updateConfig);
-    slideRows.addEventListener('input', updateConfig);
-    toggleCache.addEventListener('change', updateConfig);
-    querySelect.addEventListener('change', updateConfig);
-    
-    btnRun.addEventListener('click', runSimulation);
-    btnReset.addEventListener('click', resetSimulation);
+    treeSlider.addEventListener('input', updateTreeSlider);
+    treeBtnRun.addEventListener('click', runTree);
+    treeBtnReset.addEventListener('click', resetTree);
 
-    // Initial setup
-    updateConfig();
+    // Initialize Widget 2
+    updateTreeSlider();
+    initBTree();
+
+
+    // ==========================================
+    // 3. CACHE LATENCY WIDGET
+    // ==========================================
+    const cacheToggleHit = document.getElementById('cache-toggle-hit');
+    const cacheHitStatus = document.getElementById('cache-hit-status');
+    const cacheBtnRun = document.getElementById('cache-btn-run');
+    const cacheBtnReset = document.getElementById('cache-btn-reset');
+    const cacheNodeRam = document.getElementById('cache-node-ram');
+    const cacheNodeDisk = document.getElementById('cache-node-disk');
+    const cacheConnectorDisk = document.getElementById('cache-connector-disk');
+    const cacheMetricTime = document.getElementById('cache-metric-time');
+    const cacheMetricPath = document.getElementById('cache-metric-path');
+
+    let cacheTimeout1 = null;
+    let cacheTimeout2 = null;
+
+    function resetCache() {
+      clearTimeout(cacheTimeout1);
+      clearTimeout(cacheTimeout2);
+      cacheBtnRun.disabled = false;
+      cacheToggleHit.disabled = false;
+      
+      cacheNodeRam.className = "media-node";
+      cacheNodeDisk.className = "media-node";
+      cacheConnectorDisk.className = "media-connector";
+      cacheMetricTime.textContent = "0.00 ms";
+      cacheMetricPath.textContent = "Standing by";
+    }
+
+    function runCache() {
+      resetCache();
+      cacheBtnRun.disabled = true;
+      cacheToggleHit.disabled = true;
+
+      const isHit = cacheToggleHit.checked;
+      
+      // Step 1: Hit RAM
+      cacheNodeRam.className = "media-node active-hit";
+      cacheMetricPath.textContent = "Checking RAM Cache...";
+      
+      if (isHit) {
+        cacheTimeout1 = setTimeout(() => {
+          cacheMetricTime.textContent = "0.05 ms";
+          cacheMetricPath.textContent = "RAM Cache Hit!";
+          cacheBtnRun.disabled = false;
+        }, 600);
+      } else {
+        // Step 2: Connector and Disk Miss
+        cacheTimeout1 = setTimeout(() => {
+          cacheNodeRam.className = "media-node active-miss";
+          cacheNodeDisk.className = "media-node active-miss";
+          cacheConnectorDisk.className = "media-connector active";
+          cacheMetricPath.textContent = "Cache Miss. Fetching from Disk...";
+          
+          cacheTimeout2 = setTimeout(() => {
+            cacheMetricTime.textContent = "10.05 ms";
+            cacheMetricPath.textContent = "Loaded from Disk to RAM";
+            cacheBtnRun.disabled = false;
+          }, 800);
+        }, 600);
+      }
+    }
+
+    cacheToggleHit.addEventListener('change', () => {
+      cacheHitStatus.textContent = cacheToggleHit.checked ? "Cache Hit (RAM)" : "Cache Miss (Disk)";
+    });
+    cacheBtnRun.addEventListener('click', runCache);
+    cacheBtnReset.addEventListener('click', resetCache);
+
+
+    // ==========================================
+    // 4. QUERY PLANNER WIDGET
+    // ==========================================
+    const plannerToggleIndex = document.getElementById('planner-toggle-index');
+    const plannerIdxStatus = document.getElementById('planner-idx-status');
+    const plannerQuerySelect = document.getElementById('planner-query-select');
+    const plannerConsole = document.getElementById('planner-console');
+    const plannerMetricStrategy = document.getElementById('planner-metric-strategy');
+    const plannerMetricCost = document.getElementById('planner-metric-cost');
+
+    function updatePlanner() {
+      const isIdx = plannerToggleIndex.checked;
+      const queryVal = plannerQuerySelect.value;
+      
+      plannerIdxStatus.textContent = isIdx ? "Enabled" : "Disabled";
+      
+      if (isIdx) {
+        plannerMetricStrategy.textContent = "Index Scan";
+        plannerMetricStrategy.style.color = "#a4d037";
+        plannerMetricCost.textContent = "0.43..8.45";
+        
+        plannerConsole.textContent = `EXPLAIN (ANALYZE, BUFFERS)
+SELECT * FROM users WHERE email = '${queryVal}';
+
+Execution Plan:
+-> Index Scan using users_email_idx on users  (cost=0.43..8.45 rows=1 width=36) (actual time=0.045..0.046 rows=1 loops=1)
+   Index Cond: (email = '${queryVal}')
+   Buffers: shared hit=3
+   
+Planning Time: 0.12 ms
+Execution Time: 0.05 ms`;
+      } else {
+        plannerMetricStrategy.textContent = "Seq Scan";
+        plannerMetricStrategy.style.color = "#f05230";
+        plannerMetricCost.textContent = "0.00..18450.00";
+        
+        plannerConsole.textContent = `EXPLAIN (ANALYZE, BUFFERS)
+SELECT * FROM users WHERE email = '${queryVal}';
+
+Execution Plan:
+-> Seq Scan on users  (cost=0.00..18450.00 rows=1 width=36) (actual time=4.120..22.450 rows=1 loops=1)
+   Filter: (email = '${queryVal}')
+   Rows Removed by Filter: 999,999
+   Buffers: shared hit=18400
+   
+Planning Time: 0.08 ms
+Execution Time: 22.50 ms`;
+      }
+    }
+
+    plannerToggleIndex.addEventListener('change', updatePlanner);
+    plannerQuerySelect.addEventListener('change', updatePlanner);
+    
+    // Initialize Widget 4
+    updatePlanner();
   });
 </script>
-
----
-
-## The Four Core Elements of Database Speed
-
-Let's break down the four essential pillars that enable database systems to maintain speed even with billions of rows.
-
-### 1. Table Scans vs. Index Scans
-When a database does not have an index on the column you are filtering by, it has no choice but to perform a **Table Scan** (often called a Sequential Scan). 
-
-During a Table Scan, the database engine starts at the very beginning of the data file on disk and reads every single page sequentially. 
-- **Time Complexity:** $O(N)$
-- If you have 10,000,000 rows, the database must check 10,000,000 values. If the matching row is at the very end of the file, this operation can take seconds and trigger heavy disk read activity.
-
-With an index, the database switches to an **Index Scan**. Instead of searching through the data file, it queries a secondary lookup table that contains only the indexed keys and pointers to the physical rows.
-
-### 2. The Power of B-Tree Indexes
-Almost all relational database systems (like PostgreSQL, MySQL, and SQLite) use a data structure called a **B-Tree** (Balanced Tree) to organize their indexes.
-
-A B-Tree is a self-balancing search tree. It groups keys into nodes:
-- **Root Node:** The starting point of the search.
-- **Internal Nodes:** Intermediate layers that route the search path.
-- **Leaf Nodes:** The bottom layer containing the actual indexed keys and pointers to the physical data rows.
-
-Because nodes are sorted, B-Trees enable **binary-like search routing**:
-- **Time Complexity:** $O(\log N)$
-- Instead of checking 10,000,000 rows, a B-Tree search requires only **3 to 4 node comparisons**. With each step down the tree, the database instantly discards millions of non-matching values, narrowing down the search space in microseconds.
-
-### 3. RAM Cache and the Buffer Pool
-Reading data from a physical disk drive is extremely slow. An average Solid State Drive (SSD) takes around 0.1ms to 1.0ms to fetch a page, while a mechanical hard drive (HDD) can take up to 10ms. RAM, however, reads data in less than 0.0001ms.
-
-Databases exploit this speed difference using a memory region called the **Buffer Pool**:
-- **Cache Hit:** When you query data that has been read recently, the database finds it in the Buffer Pool (RAM) and returns it instantly.
-- **Cache Miss:** When the page is not in memory, the database must make a slow round-trip to the physical disk, load the page into the Buffer Pool, and then return it.
-
-Optimizing cache hit rates is one of the most critical aspects of database performance tuning.
-
-### 4. The Query Planner
-When you send a SQL statement to the database, it isn't executed directly. Instead, it is passed to the **Query Planner** (or Optimizer).
-
-The Query Planner:
-1. **Parses the SQL:** Converts the query into a logical execution tree.
-2. **Checks Available Indexes:** Looks for indexes on the columns filtered in your `WHERE` clauses.
-3. **Analyzes Table Statistics:** Uses internal histograms to estimate how many rows match your query.
-4. **Calculates Costs:** Compares alternative search strategies (e.g., "Is it cheaper to do a Sequential Scan or use an Index?").
-5. **Generates the Execution Plan:** Chooses the strategy with the lowest estimated CPU and I/O cost.
-
-For small tables (e.g., under 100 rows), the Query Planner will often choose a Table Scan over an Index Scan, because reading the index files has its own overhead. But on larger tables, the Query Planner will dynamically select index routes to keep your applications running at lightning speeds.
