@@ -37,7 +37,7 @@ const headerBg = SITE_CONFIG.cover ? getAssetUrl(SITE_CONFIG.cover) : null;
             <div class="site-header-content">
                 <h1 class="site-title">
                     <!-- Inline Animated Mascot SVG -->
-                    <svg id="homepage-mascot" viewBox="0 0 200 210" style="width: 140px; height: 147px; overflow: visible; cursor: pointer; display: inline-block;">
+                    <svg id="homepage-mascot" viewBox="0 0 200 170" style="width: 140px; height: 119px; overflow: visible; cursor: pointer; display: inline-block;">
                         <defs>
                             <!-- Filter to create the wobbly, hand-drawn chalk/pencil effect -->
                             <filter id="hand-drawn-filter" x="-10%" y="-10%" width="120%" height="120%">
@@ -58,21 +58,8 @@ const headerBg = SITE_CONFIG.cover ? getAssetUrl(SITE_CONFIG.cover) : null;
                             <path d="M 106 50 C 109 42, 113 35, 118 30" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" />
                             <path d="M 118 30 C 120 28, 122 28, 124 30 C 126 32, 126 34, 124 36 C 122 38, 120 38, 118 36 C 116 34, 116 32, 118 30 Z" fill="none" stroke="white" stroke-width="2.5" />
 
-                            <!-- Stand / Base / Neck / Legs -->
-                            <!-- Neck -->
-                            <path d="M 92 124 C 91 131, 88 138, 86 141" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
-                            <path d="M 112 124 C 111 131, 115 138, 118 141" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
-                            <!-- Base Oval -->
-                            <path d="M 78 141 C 95 137, 115 137, 126 141" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
-                            <path d="M 74 144 C 95 148, 115 148, 128 144" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
-                            <path d="M 78 141 C 75 142, 73 143, 74 144" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
-                            <path d="M 126 141 C 128 142, 129 143, 128 144" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
-                            <!-- Legs/Feet -->
-                            <path d="M 93 146 C 93 153, 93 158, 93 158 C 93 160, 90 160, 87 160" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
-                            <path d="M 111 146 C 111 153, 111 157, 111 157 C 111 159, 114 159, 117 159" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
-
-                            <!-- Monitor Body (Combined Silhouette for Outline) -->
-                            <path d="M 67 123 C 58 123, 50 122, 46 116 C 42 106, 40 92, 41 78 C 41 68, 48 58, 62 53 C 90 51, 120 52, 148 55 C 148 77, 147 99, 142 121 C 114 123, 86 124, 67 123 Z" fill="none" stroke="white" stroke-width="4.5" stroke-linejoin="round" />
+                            <!-- Monitor Body (Combined Silhouette for Fill) -->
+                            <path d="M 67 123 C 58 123, 50 122, 46 116 C 42 106, 40 92, 41 78 C 41 68, 48 58, 62 53 C 90 51, 120 52, 148 55 C 148 77, 147 99, 142 121 C 114 123, 86 124, 67 123 Z" fill="#1e293b" stroke="white" stroke-width="4.5" stroke-linejoin="round" />
                             
                             <!-- Crease line separating left side case from front face -->
                             <path d="M 62 53 C 63 77, 63 99, 67 123" fill="none" stroke="white" stroke-width="3" />
@@ -86,8 +73,8 @@ const headerBg = SITE_CONFIG.cover ? getAssetUrl(SITE_CONFIG.cover) : null;
                             <!-- Bezel Inner Border -->
                             <path d="M 66 59 C 91 57, 117 58, 142 61 C 142 80, 141 99, 137 116 C 114 118, 91 119, 71 118 C 67 99, 66 80, 66 59 Z" fill="none" stroke="white" stroke-width="3" />
 
-                            <!-- Screen (Outline only, no solid fill) -->
-                            <path d="M 72 65 C 93 63, 114 64, 134 67 C 134 81, 133 96, 130 110 C 111 112, 92 113, 76 112 C 73 96, 72 81, 72 65 Z" fill="none" stroke="white" stroke-width="3" />
+                            <!-- Screen (Filled with dark color) -->
+                            <path d="M 72 65 C 93 63, 114 64, 134 67 C 134 81, 133 96, 130 110 C 111 112, 92 113, 76 112 C 73 96, 72 81, 72 65 Z" fill="#090d16" stroke="white" stroke-width="3" />
 
                             <!-- Bezel Details (Dial, dots, button) -->
                             <!-- Dial -->
@@ -127,7 +114,7 @@ const headerBg = SITE_CONFIG.cover ? getAssetUrl(SITE_CONFIG.cover) : null;
                         </g>
 
                         <!-- Text "leons.dev" (cursive/hand-drawn fonts list) -->
-                        <text x="100" y="196" fill="white" font-size="22" font-family="'Patrick Hand', 'Comic Neue', 'Comic Sans MS', cursive, sans-serif" font-weight="bold" text-anchor="middle" letter-spacing="0.5">leons.dev</text>
+                        <text x="100" y="156" fill="white" font-size="22" font-family="'Patrick Hand', 'Comic Neue', 'Comic Sans MS', cursive, sans-serif" font-weight="bold" text-anchor="middle" letter-spacing="0.5">leons.dev</text>
                     </svg>
                 </h1>
                 <h2 class="site-description">{SITE_CONFIG.description}</h2>
