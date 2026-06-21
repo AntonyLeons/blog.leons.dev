@@ -1426,7 +1426,7 @@ Usage (In Ghost editor):
 
 .floating-header-logo img {
     margin: 0 10px 0 0;
-    max-height: 20px;
+    max-height: 30px;
 }
 
 html:not(.dark-mode) .floating-header-logo img {
