@@ -119,9 +119,14 @@ Adjust the sliders below to configure the agent's parameters, then use the contr
     color: #f1f5f9 !important;
     font-family: var(--font-inter, sans-serif);
     margin: 30px auto;
-    max-width: 1040px;
+    width: 92vw !important;
+    max-width: 1280px !important;
+    position: relative !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     border: 1px solid #1e293b;
+    box-sizing: border-box;
   }
 
   /* Force light colors on headers to override parent theme */
