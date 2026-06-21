@@ -331,9 +331,19 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
     border-color: #d9f99d !important;
     color: #0f172a !important;
     font-weight: bold;
-    transform: scale(1.15);
-    box-shadow: 0 0 15px #a4d037;
+    animation: matchPulse 0.5s infinite alternate;
     z-index: 11;
+  }
+
+  @keyframes matchPulse {
+    0% {
+      transform: scale(1.1);
+      box-shadow: 0 0 8px #a4d037;
+    }
+    100% {
+      transform: scale(1.22);
+      box-shadow: 0 0 25px #a4d037;
+    }
   }
 
   /* B-Tree Visualization */
@@ -368,10 +378,20 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
 
   .tree-node.active {
     border-color: #fecd35;
-    box-shadow: 0 0 12px #fecd35;
-    background: rgba(254, 205, 53, 0.15);
+    background: rgba(254, 205, 53, 0.2);
     color: #fecd35;
-    transform: scale(1.05);
+    animation: nodePulse 0.8s infinite alternate;
+  }
+
+  @keyframes nodePulse {
+    0% {
+      transform: scale(1.02);
+      box-shadow: 0 0 6px rgba(254, 205, 53, 0.4);
+    }
+    100% {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(254, 205, 53, 0.9);
+    }
   }
 
   .tree-node.discarded {
@@ -400,6 +420,14 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
   .tree-link.active {
     stroke: #fecd35;
     stroke-width: 4px;
+    stroke-dasharray: 6, 6;
+    animation: flowLink 1.2s linear infinite;
+  }
+
+  @keyframes flowLink {
+    to {
+      stroke-dashoffset: -24;
+    }
   }
 
   .tree-link.discarded {
@@ -487,14 +515,32 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = '...';
 
   .media-node.active-hit {
     border-color: #a4d037;
-    box-shadow: 0 0 12px rgba(164, 208, 55, 0.4);
     color: #a4d037;
+    animation: ramPulse 0.8s infinite alternate;
   }
 
   .media-node.active-miss {
     border-color: #fecd35;
-    box-shadow: 0 0 12px rgba(254, 205, 53, 0.4);
     color: #fecd35;
+    animation: diskPulse 0.8s infinite alternate;
+  }
+
+  @keyframes ramPulse {
+    0% {
+      box-shadow: 0 0 4px rgba(164, 208, 55, 0.3);
+    }
+    100% {
+      box-shadow: 0 0 20px rgba(164, 208, 55, 0.9);
+    }
+  }
+
+  @keyframes diskPulse {
+    0% {
+      box-shadow: 0 0 4px rgba(254, 205, 53, 0.3);
+    }
+    100% {
+      box-shadow: 0 0 20px rgba(254, 205, 53, 0.9);
+    }
   }
 
   .media-icon {

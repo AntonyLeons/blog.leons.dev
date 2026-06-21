@@ -302,6 +302,21 @@ Adjust the sliders below to configure the agent's parameters, then use the contr
     transition: transform 0.3s ease;
   }
 
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(15px) scale(0.98);
+      max-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      max-height: 100px;
+    }
+  }
+
   .context-block {
     width: 100%;
     border-radius: 4px;
@@ -312,10 +327,11 @@ Adjust the sliders below to configure the agent's parameters, then use the contr
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
     flex-shrink: 0 !important;
     min-height: 28px !important;
+    animation: slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
   }
 
   /* Block Types and Colors */
@@ -455,12 +471,18 @@ Adjust the sliders below to configure the agent's parameters, then use the contr
     background: rgba(240, 82, 48, 0.2);
     color: #f05230;
     border: 1px solid #f05230;
-    animation: flash 1s infinite alternate;
+    animation: dangerPulse 0.6s infinite alternate;
   }
 
-  @keyframes flash {
-    0% { opacity: 0.6; }
-    100% { opacity: 1; }
+  @keyframes dangerPulse {
+    0% {
+      background: rgba(240, 82, 48, 0.25);
+      box-shadow: 0 0 4px rgba(240, 82, 48, 0.4);
+    }
+    100% {
+      background: rgba(240, 82, 48, 0.45);
+      box-shadow: 0 0 16px rgba(240, 82, 48, 0.8);
+    }
   }
 
   .objective-text {
