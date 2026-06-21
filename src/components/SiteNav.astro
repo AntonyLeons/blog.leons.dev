@@ -20,9 +20,9 @@ const showLogo = current !== 'home';
 <nav class="site-nav">
     <div class="site-nav-left">
         {showLogo && (
-            SITE_CONFIG.logo ? (
+            SITE_CONFIG.logoDark ? (
                 <a class="site-nav-logo" href={getAssetUrl('/')}>
-                    <img src={getAssetUrl(SITE_CONFIG.logo)} alt={SITE_CONFIG.title} />
+                    <img src={getAssetUrl(SITE_CONFIG.logoDark)} alt={SITE_CONFIG.title} />
                 </a>
             ) : (
                 <a class="site-nav-logo" href={getAssetUrl('/')}>{SITE_CONFIG.title}</a>

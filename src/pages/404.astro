@@ -25,9 +25,9 @@ const recommendedPosts = allPosts.slice(0, 3);
         <header class="site-header outer no-cover">
             <div class="inner">
                 <nav class="site-nav-center">
-                    {SITE_CONFIG.logo ? (
+                    {SITE_CONFIG.logoDark ? (
                         <a class="site-nav-logo" href={getAssetUrl('/')}>
-                            <img src={getAssetUrl(SITE_CONFIG.logo)} alt={SITE_CONFIG.title} />
+                            <img src={getAssetUrl(SITE_CONFIG.logoDark)} alt={SITE_CONFIG.title} />
                         </a>
                     ) : (
                         <a class="site-nav-logo" href={getAssetUrl('/')}>{SITE_CONFIG.title}</a>
