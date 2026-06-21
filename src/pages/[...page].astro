@@ -36,11 +36,45 @@ const headerBg = SITE_CONFIG.cover ? getAssetUrl(SITE_CONFIG.cover) : null;
         <div class="inner">
             <div class="site-header-content">
                 <h1 class="site-title">
-                    {SITE_CONFIG.logo ? (
-                        <img class="site-logo" src={getAssetUrl(SITE_CONFIG.logo)} alt={SITE_CONFIG.title}/>
-                    ) : (
-                        SITE_CONFIG.title
-                    )}
+                    <!-- Inline Animated Mascot SVG -->
+                    <svg id="homepage-mascot" viewBox="0 0 200 210" style="width: 140px; height: 147px; overflow: visible; cursor: pointer; display: inline-block;">
+                        <!-- Antennas -->
+                        <path d="M 85 45 L 70 25" stroke="white" stroke-width="4" stroke-linecap="round" />
+                        <circle cx="70" cy="25" r="4" fill="white" />
+                        <path d="M 115 45 L 130 25" stroke="white" stroke-width="4" stroke-linecap="round" />
+                        <circle cx="130" cy="25" r="4" fill="white" />
+
+                        <!-- Stand / Base -->
+                        <path d="M 90 140 L 93 160 L 107 160 L 110 140 Z" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" />
+                        <path d="M 75 160 Q 100 170 125 160" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" />
+
+                        <!-- Left Arm -->
+                        <path d="M 40 100 Q 25 110 32 125" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" />
+
+                        <!-- Right Arm (Waving) -->
+                        <g id="mascot-right-arm" style="transform-origin: 160px 100px; transition: transform 0.15s ease;">
+                            <path d="M 160 100 Q 180 85 172 65" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" />
+                            <path d="M 172 65 Q 175 60 178 63" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" />
+                            <path d="M 172 65 Q 170 58 173 60" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" />
+                        </g>
+
+                        <!-- Monitor Body -->
+                        <rect x="40" y="45" width="120" height="95" rx="16" fill="#1e293b" stroke="white" stroke-width="5" />
+                        <!-- Screen -->
+                        <rect x="52" y="57" width="96" height="71" rx="8" fill="#090d16" stroke="white" stroke-width="3" />
+
+                        <!-- Eyes Group (moves with mouse) -->
+                        <g id="mascot-eyes" style="transition: transform 0.1s ease-out;">
+                            <path d="M 75 88 Q 85 78 95 88" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
+                            <path d="M 105 88 Q 115 78 125 88" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
+                        </g>
+
+                        <!-- Mouth -->
+                        <path d="M 95 105 Q 100 112 105 105" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" />
+
+                        <!-- Text "leons.dev" -->
+                        <text x="100" y="198" fill="white" font-size="18" font-family="system-ui, -apple-system, sans-serif" font-weight="bold" text-anchor="middle" letter-spacing="0.5">leons.dev</text>
+                    </svg>
                 </h1>
                 <h2 class="site-description">{SITE_CONFIG.description}</h2>
             </div>
@@ -66,10 +100,48 @@ const headerBg = SITE_CONFIG.cover ? getAssetUrl(SITE_CONFIG.cover) : null;
     </main>
 </Layout>
 
+<style>
+  #homepage-mascot:hover #mascot-right-arm {
+    animation: mascotWave 0.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes mascotWave {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-25deg); }
+  }
+</style>
+
 <script>
   import { initInfiniteScroll } from '../utils/infinite-scroll';
+  
+  const setupMascotInteractive = () => {
+    const mascot = document.getElementById('homepage-mascot');
+    const eyesGroup = document.getElementById('mascot-eyes');
+    if (!mascot || !eyesGroup) return;
+
+    document.addEventListener('mousemove', (e) => {
+      const rect = mascot.getBoundingClientRect();
+      const mascotCenterX = rect.left + rect.width / 2;
+      const mascotCenterY = rect.top + rect.height / 2;
+
+      const dx = e.clientX - mascotCenterX;
+      const dy = e.clientY - mascotCenterY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      const maxMove = 5;
+      const angle = Math.atan2(dy, dx);
+      
+      const moveDist = Math.min(maxMove, distance / 40);
+      const moveX = Math.cos(angle) * moveDist;
+      const moveY = Math.sin(angle) * moveDist;
+
+      eyesGroup.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    });
+  };
+
   document.addEventListener('astro:page-load', () => {
     initInfiniteScroll('#posts');
+    setupMascotInteractive();
   });
 </script>
 
