@@ -36,64 +36,59 @@ Furthermore, every tool call has overhead:
 As a result, your context window fills up with system headers, tool descriptions, and build output instead of the source code.
 
 #### Interactive Context Pollution Visualizer
-Adjust the sliders below to see how adding tools, codebase files, or build logs "pollutes" the context window, leaving very little room for actual reasoning.
+Adjust the sliders below to see how adding tools, codebase files, or build logs \"pollutes\" the context window, leaving very little room for actual reasoning.
 
 <div class="agent-widget" id="widget-pollution">
-  <div class="widget-main">
-    <div class="widget-visual-col">
-      <h4 class="widget-visual-title">Context Window Allocation</h4>
-      <div class="pollution-bar-container">
-        <div class="pollution-bar">
-          <div class="bar-segment seg-system" style="width: 12.5%">System</div>
-          <div class="bar-segment seg-tools" style="width: 10%">Tools</div>
-          <div class="bar-segment seg-files" style="width: 25%">Files</div>
-          <div class="bar-segment seg-logs" style="width: 9.3%">Logs</div>
-          <div class="bar-segment seg-free" style="width: 43.2%">Free</div>
-        </div>
-      </div>
-      <div class="pollution-legend">
-        <div class="legend-item"><span class="legend-dot dot-system"></span> System Prompt: <span id="lbl-poll-system">4,000</span> tkn</div>
-        <div class="legend-item"><span class="legend-dot dot-tools"></span> Tool Schemas: <span id="lbl-poll-tools">3,200</span> tkn</div>
-        <div class="legend-item"><span class="legend-dot dot-files"></span> Code Files: <span id="lbl-poll-files">8,000</span> tkn</div>
-        <div class="legend-item"><span class="legend-dot dot-logs"></span> Terminal Logs: <span id="lbl-poll-logs">3,000</span> tkn</div>
-        <div class="legend-item"><span class="legend-dot dot-free"></span> Remaining: <span id="lbl-poll-free">13,800</span> tkn</div>
-      </div>
-    </div>
-    
-    <div class="widget-control-col">
-      <h4 class="db-card-title">Pollution Config</h4>
-      
-      <div class="slider-group">
-        <label for="poll-slider-tools">Registered Tools: <span id="poll-val-tools">8</span> tools</label>
-        <input type="range" id="poll-slider-tools" min="3" max="30" value="8">
-        <span class="db-hint">Each tool adds JSON schema descriptions to prompt.</span>
-      </div>
-      
-      <div class="slider-group">
-        <label for="poll-slider-files">Codebase File Size: <span id="poll-val-files">Medium</span></label>
-        <input type="range" id="poll-slider-files" min="1" max="3" value="2">
-        <span class="db-hint">Large files force massive context consumption.</span>
-      </div>
-      
-      <div class="slider-group">
-        <label for="poll-slider-logs">Terminal Logs: <span id="poll-val-logs">Normal</span></label>
-        <input type="range" id="poll-slider-logs" min="0" max="2" value="1">
-        <span class="db-hint">Warnings and errors add stack traces to context.</span>
-      </div>
-      
-      <div class="pollution-metrics">
-        <div class="poll-metric-row">
-          <span>Total Overhead:</span>
-          <span id="poll-metric-overhead" class="text-warn">56.8%</span>
-        </div>
-        <div class="poll-metric-row">
-          <span>Remaining Capacity:</span>
-          <span id="poll-metric-free-pct" class="text-success">43.2%</span>
-        </div>
-      </div>
-      <div id="poll-warning" class="poll-badge badge-warning" style="display: none;">WARNING: High Context Pollution!</div>
-    </div>
-  </div>
+<div class="widget-main">
+<div class="widget-visual-col">
+<h4 class="widget-visual-title">Context Window Allocation</h4>
+<div class="pollution-bar-container">
+<div class="pollution-bar">
+<div class="bar-segment seg-system" style="width: 12.5%">System</div>
+<div class="bar-segment seg-tools" style="width: 10%">Tools</div>
+<div class="bar-segment seg-files" style="width: 25%">Files</div>
+<div class="bar-segment seg-logs" style="width: 9.3%">Logs</div>
+<div class="bar-segment seg-free" style="width: 43.2%">Free</div>
+</div>
+</div>
+<div class="pollution-legend">
+<div class="legend-item"><span class="legend-dot dot-system"></span> System Prompt: <span id="lbl-poll-system">4,000</span> tkn</div>
+<div class="legend-item"><span class="legend-dot dot-tools"></span> Tool Schemas: <span id="lbl-poll-tools">3,200</span> tkn</div>
+<div class="legend-item"><span class="legend-dot dot-files"></span> Code Files: <span id="lbl-poll-files">8,000</span> tkn</div>
+<div class="legend-item"><span class="legend-dot dot-logs"></span> Terminal Logs: <span id="lbl-poll-logs">3,000</span> tkn</div>
+<div class="legend-item"><span class="legend-dot dot-free"></span> Remaining: <span id="lbl-poll-free">13,800</span> tkn</div>
+</div>
+</div>
+<div class="widget-control-col">
+<h4 class="db-card-title">Pollution Config</h4>
+<div class="slider-group">
+<label for="poll-slider-tools">Registered Tools: <span id="poll-val-tools">8</span> tools</label>
+<input type="range" id="poll-slider-tools" min="3" max="30" value="8">
+<span class="db-hint">Each tool adds JSON schema descriptions to prompt.</span>
+</div>
+<div class="slider-group">
+<label for="poll-slider-files">Codebase File Size: <span id="poll-val-files">Medium</span></label>
+<input type="range" id="poll-slider-files" min="1" max="3" value="2">
+<span class="db-hint">Large files force massive context consumption.</span>
+</div>
+<div class="slider-group">
+<label for="poll-slider-logs">Terminal Logs: <span id="poll-val-logs">Normal</span></label>
+<input type="range" id="poll-slider-logs" min="0" max="2" value="1">
+<span class="db-hint">Warnings and errors add stack traces to context.</span>
+</div>
+<div class="pollution-metrics">
+<div class="poll-metric-row">
+<span>Total Overhead:</span>
+<span id="poll-metric-overhead" class="text-warn">56.8%</span>
+</div>
+<div class="poll-metric-row">
+<span>Remaining Capacity:</span>
+<span id="poll-metric-free-pct" class="text-success">43.2%</span>
+</div>
+</div>
+<div id="poll-warning" class="poll-badge badge-warning" style="display: none;">WARNING: High Context Pollution!</div>
+</div>
+</div>
 </div>
 
 ---
@@ -110,61 +105,53 @@ If your task description is pushed into the middle of a 100,000 token context wi
 Move the original instructions block to see how task placement affects the attention retention of the model. Note the U-shaped attention distribution.
 
 <div class="agent-widget" id="widget-attention">
-  <div class="widget-main">
-    <div class="widget-visual-col">
-      <h4 class="widget-visual-title">Model Attention Distribution</h4>
-      <div class="chart-container">
-        <svg viewBox="0 0 400 180" class="attention-svg">
-          <line x1="0" y1="20" x2="400" y2="20" stroke="#334155" stroke-dasharray="4 4" />
-          <line x1="0" y1="160" x2="400" y2="160" stroke="#334155" stroke-dasharray="4 4" />
-          <line x1="200" y1="0" x2="200" y2="180" stroke="#334155" stroke-dasharray="2 2" />
-          
-          <path d="M 10 20 Q 200 240 390 40" fill="none" stroke="#64748b" stroke-width="3" />
-          <path id="active-curve" d="M 10 20 Q 200 240 390 40" fill="none" stroke="#3eb0ef" stroke-width="4" />
-          
-          <circle id="attention-dot" cx="200" cy="130" r="8" fill="#fecd35" class="pulsing-dot" />
-          
-          <text x="15" y="15" fill="#94a3b8" font-size="10" font-family="monospace">System (Start)</text>
-          <text x="175" y="175" fill="#94a3b8" font-size="10" font-family="monospace">Middle</text>
-          <text x="315" y="15" fill="#94a3b8" font-size="10" font-family="monospace">Recent (End)</text>
-        </svg>
-      </div>
-      
-      <div class="prompt-stack-visualizer">
-        <div class="prompt-part part-system" id="part-sys">System Prompt / Setup</div>
-        <div class="prompt-part part-middle" id="part-mid">Files & Logs Context</div>
-        <div class="prompt-part part-recent" id="part-rec">Recent User Message</div>
-      </div>
-    </div>
-    
-    <div class="widget-control-col">
-      <h4 class="db-card-title">Attention Control</h4>
-      <p class="db-hint" style="margin-bottom: 15px;">
-        Choose where your **Original Task Instructions** are currently positioned inside the context window:
-      </p>
-      
-      <div class="btn-group-vertical">
-        <button class="db-btn btn-attention-pos" data-pos="0">Beginning of Prompt</button>
-        <button class="db-btn btn-attention-pos active" data-pos="1">Middle of Prompt</button>
-        <button class="db-btn btn-attention-pos" data-pos="2">End of Prompt</button>
-      </div>
-      
-      <div class="attention-metrics" style="margin-top: 15px;">
-        <div class="poll-metric-row">
-          <span>Task Attention:</span>
-          <span id="attention-val-percent" class="text-danger">15%</span>
-        </div>
-        <div class="poll-metric-row">
-          <span>Model Response:</span>
-          <span id="attention-val-status" class="text-danger">Hallucinating / Ignoring rules</span>
-        </div>
-      </div>
-      
-      <div class="attention-desc-box" id="attention-desc">
-        The instructions are buried under codebase files and build errors. The model falls victim to the "Lost in the Middle" effect, ignoring constraints and guessing API shapes.
-      </div>
-    </div>
-  </div>
+<div class="widget-main">
+<div class="widget-visual-col">
+<h4 class="widget-visual-title">Model Attention Distribution</h4>
+<div class="chart-container">
+<svg viewBox="0 0 400 180" class="attention-svg">
+<line x1="0" y1="20" x2="400" y2="20" stroke="#334155" stroke-dasharray="4 4" />
+<line x1="0" y1="160" x2="400" y2="160" stroke="#334155" stroke-dasharray="4 4" />
+<line x1="200" y1="0" x2="200" y2="180" stroke="#334155" stroke-dasharray="2 2" />
+<path d="M 10 20 Q 200 240 390 40" fill="none" stroke="#64748b" stroke-width="3" />
+<path id="active-curve" d="M 10 20 Q 200 240 390 40" fill="none" stroke="#3eb0ef" stroke-width="4" />
+<circle id="attention-dot" cx="200" cy="130" r="8" fill="#fecd35" class="pulsing-dot" />
+<text x="15" y="15" fill="#94a3b8" font-size="10" font-family="monospace">System (Start)</text>
+<text x="175" y="175" fill="#94a3b8" font-size="10" font-family="monospace">Middle</text>
+<text x="315" y="15" fill="#94a3b8" font-size="10" font-family="monospace">Recent (End)</text>
+</svg>
+</div>
+<div class="prompt-stack-visualizer">
+<div class="prompt-part part-system" id="part-sys">System Prompt / Setup</div>
+<div class="prompt-part part-middle" id="part-mid">Files & Logs Context</div>
+<div class="prompt-part part-recent" id="part-rec">Recent User Message</div>
+</div>
+</div>
+<div class="widget-control-col">
+<h4 class="db-card-title">Attention Control</h4>
+<p class="db-hint" style="margin-bottom: 15px;">
+Choose where your **Original Task Instructions** are currently positioned inside the context window:
+</p>
+<div class="btn-group-vertical">
+<button class="db-btn btn-attention-pos" data-pos="0">Beginning of Prompt</button>
+<button class="db-btn btn-attention-pos active" data-pos="1">Middle of Prompt</button>
+<button class="db-btn btn-attention-pos" data-pos="2">End of Prompt</button>
+</div>
+<div class="attention-metrics" style="margin-top: 15px;">
+<div class="poll-metric-row">
+<span>Task Attention:</span>
+<span id="attention-val-percent" class="text-danger">15%</span>
+</div>
+<div class="poll-metric-row">
+<span>Model Response:</span>
+<span id="attention-val-status" class="text-danger">Hallucinating / Ignoring rules</span>
+</div>
+</div>
+<div class="attention-desc-box" id="attention-desc">
+The instructions are buried under codebase files and build errors. The model falls victim to the \"Lost in the Middle\" effect, ignoring constraints and guessing API shapes.
+</div>
+</div>
+</div>
 </div>
 
 ---
@@ -182,58 +169,52 @@ These wrong assumptions lead to code changes that trigger build errors. Fixing t
 Configure the context size limit, then click through the steps to see how a typical multi-file coding loop fills up memory. Watch how older blocks (the original task) get pushed above the limit line and are forgotten, triggering hallucinated assumptions.
 
 <div class="agent-widget" id="widget-drift">
-  <div class="widget-main">
-    <div class="widget-visual-col">
-      <h4 class="widget-visual-title">Active Context Stack</h4>
-      
-      <div class="drift-stack-wrapper">
-        <div class="drift-limit-line" id="drift-limit-line">
-          <span>Context Limit</span>
-        </div>
-        <div class="drift-stack" id="drift-stack">
-          <!-- Populated dynamically -->
-        </div>
-      </div>
-    </div>
-    
-    <div class="widget-control-col">
-      <h4 class="db-card-title">Drift Simulation</h4>
-      
-      <div class="slider-group" style="margin-bottom: 10px;">
-        <label for="drift-slider-limit">Context Limit: <span id="drift-val-limit">32</span>k tokens</label>
-        <input type="range" id="drift-slider-limit" min="16" max="64" step="16" value="32">
-        <span class="db-hint">Smaller context sizes cause task context to drop off earlier.</span>
-      </div>
-      
-      <div class="step-controls">
-        <button id="drift-btn-prev" class="db-btn db-btn-secondary" disabled>Back</button>
-        <button id="drift-btn-next" class="db-btn db-btn-primary">Next Step</button>
-        <button id="drift-btn-reset" class="db-btn db-btn-danger">Reset</button>
-      </div>
-      <div class="step-indicator" style="margin: 8px 0;">Step: <span id="drift-step-num">0</span>/5</div>
-      <div class="step-description" id="drift-step-desc" style="min-height: 70px; background: #090d16; border: 1px solid #334155; padding: 10px; border-radius: 6px; font-size: 12px; line-height: 1.4;">
-        Agent initialized with system prompt. Ready to start task.
-      </div>
-      
-      <div class="attention-metrics" style="margin-top: 15px;">
-        <div class="poll-metric-row">
-          <span>Objective Focus:</span>
-          <span id="drift-metric-focus" class="badge-success" style="padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px;">100% Focused</span>
-        </div>
-        <div class="poll-metric-row">
-          <span>Tokens:</span>
-          <span><span id="drift-metric-tokens">9,200</span> / <span id="drift-metric-max">32,000</span></span>
-        </div>
-      </div>
-      
-      <div class="assumptions-card" style="margin-top: 15px; background: #090d16; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
-        <h5 style="font-size: 11px; text-transform: uppercase; color: #94a3b8; margin-top: 0; margin-bottom: 6px;">Assumptions & Hallucinations</h5>
-        <ul id="drift-assumptions-list" style="margin: 0; padding-left: 15px; font-size: 11px; line-height: 1.4; color: #64748b; list-style-type: square;">
-          <li>No assumptions. Model is currently objective-oriented.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+<div class="widget-main">
+<div class="widget-visual-col">
+<h4 class="widget-visual-title">Active Context Stack</h4>
+<div class="drift-stack-wrapper">
+<div class="drift-limit-line" id="drift-limit-line">
+<span>Context Limit</span>
+</div>
+<div class="drift-stack" id="drift-stack">
+<!-- Populated dynamically -->
+</div>
+</div>
+</div>
+<div class="widget-control-col">
+<h4 class="db-card-title">Drift Simulation</h4>
+<div class="slider-group" style="margin-bottom: 10px;">
+<label for="drift-slider-limit">Context Limit: <span id="drift-val-limit">32</span>k tokens</label>
+<input type="range" id="drift-slider-limit" min="16" max="64" step="16" value="32">
+<span class="db-hint">Smaller context sizes cause task context to drop off earlier.</span>
+</div>
+<div class="step-controls">
+<button id="drift-btn-prev" class="db-btn db-btn-secondary" disabled>Back</button>
+<button id="drift-btn-next" class="db-btn db-btn-primary">Next Step</button>
+<button id="drift-btn-reset" class="db-btn db-btn-danger">Reset</button>
+</div>
+<div class="step-indicator" style="margin: 8px 0;">Step: <span id="drift-step-num">0</span>/5</div>
+<div class="step-description" id="drift-step-desc" style="min-height: 70px; background: #090d16; border: 1px solid #334155; padding: 10px; border-radius: 6px; font-size: 12px; line-height: 1.4;">
+Agent initialized with system prompt. Ready to start task.
+</div>
+<div class="attention-metrics" style="margin-top: 15px;">
+<div class="poll-metric-row">
+<span>Objective Focus:</span>
+<span id="drift-metric-focus" class="badge-success" style="padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px;">100% Focused</span>
+</div>
+<div class="poll-metric-row">
+<span>Tokens:</span>
+<span><span id="drift-metric-tokens">9,200</span> / <span id="drift-metric-max">32,000</span></span>
+</div>
+</div>
+<div class="assumptions-card" style="margin-top: 15px; background: #090d16; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+<h5 style="font-size: 11px; text-transform: uppercase; color: #94a3b8; margin-top: 0; margin-bottom: 6px;">Assumptions & Hallucinations</h5>
+<ul id="drift-assumptions-list" style="margin: 0; padding-left: 15px; font-size: 11px; line-height: 1.4; color: #64748b; list-style-type: square;">
+<li>No assumptions. Model is currently objective-oriented.</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 
 ---
@@ -764,24 +745,24 @@ To get the most out of coding agents, you need to manage their context proactive
         valTools.textContent = tools;
         
         let filesTokens = 8000;
-        let filesLabel = "Medium";
+        let filesLabel = \"Medium\";
         if (filesSizeVal === 1) {
           filesTokens = 2000;
-          filesLabel = "Small";
+          filesLabel = \"Small\";
         } else if (filesSizeVal === 3) {
           filesTokens = 18000;
-          filesLabel = "Large";
+          filesLabel = \"Large\";
         }
         valFiles.textContent = filesLabel;
         
         let logsTokens = 3000;
-        let logsLabel = "Normal";
+        let logsLabel = \"Normal\";
         if (logsVal === 0) {
           logsTokens = 0;
-          logsLabel = "None";
+          logsLabel = \"None\";
         } else if (logsVal === 2) {
           logsTokens = 10000;
-          logsLabel = "Verbose";
+          logsLabel = \"Verbose\";
         }
         valLogs.textContent = logsLabel;
         
@@ -857,26 +838,26 @@ To get the most out of coding agents, you need to manage their context proactive
         {
           cx: 40,
           cy: 22,
-          percent: "95%",
-          status: "Strong focus (ignoring workspace details)",
-          desc: "The task instructions are at the beginning of the context (priming). The model remembers them clearly but might struggle to reconcile them with files placed in the middle of the context.",
-          color: "#10b981"
+          percent: \"95%\",
+          status: \"Strong focus (ignoring workspace details)\",
+          desc: \"The task instructions are at the beginning of the context (priming). The model remembers them clearly but might struggle to reconcile them with files placed in the middle of the context.\",
+          color: \"#10b981\"
         },
         {
           cx: 200,
           cy: 130,
-          percent: "15%",
-          status: "Lost in the middle! (Will ignore instructions)",
-          desc: "The task instructions are buried under codebase files and build errors. The model falls victim to the 'Lost in the Middle' effect, ignoring constraints and guessing API shapes.",
-          color: "#f05230"
+          percent: \"15%\",
+          status: \"Lost in the middle! (Will ignore instructions)\",
+          desc: \"The task instructions are buried under codebase files and build errors. The model falls victim to the 'Lost in the Middle' effect, ignoring constraints and guessing API shapes.\",
+          color: \"#f05230\"
         },
         {
           cx: 360,
           cy: 35,
-          percent: "85%",
-          status: "Strong focus (recency bias priority)",
-          desc: "The task instructions are at the very end of the prompt (recent input). The model focuses heavily on this, but will likely forget initial system constraints and configurations.",
-          color: "#fecd35"
+          percent: \"85%\",
+          status: \"Strong focus (recency bias priority)\",
+          desc: \"The task instructions are at the very end of the prompt (recent input). The model focuses heavily on this, but will likely forget initial system constraints and configurations.\",
+          color: \"#fecd35\"
         }
       ];
 
@@ -947,73 +928,73 @@ To get the most out of coding agents, you need to manage their context proactive
 
       const driftStepsData = [
         {
-          title: "Agent Initialized",
-          desc: "The agent is loaded with the base system prompt, registered tool schemas, and your task request: 'Fix login authentication flow'.",
+          title: \"Agent Initialized\",
+          desc: \"The agent is loaded with the base system prompt, registered tool schemas, and your task request: 'Fix login authentication flow'.\",
           blocks: [
-            { id: "system", name: "System Prompt", tokens: 4000, type: "block-system" },
-            { id: "tools", name: "Tool Schemas (8 tools)", tokens: 3200, type: "block-tools" },
-            { id: "task", name: "Original Task: Fix Login Bug", tokens: 2000, type: "block-task" }
+            { id: \"system\", name: \"System Prompt\", tokens: 4000, type: \"block-system\" },
+            { id: \"tools\", name: \"Tool Schemas (8 tools)\", tokens: 3200, type: \"block-tools\" },
+            { id: \"task\", name: \"Original Task: Fix Login Bug\", tokens: 2000, type: \"block-task\" }
           ]
         },
         {
-          title: "Workspace Search",
-          desc: "The agent searches the workspace for auth references. Grep outputs and file lists are added to the context.",
+          title: \"Workspace Search\",
+          desc: \"The agent searches the workspace for auth references. Grep outputs and file lists are added to the context.\",
           blocks: [
-            { id: "system", name: "System Prompt", tokens: 4000, type: "block-system" },
-            { id: "tools", name: "Tool Schemas (8 tools)", tokens: 3200, type: "block-tools" },
-            { id: "task", name: "Original Task: Fix Login Bug", tokens: 2000, type: "block-task" },
-            { id: "search", name: "Search Logs & Grep", tokens: 3000, type: "block-search" }
+            { id: \"system\", name: \"System Prompt\", tokens: 4000, type: \"block-system\" },
+            { id: \"tools\", name: \"Tool Schemas (8 tools)\", tokens: 3200, type: \"block-tools\" },
+            { id: \"task\", name: \"Original Task: Fix Login Bug\", tokens: 2000, type: \"block-task\" },
+            { id: \"search\", name: \"Search Logs & Grep\", tokens: 3000, type: \"block-search\" }
           ]
         },
         {
-          title: "Read Code Files",
-          desc: "The agent reads the contents of 'auth.ts' and 'db.ts' files to understand the auth flow. The source code is appended to memory.",
+          title: \"Read Code Files\",
+          desc: \"The agent reads the contents of 'auth.ts' and 'db.ts' files to understand the auth flow. The source code is appended to memory.\",
           blocks: [
-            { id: "system", name: "System Prompt", tokens: 4000, type: "block-system" },
-            { id: "tools", name: "Tool Schemas (8 tools)", tokens: 3200, type: "block-tools" },
-            { id: "task", name: "Original Task: Fix Login Bug", tokens: 2000, type: "block-task" },
-            { id: "search", name: "Search Logs & Grep", tokens: 3000, type: "block-search" },
-            { id: "files", name: "File Contents: auth.ts & db.ts", tokens: 9000, type: "block-files" }
+            { id: \"system\", name: \"System Prompt\", tokens: 4000, type: \"block-system\" },
+            { id: \"tools\", name: \"Tool Schemas (8 tools)\", tokens: 3200, type: \"block-tools\" },
+            { id: \"task\", name: \"Original Task: Fix Login Bug\", tokens: 2000, type: \"block-task\" },
+            { id: \"search\", name: \"Search Logs & Grep\", tokens: 3000, type: \"block-search\" },
+            { id: \"files\", name: \"File Contents: auth.ts & db.ts\", tokens: 9000, type: \"block-files\" }
           ]
         },
         {
-          title: "Test Execution & Compile",
-          desc: "The agent runs tests. A massive 8,000-token trace log of compilation errors and warnings is loaded back into context.",
+          title: \"Test Execution & Compile\",
+          desc: \"The agent runs tests. A massive 8,000-token trace log of compilation errors and warnings is loaded back into context.\",
           blocks: [
-            { id: "system", name: "System Prompt", tokens: 4000, type: "block-system" },
-            { id: "tools", name: "Tool Schemas (8 tools)", tokens: 3200, type: "block-tools" },
-            { id: "task", name: "Original Task: Fix Login Bug", tokens: 2000, type: "block-task" },
-            { id: "search", name: "Search Logs & Grep", tokens: 3000, type: "block-search" },
-            { id: "files", name: "File Contents: auth.ts & db.ts", tokens: 9000, type: "block-files" },
-            { id: "logs", name: "Linting & Compile Logs", tokens: 8000, type: "block-logs" }
+            { id: \"system\", name: \"System Prompt\", tokens: 4000, type: \"block-system\" },
+            { id: \"tools\", name: \"Tool Schemas (8 tools)\", tokens: 3200, type: \"block-tools\" },
+            { id: \"task\", name: \"Original Task: Fix Login Bug\", tokens: 2000, type: \"block-task\" },
+            { id: \"search\", name: \"Search Logs & Grep\", tokens: 3000, type: \"block-search\" },
+            { id: \"files\", name: \"File Contents: auth.ts & db.ts\", tokens: 9000, type: \"block-files\" },
+            { id: \"logs\", name: \"Linting & Compile Logs\", tokens: 8000, type: \"block-logs\" }
           ]
         },
         {
-          title: "Mid-Task Pivot",
-          desc: "You interrupt the agent and add a new instruction: 'Also log OAuth callback payloads'. This requirement is pushed onto the stack.",
+          title: \"Mid-Task Pivot\",
+          desc: \"You interrupt the agent and add a new instruction: 'Also log OAuth callback payloads'. This requirement is pushed onto the stack.\",
           blocks: [
-            { id: "system", name: "System Prompt", tokens: 4000, type: "block-system" },
-            { id: "tools", name: "Tool Schemas (8 tools)", tokens: 3200, type: "block-tools" },
-            { id: "task", name: "Original Task: Fix Login Bug", tokens: 2000, type: "block-task" },
-            { id: "search", name: "Search Logs & Grep", tokens: 3000, type: "block-search" },
-            { id: "files", name: "File Contents: auth.ts & db.ts", tokens: 9000, type: "block-files" },
-            { id: "logs", name: "Linting & Compile Logs", tokens: 8000, type: "block-logs" },
-            { id: "pivot", name: "User Pivot: Log OAuth callback", tokens: 2500, type: "block-pivot" }
+            { id: \"system\", name: \"System Prompt\", tokens: 4000, type: \"block-system\" },
+            { id: \"tools\", name: \"Tool Schemas (8 tools)\", tokens: 3200, type: \"block-tools\" },
+            { id: \"task\", name: \"Original Task: Fix Login Bug\", tokens: 2000, type: \"block-task\" },
+            { id: \"search\", name: \"Search Logs & Grep\", tokens: 3000, type: \"block-search\" },
+            { id: \"files\", name: \"File Contents: auth.ts & db.ts\", tokens: 9000, type: \"block-files\" },
+            { id: \"logs\", name: \"Linting & Compile Logs\", tokens: 8000, type: \"block-logs\" },
+            { id: \"pivot\", name: \"User Pivot: Log OAuth callback\", tokens: 2500, type: \"block-pivot\" }
           ]
         },
         {
-          title: "Context Drift",
-          desc: "The agent loads new files ('oauth.ts') and logs. Total memory exceeds the limit line, pruning the oldest blocks at the top (including your original task instructions)!",
+          title: \"Context Drift\",
+          desc: \"The agent loads new files ('oauth.ts') and logs. Total memory exceeds the limit line, pruning the oldest blocks at the top (including your original task instructions)!\",
           blocks: [
-            { id: "system", name: "System Prompt", tokens: 4000, type: "block-system" },
-            { id: "tools", name: "Tool Schemas (8 tools)", tokens: 3200, type: "block-tools" },
-            { id: "task", name: "Original Task: Fix Login Bug", tokens: 2000, type: "block-task" },
-            { id: "search", name: "Search Logs & Grep", tokens: 3000, type: "block-search" },
-            { id: "files", name: "File Contents: auth.ts & db.ts", tokens: 9000, type: "block-files" },
-            { id: "logs", name: "Linting & Compile Logs", tokens: 8000, type: "block-logs" },
-            { id: "pivot", name: "User Pivot: Log OAuth callback", tokens: 2500, type: "block-pivot" },
-            { id: "drift-files", name: "File Contents: oauth.ts", tokens: 6000, type: "block-files" },
-            { id: "drift-logs", name: "OAuth Compile & Run Logs", tokens: 8000, type: "block-logs" }
+            { id: \"system\", name: \"System Prompt\", tokens: 4000, type: \"block-system\" },
+            { id: \"tools\", name: \"Tool Schemas (8 tools)\", tokens: 3200, type: \"block-tools\" },
+            { id: \"task\", name: \"Original Task: Fix Login Bug\", tokens: 2000, type: \"block-task\" },
+            { id: \"search\", name: \"Search Logs & Grep\", tokens: 3000, type: \"block-search\" },
+            { id: \"files\", name: \"File Contents: auth.ts & db.ts\", tokens: 9000, type: \"block-files\" },
+            { id: \"logs\", name: \"Linting & Compile Logs\", tokens: 8000, type: \"block-logs\" },
+            { id: \"pivot\", name: \"User Pivot: Log OAuth callback\", tokens: 2500, type: \"block-pivot\" },
+            { id: \"drift-files\", name: \"File Contents: oauth.ts\", tokens: 6000, type: \"block-files\" },
+            { id: \"drift-logs\", name: \"OAuth Compile & Run Logs\", tokens: 8000, type: \"block-logs\" }
           ]
         }
       ];
@@ -1071,13 +1052,13 @@ To get the most out of coding agents, you need to manage their context proactive
         
         driftAssumptionsList.innerHTML = '';
         if (isTaskPruned) {
-          driftMetricFocus.className = "focus-badge badge-danger";
-          driftMetricFocus.textContent = "OBJECTIVE LOST";
+          driftMetricFocus.className = \"focus-badge badge-danger\";
+          driftMetricFocus.textContent = \"OBJECTIVE LOST\";
           
           const assumptions = [
-            "Assumption: The authentication flow works fine now (cannot verify).",
-            "Assumption: Signup process requires OAuth callbacks directly in router.",
-            "Assumption: Node.js standard environment supports OAuth callback parameters."
+            \"Assumption: The authentication flow works fine now (cannot verify).\",
+            \"Assumption: Signup process requires OAuth callbacks directly in router.\",
+            \"Assumption: Node.js standard environment supports OAuth callback parameters.\"
           ];
           assumptions.forEach(a => {
             const li = document.createElement('li');
@@ -1085,16 +1066,16 @@ To get the most out of coding agents, you need to manage their context proactive
             driftAssumptionsList.appendChild(li);
           });
         } else if (driftState.step >= 4 && totalTokens > driftState.limit * 0.75) {
-          driftMetricFocus.className = "focus-badge badge-warning";
-          driftMetricFocus.textContent = "Drifting Focus";
+          driftMetricFocus.className = \"focus-badge badge-warning\";
+          driftMetricFocus.textContent = \"Drifting Focus\";
           const li = document.createElement('li');
-          li.textContent = "Warning: Memory pressure is high. Avoid making large edits.";
+          li.textContent = \"Warning: Memory pressure is high. Avoid making large edits.\";
           driftAssumptionsList.appendChild(li);
         } else {
-          driftMetricFocus.className = "focus-badge badge-success";
-          driftMetricFocus.textContent = "100% Focused";
+          driftMetricFocus.className = \"focus-badge badge-success\";
+          driftMetricFocus.textContent = \"100% Focused\";
           const li = document.createElement('li');
-          li.textContent = "No assumptions. Model is currently objective-oriented.";
+          li.textContent = \"No assumptions. Model is currently objective-oriented.\";
           driftAssumptionsList.appendChild(li);
         }
         
@@ -1119,7 +1100,7 @@ To get the most out of coding agents, you need to manage their context proactive
       });
       driftBtnReset.addEventListener('click', () => {
         driftState.step = 0;
-        driftStepNum.textContent = "0";
+        driftStepNum.textContent = \"0\";
         updateDriftVisuals();
       });
 
