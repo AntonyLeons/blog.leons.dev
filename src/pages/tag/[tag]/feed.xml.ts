@@ -36,7 +36,7 @@ export async function GET(context: any) {
   const tagEntry = tag ? await getEntry('tags', tag) : null;
   const tagInfo = tagEntry ? tagEntry.data : null;
   const tagName = tagInfo?.name || tag.replace(/-/g, ' ');
-  const tagDescription = tagInfo?.description || `A collection of posts filed under ${tagName}`;
+  const tagDescription = typeof tagInfo?.description === 'string' ? tagInfo.description : `A collection of posts filed under ${tagName}`;
 
   return generateAtomFeed(filteredPosts, {
     title: `${SITE_CONFIG.title} | ${tagName.charAt(0).toUpperCase() + tagName.slice(1)}`,

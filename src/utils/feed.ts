@@ -21,7 +21,7 @@ export async function generateAtomFeed(posts: any[], options: FeedOptions): Prom
     
     // Resolve author
     const authorEntry = post.data.author ? await getEntry(post.data.author) : null;
-    const authorData = authorEntry ? authorEntry.data : null;
+    const authorData = (authorEntry && authorEntry.collection === 'authors') ? authorEntry.data : null;
     const authorName = authorData?.name || (post.data.author?.id || '');
     const authorEmail = (authorData as any)?.email || '';
     const authorUri = typeof authorData?.url_full === 'string' ? authorData.url_full : '';

@@ -10,12 +10,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.10",
-    "astro": "^7.0.5"
+    "@astrojs/rss": "^4.0.19",
+    "astro": "^7.0.7"
   },
   "devDependencies": {
-    "js-yaml": "^4.1.0",
-    "typescript": "^5.7.2"
+    "js-yaml": "^5.2.1",
+    "typescript": "^7.0.2"
   },
   "engines": {
     "node": ">=24"
