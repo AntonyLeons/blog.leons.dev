@@ -11,11 +11,11 @@ subclass: "post"
 author: antony
 ---
 
-Bun 1.4 is not a routine update. The project rewrote Bun from Zig to Rust while keeping JavaScriptCore as its JavaScript engine.
+Bun 1.4 is not a routine update. The project rewrote Bun from Zig to Rust using claude while keeping JavaScriptCore as its JavaScript engine.
 
 That immediately raises two questions: is it actually faster, and will existing Bun applications continue to work?
 
-I tested both questions against [StreamDrop](https://streamdrop.app/), my open-source, peer-to-peer file-transfer service. It sends files directly between devices without uploading them to permanent cloud storage. You can [try StreamDrop](https://streamdrop.app/) or [browse the source on GitHub](https://github.com/AntonyLeons/streamdrop). The benchmark result is encouraging, but the most useful discovery was not a performance win. It was a breaking change that stopped large transfers completely.
+I tested both questions against [StreamDrop](https://streamdrop.app/), my open-source, peer-to-peer file-transfer service. It sends files directly between devices without uploading them to permanent cloud storage. You can [try StreamDrop](https://streamdrop.app/) or [browse the source on GitHub](https://github.com/AntonyLeons/streamdrop). The benchmark results are encouraging and we found a breaking change along the way.
 
 ## How I tested it
 
@@ -92,15 +92,15 @@ After the fix, the full 256 MiB transfer completed on Bun 1.4.2 at **851 MiB/s**
 
 ## Should you upgrade?
 
-For StreamDrop, yes—but not blindly.
+Yes, but have fun regression testing.
 
-Bun 1.4 delivered its largest improvement exactly where this application benefits: streaming throughput, memory use, and CPU time. Startup became dramatically faster too. The Rust rewrite did not merely preserve performance; this release moved several practical workloads forward.
+Bun 1.4 delivered its largest improvement exactly where StreamDrop benefits: streaming throughput, memory use, and CPU time. Startup became dramatically faster too. The Rust rewrite did not merely preserve performance; this release moved several practical workloads forward.
 
-But a benchmark that only measured successful 128 MiB transfers would have missed the most important finding. Performance testing should include the edges of the real workload, because an infinitely fast failed request is still a failed request.
+But a benchmark that only measured successful 128 MiB transfers would have missed the breaking change. Performance testing should include the edges of the real workload, because an infinitely fast failed request is still a failed request.
 
 If your Bun server accepts large uploads, add an over-limit integration test and configure `maxRequestBodySize` before upgrading. Once that was done, Bun 1.4 was a meaningful improvement for StreamDrop.
 
-Want to see the result for yourself? [Send a file with StreamDrop](https://streamdrop.app/)—there is no account to create—or [read, run, and contribute to the code on GitHub](https://github.com/AntonyLeons/streamdrop).
+Want to see the result for yourself? [Send a file with StreamDrop](https://streamdrop.app/); there is no account to create or [read, run, and contribute to the code on GitHub](https://github.com/AntonyLeons/streamdrop).
 
 <style>
   .bun-chart {
