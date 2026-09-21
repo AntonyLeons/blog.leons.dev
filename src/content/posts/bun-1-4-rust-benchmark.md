@@ -1,6 +1,6 @@
 ---
 current: post
-cover: /assets/images/bun-1-4-benchmark.png
+cover: /assets/images/streamdrop-logo.png
 navigation: true
 title: "Bun Rewrote Itself in Rust. I Benchmarked the Difference"
 description: "Bun 1.4 replaces Zig with Rust. I tested startup, HTTP throughput, memory use, and real file transfers—and found one breaking change."
