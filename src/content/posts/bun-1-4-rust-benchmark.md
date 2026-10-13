@@ -94,11 +94,11 @@ After the fix, the full 256 MiB transfer completed on Bun 1.4.2 at **851 MiB/s**
 
 Yes, but have fun regression testing.
 
-Bun 1.4 delivered its largest improvement exactly where StreamDrop benefits: streaming throughput, memory use, and CPU time. Startup became dramatically faster too. The Rust rewrite did not merely preserve performance; this release moved several practical workloads forward.
+Bun 1.4 delivered its largest improvement exactly where StreamDrop benefits: streaming throughput, memory use, and CPU time. Startup became dramatically faster too.
 
 But a benchmark that only measured successful 128 MiB transfers would have missed the breaking change. Performance testing should include the edges of the real workload, because an infinitely fast failed request is still a failed request.
 
-If your Bun server accepts large uploads, add an over-limit integration test and configure `maxRequestBodySize` before upgrading. Once that was done, Bun 1.4 was a meaningful improvement for StreamDrop.
+If your Bun server accepts large uploads, add an over-limit integration test and configure `maxRequestBodySize` before upgrading.
 
 Want to see the result for yourself? [Send a file with StreamDrop](https://streamdrop.app/); there is no account to create or [read, run, and contribute to the code on GitHub](https://github.com/AntonyLeons/streamdrop).
 
