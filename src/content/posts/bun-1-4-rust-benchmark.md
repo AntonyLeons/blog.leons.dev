@@ -108,9 +108,9 @@ StreamDrop is not my only project where a runtime change made a noticeable diffe
 
 Ward started as a Java application using Spring Boot and OSHI. The [Rust version, ward-rs](https://github.com/AntonyLeons/ward-rs), uses Axum and sysinfo. I built both local checkouts from source and measured them in Docker, using the same one-CPU and 512 MiB limits.
 
-<figure>
+<figure class="ward-preview">
   <a href="https://status.leons.dev/"><img src="/assets/images/ward-dashboard.png" alt="Ward dashboard in its light theme, showing processor, memory, storage, uptime, and hardware utilisation charts" width="1426" height="757" loading="lazy" /></a>
-  <figcaption>Ward's dashboard preview from the project README. The displayed machine and version are illustrative, not the benchmark environment. Click to explore the live demo.</figcaption>
+  <figcaption>Ward dashboard preview. <a href="https://status.leons.dev/">Explore the live demo →</a><br />Illustrative screenshot; benchmark results below use a different machine and version.</figcaption>
 </figure>
 
 These measurements were taken on 13 October 2026: Java Ward 2.6.1 at commit `955e326`, and ward-rs 1.0.6 at `77aed22`. The Java image used Temurin 25.0.4.1; the Rust release build used rustc 1.99.0. Both were Linux ARM64 builds on the same Apple M1 Max.
@@ -166,6 +166,30 @@ The result compares the complete applications: JVM and Spring Boot against a nat
 If that sounds useful, [get started with Ward](https://ward.leons.dev/), [try the dashboard](https://status.leons.dev/), or [browse ward-rs on GitHub](https://github.com/AntonyLeons/ward-rs). The [Java implementation](https://github.com/AntonyLeons/Ward) is available too if you want to compare the code.
 
 <style>
+  .post-full-content .ward-preview {
+    width: 100%;
+    max-width: 900px;
+    margin: 2em auto;
+  }
+  .post-full-content .ward-preview > a {
+    display: block;
+    box-shadow: none;
+  }
+  .post-full-content .ward-preview img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+  }
+  .post-full-content .ward-preview figcaption {
+    margin: 14px auto 0;
+    max-width: 680px;
+    font-family: var(--font-inter, ui-sans-serif, system-ui, sans-serif);
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: center;
+    color: #8e99a9;
+  }
   .bun-chart {
     margin: 2.5em 0;
     padding: 1.4em;
