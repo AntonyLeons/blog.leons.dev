@@ -147,23 +147,11 @@ For a monitoring dashboard, that is a practical benefit: Ward should leave most 
   <p class="bun-chart-note">The executable is 71.2% smaller; the complete runtime image is 72.3% smaller. Each pair uses its own scale.</p>
 </div>
 
-Fresh Rust processes reached the first valid uptime response in **3.1–8.3 ms**, while Java took **3.8–4.3 seconds**. This includes application initialisation and the first API request, but excludes Docker startup and compilation. Filesystem caches were warm, and the readiness probe ran every two milliseconds, so the smallest timings should be read as a few milliseconds rather than a precise sub-millisecond claim.
+Rust started in **3.1–8.3 ms** versus Java’s **3.8–4.3 seconds**, with a **72% smaller Docker image** and barely measurable idle CPU use.
 
-The production Rust image is **103.6 MiB**, substantially smaller than Java's **373.6 MiB**. A JAR still needs its Java runtime, which is why I measured both the application file and the complete deployment image.
+The usage API’s huge latency gap mainly comes from Java’s one-second sampling delay versus Rust’s cached metrics. These five-run Docker benchmarks compare complete applications, not just languages.
 
-Idle CPU was about **0.10%** for Java. Rust accumulated no measurable process CPU time during the ten-second idle windows. That means below this test's measurement resolution, rather than a promise of zero CPU use in production. An idle dashboard and one being polled by a browser are different workloads.
-
-### Why the usage response is so different
-
-Java's usage endpoint deliberately waits one second between CPU samples. Rust returns cached system metrics and refreshes them when at least a second has elapsed. The **1,024.7 ms versus 0.11 ms** result therefore reflects different sampling strategies as well as the implementation change. It does not mean Rust can measure the hardware thousands of times faster.
-
-For a simpler comparison, the uptime endpoint responded in **1.12 ms versus 0.12 ms**. Those are local, sequential requests inside the container, with a Python client opening a connection for each request; they measure observed latency rather than maximum throughput. Neither implementation is likely to make a human wait for an uptime update.
-
-I used the median of five fresh-process runs. Each run checked the uptime response fields, waited three seconds before measuring process RSS, sampled idle CPU for ten seconds, then made 100 uptime requests and three usage requests. No host filesystem was mounted into either application, so this tests the container dashboard, not the accuracy of host monitoring or browser rendering. Artifact and image sizes are single measurements of the built outputs.
-
-The result compares the complete applications: JVM and Spring Boot against a native Rust executable, with different libraries and caching decisions. For Ward, the clearest win is the much smaller memory footprint, followed by startup and deployment size.
-
-If that sounds useful, [get started with Ward](https://ward.leons.dev/), [try the dashboard](https://status.leons.dev/), or [browse ward-rs on GitHub](https://github.com/AntonyLeons/ward-rs). The [Java implementation](https://github.com/AntonyLeons/Ward) is available too if you want to compare the code.
+[Try Ward](https://status.leons.dev/), [get started](https://ward.leons.dev/), or explore the [Rust](https://github.com/AntonyLeons/ward-rs) and [Java](https://github.com/AntonyLeons/Ward) code.
 
 <style>
   .post-full-content .ward-preview {
