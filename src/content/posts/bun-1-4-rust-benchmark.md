@@ -102,7 +102,94 @@ If your Bun server accepts large uploads, add an over-limit integration test and
 
 Want to see the result for yourself? [Send a file with StreamDrop](https://streamdrop.app/); there is no account to create or [read, run, and contribute to the code on GitHub](https://github.com/AntonyLeons/streamdrop).
 
+## Bonus: Ward, from Java to Rust
+
+StreamDrop is not my only project where a runtime change made a noticeable difference. [Ward](https://ward.leons.dev/) is an open-source server dashboard that gives you a quick view of CPU, memory, storage, and uptime. If you want something simple to leave running on a small server, [have a look at the live demo](https://status.leons.dev/).
+
+Ward started as a Java application using Spring Boot and OSHI. The [Rust version, ward-rs](https://github.com/AntonyLeons/ward-rs), uses Axum and sysinfo. I built both local checkouts from source and measured them in Docker, using the same one-CPU and 512 MiB limits.
+
+<figure class="ward-preview">
+  <a href="https://status.leons.dev/"><img src="/assets/images/ward-dashboard.png" alt="Ward dashboard in its light theme, showing processor, memory, storage, uptime, and hardware utilisation charts" width="1426" height="757" loading="lazy" /></a>
+  <figcaption>Ward dashboard preview. <a href="https://status.leons.dev/">Explore the live demo →</a><br />Illustrative screenshot; benchmark results below use a different machine and version.</figcaption>
+</figure>
+
+These measurements were taken on 13 October 2026: Java Ward 2.6.1 at commit `955e326`, and ward-rs 1.0.6 at `77aed22`. The Java image used Temurin 25.0.4.1; the Rust release build used rustc 1.99.0. Both were Linux ARM64 builds on the same Apple M1 Max.
+
+### A smaller background process
+
+<div class="bun-chart" data-bun-chart>
+  <h3>Ward idle memory <span>lower is better</span></h3>
+  <div class="bun-chart-row"><span class="bun-chart-name">Java</span><span class="bun-chart-track"><span class="bun-chart-bar zig" style="--bar:100%"></span></span><strong>193.6 MiB</strong></div>
+  <div class="bun-chart-row"><span class="bun-chart-name">Rust</span><span class="bun-chart-track"><span class="bun-chart-bar rust" style="--bar:2.01%"></span></span><strong>3.9 MiB</strong></div>
+  <p class="bun-chart-note">98.0% less resident process memory across five fresh starts.</p>
+</div>
+
+The Rust process used **3.9 MiB of idle resident memory**, compared with **193.6 MiB** for Java, a reduction of about **98%**. After the API requests, those figures were still only 4.0 MiB and 195.5 MiB respectively.
+
+For a monitoring dashboard, that is a practical benefit: Ward should leave most of the server's memory available for the applications it monitors.
+
+### Startup, storage, and API latency
+
+| Measurement | Java Ward | ward-rs |
+| --- | ---: | ---: |
+| Process launch to first valid API response | 4,139.5 ms | 3.5 ms |
+| Idle resident process memory | 193.6 MiB | 3.9 MiB |
+| Resident memory after API requests | 195.5 MiB | 4.0 MiB |
+| Application artifact | 26.2 MiB JAR | 7.6 MiB executable |
+| Production Docker image, uncompressed | 373.6 MiB | 103.6 MiB |
+| Warm uptime API response | 1.12 ms | 0.12 ms |
+| Usage API response | 1,024.7 ms | 0.11 ms |
+
+<div class="bun-chart" data-bun-chart>
+  <h3>Ward deployment size <span>lower is better</span></h3>
+  <div class="bun-chart-group"><h4>Application artifact</h4><div class="bun-chart-row"><span class="bun-chart-name">Java JAR</span><span class="bun-chart-track"><span class="bun-chart-bar zig" style="--bar:100%"></span></span><strong>26.2 MiB</strong></div><div class="bun-chart-row"><span class="bun-chart-name">Rust binary</span><span class="bun-chart-track"><span class="bun-chart-bar rust" style="--bar:28.84%"></span></span><strong>7.6 MiB</strong></div></div>
+  <div class="bun-chart-group"><h4>Production Docker image</h4><div class="bun-chart-row"><span class="bun-chart-name">Java</span><span class="bun-chart-track"><span class="bun-chart-bar zig" style="--bar:100%"></span></span><strong>373.6 MiB</strong></div><div class="bun-chart-row"><span class="bun-chart-name">Rust</span><span class="bun-chart-track"><span class="bun-chart-bar rust" style="--bar:27.72%"></span></span><strong>103.6 MiB</strong></div></div>
+  <p class="bun-chart-note">The executable is 71.2% smaller; the complete runtime image is 72.3% smaller. Each pair uses its own scale.</p>
+</div>
+
+Fresh Rust processes reached the first valid uptime response in **3.1–8.3 ms**, while Java took **3.8–4.3 seconds**. This includes application initialisation and the first API request, but excludes Docker startup and compilation. Filesystem caches were warm, and the readiness probe ran every two milliseconds, so the smallest timings should be read as a few milliseconds rather than a precise sub-millisecond claim.
+
+The production Rust image is **103.6 MiB**, substantially smaller than Java's **373.6 MiB**. A JAR still needs its Java runtime, which is why I measured both the application file and the complete deployment image.
+
+Idle CPU was about **0.10%** for Java. Rust accumulated no measurable process CPU time during the ten-second idle windows. That means below this test's measurement resolution, rather than a promise of zero CPU use in production. An idle dashboard and one being polled by a browser are different workloads.
+
+### Why the usage response is so different
+
+Java's usage endpoint deliberately waits one second between CPU samples. Rust returns cached system metrics and refreshes them when at least a second has elapsed. The **1,024.7 ms versus 0.11 ms** result therefore reflects different sampling strategies as well as the implementation change. It does not mean Rust can measure the hardware thousands of times faster.
+
+For a simpler comparison, the uptime endpoint responded in **1.12 ms versus 0.12 ms**. Those are local, sequential requests inside the container, with a Python client opening a connection for each request; they measure observed latency rather than maximum throughput. Neither implementation is likely to make a human wait for an uptime update.
+
+I used the median of five fresh-process runs. Each run checked the uptime response fields, waited three seconds before measuring process RSS, sampled idle CPU for ten seconds, then made 100 uptime requests and three usage requests. No host filesystem was mounted into either application, so this tests the container dashboard, not the accuracy of host monitoring or browser rendering. Artifact and image sizes are single measurements of the built outputs.
+
+The result compares the complete applications: JVM and Spring Boot against a native Rust executable, with different libraries and caching decisions. For Ward, the clearest win is the much smaller memory footprint, followed by startup and deployment size.
+
+If that sounds useful, [get started with Ward](https://ward.leons.dev/), [try the dashboard](https://status.leons.dev/), or [browse ward-rs on GitHub](https://github.com/AntonyLeons/ward-rs). The [Java implementation](https://github.com/AntonyLeons/Ward) is available too if you want to compare the code.
+
 <style>
+  .post-full-content .ward-preview {
+    width: 100%;
+    max-width: 900px;
+    margin: 2em auto;
+  }
+  .post-full-content .ward-preview > a {
+    display: block;
+    box-shadow: none;
+  }
+  .post-full-content .ward-preview img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+  }
+  .post-full-content .ward-preview figcaption {
+    margin: 14px auto 0;
+    max-width: 680px;
+    font-family: var(--font-inter, ui-sans-serif, system-ui, sans-serif);
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: center;
+    color: #8e99a9;
+  }
   .bun-chart {
     margin: 2.5em 0;
     padding: 1.4em;
