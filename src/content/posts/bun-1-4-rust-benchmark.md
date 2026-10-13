@@ -108,6 +108,11 @@ StreamDrop is not my only project where a runtime change made a noticeable diffe
 
 Ward started as a Java application using Spring Boot and OSHI. The [Rust version, ward-rs](https://github.com/AntonyLeons/ward-rs), uses Axum and sysinfo. I built both local checkouts from source and measured them in Docker, using the same one-CPU and 512 MiB limits.
 
+<figure>
+  <a href="https://status.leons.dev/"><img src="/assets/images/ward-dashboard.png" alt="Ward dashboard in its light theme, showing processor, memory, storage, uptime, and hardware utilisation charts" width="1426" height="757" loading="lazy" /></a>
+  <figcaption>Ward's dashboard preview from the project README. The displayed machine and version are illustrative, not the benchmark environment. Click to explore the live demo.</figcaption>
+</figure>
+
 These measurements were taken on 13 October 2026: Java Ward 2.6.1 at commit `955e326`, and ward-rs 1.0.6 at `77aed22`. The Java image used Temurin 25.0.4.1; the Rust release build used rustc 1.99.0. Both were Linux ARM64 builds on the same Apple M1 Max.
 
 ### A smaller background process
